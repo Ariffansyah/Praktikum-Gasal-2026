@@ -152,44 +152,44 @@ body {
   line-height: 1.55;
 }
 
-.course-meta {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.course-meta-table {
+  width: 100%;
   margin: 1.7rem 0 2rem;
+  table-layout: fixed;
+  border-collapse: collapse;
   border-top: 1px solid var(--oop-rule-strong);
   border-bottom: 1px solid var(--oop-rule-strong);
 }
 
-.course-meta > div {
-  min-width: 0;
-  padding: 0.85rem 1rem 0.9rem;
+.course-meta-table th,
+.course-meta-table td {
+  width: 25%;
+  padding: 0.72rem 1rem;
   border-right: 1px solid var(--oop-rule);
+  text-align: left;
 }
 
-.course-meta > div:first-child {
+.course-meta-table th:first-child,
+.course-meta-table td:first-child {
   padding-left: 0;
 }
 
-.course-meta > div:last-child {
+.course-meta-table th:last-child,
+.course-meta-table td:last-child {
   padding-right: 0;
   border-right: 0;
 }
 
-.course-meta span,
-.course-meta strong {
-  display: block;
-}
-
-.course-meta span {
-  margin-bottom: 0.25rem;
+.course-meta-table th {
   color: var(--oop-muted);
   font-family: var(--oop-mono);
   font-size: 0.7rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.course-meta strong {
+.course-meta-table td {
   color: var(--oop-ink);
   font-size: 0.95rem;
 }
@@ -271,10 +271,18 @@ body {
   font-size: 0.93rem;
 }
 
+.main-content table.course-meta-table {
+  margin: 1.7rem 0 2rem;
+}
+
 .main-content table:not(.schedule-table) th {
   color: var(--oop-ink);
   background: var(--oop-blue-wash);
   font-weight: 700;
+}
+
+.main-content table.course-meta-table th {
+  background: transparent;
 }
 
 .main-content table:not(.schedule-table) th,
@@ -295,19 +303,14 @@ body {
 }
 
 @media (max-width: 50rem) {
-  .course-meta {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .course-meta-table th,
+  .course-meta-table td {
+    padding: 0.65rem 0.7rem;
   }
 
-  .course-meta > div,
-  .course-meta > div:first-child,
-  .course-meta > div:last-child {
-    padding: 0.8rem 0.75rem;
-    border-right: 1px solid var(--oop-rule);
-  }
-
-  .course-meta > div:nth-child(2n) {
-    border-right: 0;
+  .course-meta-table th:first-child,
+  .course-meta-table td:first-child {
+    padding-left: 0;
   }
 }
 
@@ -324,21 +327,17 @@ body {
     font-size: 1.05rem;
   }
 
-  .course-meta {
-    grid-template-columns: 1fr;
+  .course-meta-table {
+    font-size: 0.78rem;
   }
 
-  .course-meta > div,
-  .course-meta > div:first-child,
-  .course-meta > div:last-child,
-  .course-meta > div:nth-child(2n) {
-    padding: 0.7rem 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--oop-rule);
+  .course-meta-table th,
+  .course-meta-table td {
+    padding: 0.6rem 0.45rem;
   }
 
-  .course-meta > div:last-child {
-    border-bottom: 0;
+  .course-meta-table th {
+    font-size: 0.6rem;
   }
 
   .main-content table:not(.schedule-table) {

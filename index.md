@@ -5,24 +5,25 @@ nav_order: 1
 has_toc: false
 ---
 
-<div class="course-kicker">OOP 26 / GASAL 2026 / UNESA</div>
+OOP 26 / GASAL 2026 / UNESA
+{: .course-kicker}
 
 # Pemrograman Berorientasi Objek
 
-<p class="course-lede">Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.</p>
+Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
+{: .course-lede}
 
-<div class="course-meta" markdown="0">
-  <div><span>Term</span><strong>TBA</strong></div>
-  <div><span>Meeting time</span><strong>TBA</strong></div>
-  <div><span>Location</span><strong>TBA</strong></div>
-  <div><span>Instructor</span><strong>TBA</strong></div>
-</div>
+| Term | Meeting time | Location | Instructor |
+|:--|:--|:--|:--|
+| TBA | TBA | TBA | TBA |
+{: .course-meta-table}
 
 The course schedule below is the main working document for the course. Replace each `TBA` entry with the final lecture topic, assignment, deadline, or resource when the course plan is ready.
 
 ## Weekly Schedule
 
-<p class="schedule-note"><a href="#weekly-schedule">Skip to the schedule</a> or use the sidebar to browse course materials.</p>
+[Skip to the schedule](#weekly-schedule) or use the sidebar to browse course materials.
+{: .schedule-note}
 
 {% include course-schedule.md %}
 

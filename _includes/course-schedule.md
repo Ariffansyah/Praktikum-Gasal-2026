@@ -1,30 +1,24 @@
-<div id="weekly-schedule" class="schedule-wrap">
-  <table class="schedule-table">
-    <thead>
-      <tr>
-        <th scope="col">Wk.</th>
-        <th scope="col">Date</th>
-        <th scope="col">Lecture / Topic</th>
-        <th scope="col">Assignment</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
-    </tbody>
-  </table>
-</div>
+<div id="weekly-schedule" class="schedule-wrap" markdown="1">
 
-<p class="table-footnote">Schedule, deadlines, and links will be updated from TBA when the practicum plan is finalized.</p>
+| Wk. | Date | Lecture / Topic | Assignment |
+|:---|:---|:---|:---|
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+| TBA | TBA | **TBA**; Materials: TBA | TBA |
+{: .schedule-table}
+
+_Schedule, deadlines, and links will be updated from TBA when the practicum plan is finalized._
+{: .table-footnote}
+
+</div>
