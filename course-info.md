@@ -5,10 +5,6 @@ nav_order: 3
 has_children: true
 ---
 
-# Course Info
-
-This page contains the working information for the OOP practicum.
-
 ## Course details
 
 - Course name: Pemrograman Berorientasi Objek

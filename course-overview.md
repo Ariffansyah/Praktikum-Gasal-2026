@@ -5,48 +5,36 @@ parent: Course Info
 nav_order: 1
 ---
 
-# Course Overview
+# Gambaran Umum Mata Kuliah
 
-This practicum introduces object-oriented programming with Python and applies the concepts through structured coding exercises and a small application project.
+Praktikum ini memperkenalkan pemrograman berorientasi objek menggunakan Python dan menerapkan konsep-konsep tersebut melalui latihan pemrograman terstruktur serta sebuah proyek aplikasi sederhana.
 
-## Description
+## Deskripsi
 
-The weekly sequence moves from fundamental object-oriented programming concepts to software organization, exception handling, file handling, GUI integration, application design, implementation, testing, and application demonstration.
+Urutan materi mingguan dimulai dari konsep dasar pemrograman berorientasi objek hingga organisasi perangkat lunak, penanganan eksepsi, pengelolaan berkas, integrasi GUI, perancangan aplikasi, implementasi, pengujian, dan demonstrasi aplikasi.
 
-## Learning outcomes
+## Capaian Pembelajaran
 
-Upon completing this practicum, students are expected to be able to:
+Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
-- **CPMK-1:** Explain the concepts, principles, and characteristics of object-oriented programming and distinguish them from other programming paradigms.
+* **CPMK-1:** Menjelaskan konsep, prinsip, dan karakteristik pemrograman berorientasi objek serta membedakannya dari paradigma pemrograman lainnya.
+* **CPMK-2:** Mengimplementasikan prinsip-prinsip pemrograman berorientasi objek menggunakan Python, meliputi **class, object, encapsulation, abstraction, inheritance, polymorphism,** dan **hubungan antarkelas**.
+* **CPMK-3:** Merancang struktur program berorientasi objek yang modular dan terorganisasi dengan menerapkan **module/package, exception handling, file handling,** dan **hubungan antarkelas**.
+* **CPMK-4:** Mengembangkan **aplikasi OOP berbasis Python dengan antarmuka grafis (GUI)** melalui proses **analisis kebutuhan, perancangan, implementasi, integrasi, pengujian,** dan **presentasi aplikasi**.
+* **CPMK-5:** Mengembangkan aplikasi sederhana menggunakan **pemrograman berorientasi objek dengan Python** dengan mengintegrasikan konsep dan teknik yang telah dipelajari selama praktikum menjadi sebuah aplikasi yang fungsional.
 
-- **CPMK-2:** Implement object-oriented programming principles using Python, including **class, object, encapsulation, abstraction, inheritance, polymorphism,** and **relationships between classes**.
+## Format Mingguan
 
-- **CPMK-3:** Design a modular and organized object-oriented program structure by applying **modules/packages, exception handling, file handling,** and **class relationships**.
+* **Penjelasan materi:** Satu materi utama dibagikan dan digunakan bersama oleh ketiga kelas setiap minggu.
+* **Praktik terbimbing:** Latihan pemrograman yang disesuaikan dengan materi mingguan.
+* **Pengerjaan tugas:** Tugas dan latihan pemrograman yang berkaitan dengan materi mingguan.
+* **Konsultasi:** Diskusi dan konsultasi mengenai latihan, tugas, serta proyek aplikasi.
+* **Sumber daya / tools:** Sumber belajar Python, dokumentasi, perangkat pengembangan, dan materi pendukung.
 
-- **CPMK-4:** Develop a simple **Python-based OOP application with a graphical user interface (GUI)** through the processes of **requirements analysis, design, implementation, integration, testing,** and **application presentation**.
+## Persiapan yang Diperlukan
 
-- **CPMK-5:** Develop a simple application using **object-oriented programming with Python** by integrating the concepts and techniques learned throughout the practicum into a functional application.
-
-## Weekly format
-
-- **Lecture / explanation:** One main topic is shared by all three classes each week.
-
-- **Guided practice:** Coding exercises aligned with the weekly topic.
-
-- **Assignment work:** Assignments and programming tasks related to the weekly topic.
-
-- **Consultation:** Discussion and consultation regarding exercises, assignments, and the application project.
-
-- **Resources / tools:** Python development resources, documentation, development tools, and supporting materials.
-
-## Required preparation
-
-- Review the weekly topic before the practicum.
-
-- Prepare a working **Python 3** development environment.
-
-- Install and configure the required development tools listed in [Tools and Setup](../resources/tools-and-setup).
-
-- Bring the required practicum materials and assignment files.
-
-- Be prepared to write, run, debug, and test Python programs during the practicum.
+* Pelajari kembali materi mingguan sebelum mengikuti praktikum.
+* Siapkan lingkungan pengembangan **Python 3** yang dapat digunakan dengan baik.
+* Instal dan konfigurasi perangkat pengembangan yang diperlukan sebagaimana tercantum pada [Tools dan Setup](../resources/tools-and-setup).
+* Bawa materi praktikum dan berkas tugas yang diperlukan.
+* Bersiap untuk menulis, menjalankan, melakukan debugging, dan menguji program Python selama praktikum.

@@ -7,6 +7,6 @@ has_toc: false
 
 # Calendar
 
-This page provides the practicum calendar, including the weekly schedule, topics, and important activities throughout the course.
+Halaman ini menyediakan kalender praktikum yang mencakup jadwal mingguan, topik, dan kegiatan penting selama praktikum berlangsung.
 
 {% include course-schedule.md %}

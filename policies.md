@@ -7,19 +7,19 @@ nav_order: 3
 
 # Policies
 
-Replace the placeholders below with the official course policies.
+Ganti placeholder di bawah ini dengan kebijakan resmi mata kuliah.
 
-| Policy | Details |
-|:--|:--|
-| Attendance | TBA |
-| Late submissions | TBA |
-| Extensions | TBA |
-| Academic integrity | TBA |
-| Collaboration | TBA |
-| Use of external tools | TBA |
-| Accessibility and support | TBA |
-| Communication | TBA |
+| Kebijakan                  | Ketentuan |
+| :------------------------- | :-------- |
+| Kehadiran                  | TBA       |
+| Keterlambatan pengumpulan  | TBA       |
+| Perpanjangan waktu         | TBA       |
+| Integritas akademik        | TBA       |
+| Kolaborasi                 | TBA       |
+| Penggunaan tools eksternal | TBA       |
+| Aksesibilitas dan dukungan | TBA       |
+| Komunikasi                 | TBA       |
 
-## Questions and announcements
+## Pertanyaan dan pengumuman
 
 TBA

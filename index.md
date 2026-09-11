@@ -10,13 +10,13 @@ has_toc: false
 Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya.
 {: .course-lede}
 
-## Course details
+## Detail Mata Kuliah
 
 - Term: Semester Gasal 2026
 - Instructor: Riskyana Dewi Instan Puspitasari, M. Kom.
 - Practicum focus: Object-oriented programming using Python
 
-## Practicum schedule
+## Jadwal Praktikum
 
 <table class="class-schedule">
   <thead>
@@ -35,11 +35,11 @@ Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, 
 </table>
 
 
-The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading and assignment links are temporary placeholders and will be updated later.
+Jadwal praktikum di bawah ini merupakan dokumen utama yang digunakan sebagai acuan pelaksanaan praktikum. Setiap minggu menggunakan satu topik praktikum yang sama untuk ketiga kelas. Tautan bacaan dan tugas yang masih berupa placeholder akan diperbarui kemudian.
 
-## Weekly Schedule
+## Jadwal Mingguan
 
-[Skip to the schedule](#weekly-schedule) or use the sidebar to browse course materials.
+[Lewati ke jadwal](#weekly-schedule) atau gunakan sidebar untuk menelusuri materi praktikum.
 {: .schedule-note}
 
 {% include course-schedule.md %}
