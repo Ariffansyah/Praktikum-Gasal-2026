@@ -267,6 +267,13 @@ textarea:focus-visible {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Flatten the table wrapper supplied by the Just the Docs theme. */
+.table-wrapper {
+  overflow-x: visible !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 .schedule-table {
   width: 100%;
   min-width: 780px;
