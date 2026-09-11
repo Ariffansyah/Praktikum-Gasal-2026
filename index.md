@@ -7,7 +7,7 @@ has_toc: false
 
 # Pemrograman Berorientasi Objek
 
-Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya.
+Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya.
 {: .course-lede}
 
 ## Course details
