@@ -6,14 +6,12 @@ nav_order: 4
 
 # Staff
 
-Teaching team details are currently TBA.
+The practicum instructor is listed below.
 
 ## Teaching team
 
-- Instructor: TBA
-- TA 1: TBA
-- TA 2: TBA
-- TA 3: TBA
+- Instructor: Riskyana Dewi Instan Puspitasari, M. Kom.
+- Teaching assistants: TBA
 
 ## Contact
 

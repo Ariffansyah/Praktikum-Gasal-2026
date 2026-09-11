@@ -12,7 +12,7 @@ Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa. Bui
 - `_includes/course-schedule.md` - shared schedule table used by Home and Calendar
 - `_sass/custom/custom.scss` - visual overrides for the academic course layout
 
-All academic details are intentionally marked `TBA`. Replace the placeholders as the course plan is finalized.
+The schedule contains the Semester Gasal 2026 meeting dates, class groups, locations, and weekly topic outlines. Reading links, assignments, and other unspecified course details remain `TBA` until they are provided.
 
 ## Local development
 

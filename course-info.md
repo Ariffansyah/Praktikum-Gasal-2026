@@ -7,21 +7,26 @@ has_children: true
 
 # Course Info
 
-This section is the placeholder for the official OOP practicum description, learning outcomes, assessment plan, and course policies.
+This page contains the working information for the OOP practicum.
 
-| Course detail | Information |
-|:--|:--|
-| Course name | Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa |
-| Course code | TBA |
-| Term | TBA |
-| Credits | TBA |
-| Prerequisites | TBA |
-| Language / tools | TBA |
-| Instructor | TBA |
-| Contact | TBA |
+## Course details
+
+- Course name: Pemrograman Berorientasi Objek
+- Program: S1 Kecerdasan Artifisial, Unesa
+- Term: Semester Gasal 2026
+- Course code: TBA
+- Credits: TBA
+- Prerequisites: TBA
+- Language / tools: Python and TBA
+- Instructor: Riskyana Dewi Instan Puspitasari, M. Kom.
+- Contact: TBA
+
+## Class schedule
+
+- Wednesday, 09:30-11:10 - Class 2025C - Location C01.04.03
+- Wednesday, 13:00-14:40 - Class 2025A - Location C01.04.03
+- Friday, 13:00-14:40 - Class 2025B - Location C01.03.03
 
 ## Course structure
 
-The course is expected to combine guided explanations, coding exercises, and assignments. The final format, attendance rules, grading weights, and submission process are all TBA.
-
-Use the pages in this section to replace these placeholders with the final course information.
+The course combines guided explanations, coding exercises, and practicum work. One main topic is used for the three class meetings in each week. Assessment weights, attendance rules, and the submission process are TBA.

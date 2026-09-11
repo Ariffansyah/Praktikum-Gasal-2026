@@ -7,29 +7,29 @@ nav_order: 1
 
 # Course Overview
 
-Everything on this page is a placeholder for the final OOP practicum brief.
+This practicum introduces object-oriented programming with Python and applies the concepts through structured coding exercises and a small application project.
 
 ## Description
 
-TBA
+The weekly sequence moves from core OOP concepts to software organization, error handling, file handling, GUI integration, application design, implementation, and demonstration.
 
 ## Learning outcomes
 
-- TBA
-- TBA
-- TBA
-- TBA
+- Explain the role of classes, objects, attributes, methods, and object relationships.
+- Implement encapsulation, inheritance, abstraction, polymorphism, and composition in Python.
+- Organize reusable code with modules and packages, and handle errors and persistent data.
+- Integrate object-oriented classes with a graphical user interface.
+- Analyze requirements, design a class structure, implement an application, and demonstrate the result.
 
 ## Weekly format
 
-| Component | Details |
-|:--|:--|
-| Lecture / explanation | TBA |
-| Guided practice | TBA |
-| Assignment work | TBA |
-| Consultation | TBA |
-| Resources / tools | TBA |
+- Lecture / explanation: One main topic is shared by all three classes each week.
+- Guided practice: Coding exercises aligned with the weekly topic.
+- Assignment work: TBA.
+- Consultation: TBA.
+- Resources / tools: TBA.
 
 ## Required preparation
 
-TBA
+- Review the weekly topic before the practicum.
+- Prepare a Python development environment.

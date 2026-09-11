@@ -10,15 +10,19 @@ has_toc: false
 Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
 {: .course-lede}
 
-| Course detail | Information |
-|:--|:--|
-| Term | TBA |
-| Meeting time | TBA |
-| Location | TBA |
-| Instructor | TBA |
-{: .course-details-table}
+## Course details
 
-The course schedule below is the main working document for the course. Replace each `TBA` entry with the final lecture topic, assignment, deadline, or resource when the course plan is ready.
+- Term: Semester Gasal 2026
+- Instructor: Riskyana Dewi Instan Puspitasari, M. Kom.
+- Practicum format: One main topic per week for all three classes
+
+## Class schedule
+
+- Wednesday, 09:30-11:10 - Class 2025C - Location C01.04.03
+- Wednesday, 13:00-14:40 - Class 2025A - Location C01.04.03
+- Friday, 13:00-14:40 - Class 2025B - Location C01.03.03
+
+The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading entries are currently TBA and will be added later.
 
 ## Weekly Schedule
 
