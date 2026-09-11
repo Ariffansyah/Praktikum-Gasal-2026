@@ -5,11 +5,11 @@ nav_order: 1
 has_toc: false
 ---
 
-<div class="course-kicker">PRACTICUM WEBSITE / ALL DETAILS TBA</div>
+<div class="course-kicker">OOP 26 / GASAL 2026 / UNESA</div>
 
-# Object-Oriented Programming
+# Pemrograman Berorientasi Objek
 
-<p class="course-lede">A practical course site for learning how to model problems with classes, objects, interfaces, and reusable software design.</p>
+<p class="course-lede">Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.</p>
 
 <div class="course-meta" markdown="0">
   <div><span>Term</span><strong>TBA</strong></div>
@@ -18,7 +18,7 @@ has_toc: false
   <div><span>Instructor</span><strong>TBA</strong></div>
 </div>
 
-The course schedule below is the main working document for the practicum. Replace each `TBA` entry with the final lecture topic, reading, activity, deadline, or resource when the course plan is ready.
+The course schedule below is the main working document for the course. Replace each `TBA` entry with the final lecture topic, assignment, deadline, or resource when the course plan is ready.
 
 ## Weekly Schedule
 
@@ -28,4 +28,4 @@ The course schedule below is the main working document for the practicum. Replac
 
 ## Start here
 
-[Course Info](course-info) contains the course structure, grading placeholders, and policies. Visit [Staff](staff) for the instructor and three TA pages, or use the sidebar to open the labs, homeworks, projects, and resources indexes.
+[Course Info](course-info) contains the course structure, grading placeholders, and policies. Visit [Staff](staff) for the instructor and teaching assistants, or use the sidebar to open the resources index.

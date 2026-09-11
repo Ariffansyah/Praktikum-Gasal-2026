@@ -5,28 +5,24 @@
         <th scope="col">Wk.</th>
         <th scope="col">Date</th>
         <th scope="col">Lecture / Topic</th>
-        <th scope="col">Readings</th>
-        <th scope="col">Discussion</th>
-        <th scope="col">Lab</th>
-        <th scope="col">Homework</th>
-        <th scope="col">Project</th>
+        <th scope="col">Assignment</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
-      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
+      <tr><td>TBA</td><td>TBA</td><td><strong>TBA</strong><br>Materials: TBA</td><td>TBA</td></tr>
     </tbody>
   </table>
 </div>

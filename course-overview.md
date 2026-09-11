@@ -26,9 +26,9 @@ TBA
 |:--|:--|
 | Lecture / explanation | TBA |
 | Guided practice | TBA |
-| Laboratory | TBA |
+| Assignment work | TBA |
 | Consultation | TBA |
-| Project work | TBA |
+| Resources / tools | TBA |
 
 ## Required preparation
 

@@ -7,6 +7,6 @@ has_toc: false
 
 # Calendar
 
-The complete OOP practicum calendar is kept here and on the home page. Dates, topics, readings, activities, and deadlines are currently TBA.
+The complete OOP 26 calendar is kept here and on the home page. Dates, topics, assignments, and deadlines are currently TBA.
 
 {% include course-schedule.md %}

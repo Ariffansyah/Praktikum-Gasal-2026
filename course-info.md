@@ -11,7 +11,7 @@ This section is the placeholder for the official OOP practicum description, lear
 
 | Course detail | Information |
 |:--|:--|
-| Course name | Object-Oriented Programming Practicum |
+| Course name | Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa |
 | Course code | TBA |
 | Term | TBA |
 | Credits | TBA |
@@ -22,6 +22,6 @@ This section is the placeholder for the official OOP practicum description, lear
 
 ## Course structure
 
-The practicum is expected to combine guided explanations, coding exercises, laboratory sessions, and project work. The final format, attendance rules, grading weights, and submission process are all TBA.
+The course is expected to combine guided explanations, coding exercises, and assignments. The final format, attendance rules, grading weights, and submission process are all TBA.
 
 Use the pages in this section to replace these placeholders with the final course information.
