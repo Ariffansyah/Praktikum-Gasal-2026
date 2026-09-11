@@ -1,8 +1,30 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: OOP Practicum
+description: Course website for the Object-Oriented Programming practicum
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: ""
+baseurl: ""
+permalink: pretty
+
+search_enabled: true
+heading_anchors: true
+nav_enabled: true
+nav_sort: case_sensitive
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  "Course Info":
+    - "/course-info/"
+  "Staff":
+    - "/staff/"
+aux_links_new_tab: false
+
+back_to_top: true
+back_to_top_text: "Back to top"
+
+footer_content: "OOP Practicum - Object-Oriented Programming course website. All course details are TBA."
+
+color_scheme: light
+
+sass:
+  quiet_deps: true
+  silence_deprecations: [import]
