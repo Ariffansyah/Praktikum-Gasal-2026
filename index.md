@@ -16,6 +16,7 @@ Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
 | Meeting time | TBA |
 | Location | TBA |
 | Instructor | TBA |
+{: .course-details-table}
 
 The course schedule below is the main working document for the course. Replace each `TBA` entry with the final lecture topic, assignment, deadline, or resource when the course plan is ready.
 

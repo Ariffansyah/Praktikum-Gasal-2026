@@ -231,6 +231,40 @@ body {
   overflow-wrap: anywhere;
 }
 
+.main-content table.course-details-table {
+  border: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.main-content table.course-details-table th,
+.main-content table.course-details-table td {
+  padding: 0.68rem 0.75rem;
+  border: 0;
+  border-bottom: 1px solid var(--oop-rule);
+  background: transparent;
+  text-align: left;
+  vertical-align: top;
+}
+
+.main-content table.course-details-table th {
+  background: var(--oop-blue-wash);
+}
+
+.main-content table.course-details-table th:first-child,
+.main-content table.course-details-table td:first-child {
+  padding-left: 0;
+}
+
+.main-content table.course-details-table th:last-child,
+.main-content table.course-details-table td:last-child {
+  padding-right: 0;
+}
+
 .main-content code {
   color: var(--oop-link-dark);
   background: var(--oop-blue-wash);
