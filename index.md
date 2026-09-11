@@ -33,4 +33,4 @@ The course schedule below is the main working document for the course. Each week
 
 ## Start here
 
-[Course Info](course-info) contains the course structure, grading placeholders, and policies. Visit [Staff](staff) for the instructor and teaching assistants, or use the sidebar to open the resources index.
+[Course Info](https://oop-ai26.github.io/Praktikum-Gasal-2026/course-info/) contains the course structure, grading placeholders, and policies. Visit [Staff](https://oop-ai26.github.io/Praktikum-Gasal-2026/staff/) for the instructor and teaching assistants, or use the sidebar to open the resources index.

@@ -1,16 +1,22 @@
 /* Hallmark - macrostructure: Long Document - tone: technical - anchor hue: blue */
 
 :root {
-  --oop-paper: oklch(99% 0.006 250);
-  --oop-sidebar: oklch(97% 0.012 255);
-  --oop-ink: oklch(28% 0.018 275);
-  --oop-muted: oklch(48% 0.018 275);
-  --oop-rule: oklch(88% 0.018 255);
-  --oop-rule-strong: oklch(78% 0.028 250);
-  --oop-link: oklch(49% 0.19 255);
-  --oop-link-dark: oklch(38% 0.17 255);
-  --oop-blue-wash: oklch(95% 0.025 250);
-  --oop-tba: oklch(49% 0.025 275);
+  color-scheme: dark;
+  --oop-paper: oklch(20% 0.022 255);
+  --oop-sidebar: oklch(16% 0.022 255);
+  --oop-ink: oklch(92% 0.018 275);
+  --oop-muted: oklch(74% 0.022 275);
+  --oop-rule: oklch(38% 0.028 255);
+  --oop-rule-strong: oklch(52% 0.035 250);
+  --oop-link: oklch(82% 0.15 255);
+  --oop-link-hover: oklch(90% 0.12 255);
+  --oop-blue-wash: oklch(28% 0.045 250);
+  --oop-tba: oklch(72% 0.028 275);
+  --oop-active-bg: oklch(92% 0.018 250);
+  --oop-active-ink: oklch(24% 0.035 275);
+  --oop-row-hover: oklch(26% 0.035 250);
+  --oop-code-bg: oklch(14% 0.02 255);
+  --oop-button-bg: oklch(30% 0.04 250);
   --oop-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
 }
 
@@ -24,6 +30,14 @@ body {
   color: var(--oop-ink);
   font-size: 16px;
   line-height: 1.62;
+}
+
+.site-header,
+.main-header,
+.main,
+.main-content,
+.site-footer {
+  background: var(--oop-paper);
 }
 
 .site-title {
@@ -57,10 +71,14 @@ body {
   white-space: nowrap;
 }
 
-.nav-list-link:hover,
-.nav-list-link.active {
-  color: var(--oop-link-dark);
+.nav-list-link:hover {
+  color: var(--oop-link);
   background: var(--oop-blue-wash);
+}
+
+.nav-list-link.active {
+  color: var(--oop-active-ink);
+  background: var(--oop-active-bg);
 }
 
 .nav-list .nav-list .nav-list-link {
@@ -87,9 +105,39 @@ body {
   border-radius: 2px;
 }
 
+.search-input::placeholder {
+  color: var(--oop-muted);
+}
+
 .search-input:focus {
   border-color: var(--oop-link);
   box-shadow: 0 0 0 2px var(--oop-blue-wash);
+}
+
+.site-button,
+.btn,
+button {
+  border-color: var(--oop-rule-strong);
+  background: var(--oop-button-bg);
+  color: var(--oop-ink);
+}
+
+.site-button:hover,
+.btn:hover,
+button:hover {
+  background: var(--oop-active-bg);
+  color: var(--oop-active-ink);
+}
+
+.site-button:focus-visible,
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--oop-link);
+  outline-offset: 2px;
 }
 
 .main-content {
@@ -131,7 +179,7 @@ body {
 }
 
 .main-content a:hover {
-  color: var(--oop-link-dark);
+  color: var(--oop-link-hover);
 }
 
 .course-lede {
@@ -158,7 +206,7 @@ body {
 
 .schedule-table {
   width: 100%;
-  min-width: 1240px;
+  min-width: 780px;
   margin: 0;
   table-layout: fixed;
   border-collapse: collapse;
@@ -183,22 +231,17 @@ body {
   letter-spacing: 0.025em;
 }
 
-.schedule-table th:nth-child(1) { width: 5%; }
-.schedule-table th:nth-child(2) { width: 11%; }
-.schedule-table th:nth-child(3) { width: 7%; }
-.schedule-table th:nth-child(4) { width: 12%; }
-.schedule-table th:nth-child(5) { width: 8%; }
-.schedule-table th:nth-child(6) { width: 11%; }
-.schedule-table th:nth-child(7) { width: 30%; }
-.schedule-table th:nth-child(8) { width: 8%; }
-.schedule-table th:nth-child(9) { width: 8%; }
+.schedule-table th:nth-child(1) { width: 12%; }
+.schedule-table th:nth-child(2) { width: 34%; }
+.schedule-table th:nth-child(3) { width: 39%; }
+.schedule-table th:nth-child(4) { width: 15%; }
 
 .schedule-table tbody tr:hover {
-  background: oklch(98% 0.012 250);
+  background: var(--oop-row-hover);
 }
 
 .schedule-table td:first-child {
-  color: var(--oop-link-dark);
+  color: var(--oop-link);
   font-family: var(--oop-mono);
   font-weight: 700;
 }
@@ -210,6 +253,11 @@ body {
 .schedule-table strong {
   color: var(--oop-ink);
   font-weight: 700;
+}
+
+.schedule-table a {
+  color: var(--oop-link);
+  white-space: nowrap;
 }
 
 .table-footnote {
@@ -234,6 +282,10 @@ body {
 .main-content table:not(.schedule-table) td {
   border-bottom: 1px solid var(--oop-rule);
   overflow-wrap: anywhere;
+}
+
+.main-content table:not(.schedule-table) {
+  background: var(--oop-sidebar);
 }
 
 .main-content table.course-details-table {
@@ -271,8 +323,13 @@ body {
 }
 
 .main-content code {
-  color: var(--oop-link-dark);
+  color: var(--oop-link);
   background: var(--oop-blue-wash);
+}
+
+.main-content pre,
+.main-content code {
+  background: var(--oop-code-bg);
 }
 
 .site-footer {

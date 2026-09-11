@@ -1,10 +1,12 @@
 title: OOP 26
-description: Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa
+description: Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya
 theme: just-the-docs
 
-url: ""
-baseurl: ""
+url: "https://oop-ai26.github.io"
+baseurl: "/Praktikum-Gasal-2026"
 permalink: pretty
+color_scheme: wider
+
 
 search_enabled: true
 heading_anchors: true
@@ -12,18 +14,20 @@ nav_enabled: true
 nav_sort: case_sensitive
 
 aux_links:
+  Dark Mode:
+    - "#"
   "Course Info":
-    - "/course-info/"
+    - "https://oop-ai26.github.io/Praktikum-Gasal-2026/course-info/"
   "Staff":
-    - "/staff/"
+    - "https://oop-ai26.github.io/Praktikum-Gasal-2026/staff/"
 aux_links_new_tab: false
 
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa"
+footer_content: "Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya"
 
-color_scheme: light
+color_scheme: dark
 
 sass:
   quiet_deps: true
