@@ -7,7 +7,7 @@ has_toc: false
 
 # Pemrograman Berorientasi Objek
 
-Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
+Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya.
 {: .course-lede}
 
 ## Course details
@@ -18,9 +18,10 @@ Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
 
 ## Class schedule
 
-- Wednesday, 09:30-11:10 - Class 2025C - Location C01.04.03
-- Wednesday, 13:00-14:40 - Class 2025A - Location C01.04.03
-- Friday, 13:00-14:40 - Class 2025B - Location C01.03.03
+| Wednesday                                        | Wednesday                                        | Friday                                           |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| 09:30–11:10<br>Class 2025C<br>Location: C01.04.03 | 13:00–14:40<br>Class 2025A<br>Location: C01.04.03 | 13:00–14:40<br>Class 2025B<br>Location: C01.03.03 |
+
 
 The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading and assignment links are temporary placeholders and will be updated later.
 
@@ -31,6 +32,6 @@ The course schedule below is the main working document for the course. Each week
 
 {% include course-schedule.md %}
 
-## Start here
+<!-- ## Start here
 
-[Course Info](https://oop-ai26.github.io/Praktikum-Gasal-2026/course-info/) contains the course structure, grading placeholders, and policies. Visit [Staff](https://oop-ai26.github.io/Praktikum-Gasal-2026/staff/) for the instructor and teaching assistants, or use the sidebar to open the resources index.
+[Course Info](https://oop-ai26.github.io/Praktikum-Gasal-2026/course-info/) contains the course structure, grading placeholders, and policies. Visit [Staff](https://oop-ai26.github.io/Praktikum-Gasal-2026/staff/) for the instructor and teaching assistants, or use the sidebar to open the resources index. -->
