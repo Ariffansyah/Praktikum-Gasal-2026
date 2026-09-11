@@ -20,6 +20,25 @@
   --oop-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+  --oop-paper: oklch(99% 0.006 250);
+  --oop-sidebar: oklch(97% 0.012 255);
+  --oop-ink: oklch(28% 0.018 275);
+  --oop-muted: oklch(48% 0.018 275);
+  --oop-rule: oklch(88% 0.018 255);
+  --oop-rule-strong: oklch(78% 0.028 250);
+  --oop-link: oklch(49% 0.19 255);
+  --oop-link-hover: oklch(38% 0.17 255);
+  --oop-blue-wash: oklch(95% 0.025 250);
+  --oop-tba: oklch(49% 0.025 275);
+  --oop-active-bg: oklch(28% 0.018 275);
+  --oop-active-ink: oklch(96% 0.006 250);
+  --oop-row-hover: oklch(98% 0.012 250);
+  --oop-code-bg: oklch(96% 0.006 250);
+  --oop-button-bg: oklch(97% 0.006 250);
+}
+
 html,
 body {
   overflow-x: clip;
@@ -232,9 +251,10 @@ textarea:focus-visible {
 }
 
 .schedule-table th:nth-child(1) { width: 12%; }
-.schedule-table th:nth-child(2) { width: 34%; }
-.schedule-table th:nth-child(3) { width: 39%; }
-.schedule-table th:nth-child(4) { width: 15%; }
+.schedule-table th:nth-child(2) { width: 30%; }
+.schedule-table th:nth-child(3) { width: 32%; }
+.schedule-table th:nth-child(4) { width: 13%; }
+.schedule-table th:nth-child(5) { width: 13%; }
 
 .schedule-table tbody tr:hover {
   background: var(--oop-row-hover);

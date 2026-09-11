@@ -5,8 +5,7 @@ theme: just-the-docs
 url: "https://oop-ai26.github.io"
 baseurl: "/Praktikum-Gasal-2026"
 permalink: pretty
-color_scheme: wider
-
+color_scheme: dark
 
 search_enabled: true
 heading_anchors: true
@@ -26,8 +25,6 @@ back_to_top: true
 back_to_top_text: "Back to top"
 
 footer_content: "Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya"
-
-color_scheme: dark
 
 sass:
   quiet_deps: true

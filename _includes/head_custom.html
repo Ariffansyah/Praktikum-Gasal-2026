@@ -1,0 +1,68 @@
+<script>
+(function () {
+  var storageKey = "oop26-theme";
+  var savedTheme = null;
+
+  try {
+    savedTheme = localStorage.getItem(storageKey);
+  } catch (error) {
+    savedTheme = null;
+  }
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
+
+  function initThemeToggle() {
+    var toggle = null;
+    var links = document.querySelectorAll(".aux-nav a.site-button");
+
+    for (var i = 0; i < links.length; i += 1) {
+      var label = links[i].textContent.trim();
+      if (label === "Dark Mode" || label === "Light Mode") {
+        toggle = links[i];
+        break;
+      }
+    }
+
+    if (!toggle || typeof jtd === "undefined") {
+      return;
+    }
+
+    function applyTheme(theme) {
+      var loadedTheme = jtd.getTheme();
+      if (loadedTheme === "default") {
+        loadedTheme = "dark";
+      }
+
+      document.documentElement.setAttribute("data-theme", theme);
+
+      if (loadedTheme !== theme) {
+        jtd.setTheme(theme);
+      }
+
+      toggle.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
+      toggle.setAttribute("aria-label", "Switch to " + (theme === "dark" ? "light" : "dark") + " mode");
+
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch (error) {
+        // Continue without persistence when storage is unavailable.
+      }
+    }
+
+    toggle.addEventListener("click", function (event) {
+      event.preventDefault();
+      applyTheme(jtd.getTheme() === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initThemeToggle);
+  } else {
+    initThemeToggle();
+  }
+}());
+</script>

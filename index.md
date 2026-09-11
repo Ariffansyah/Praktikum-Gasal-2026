@@ -22,7 +22,7 @@ Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
 - Wednesday, 13:00-14:40 - Class 2025A - Location C01.04.03
 - Friday, 13:00-14:40 - Class 2025B - Location C01.03.03
 
-The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading entries are currently TBA and will be added later.
+The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading and assignment links are temporary placeholders and will be updated later.
 
 ## Weekly Schedule
 
