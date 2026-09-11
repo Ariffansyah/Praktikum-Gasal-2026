@@ -134,64 +134,12 @@ body {
   color: var(--oop-link-dark);
 }
 
-.course-kicker {
-  margin-top: 1.2rem;
-  color: var(--oop-link);
-  font-family: var(--oop-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  line-height: 1.4;
-}
-
 .course-lede {
   max-width: 52rem;
   margin: 0 0 1.4rem;
   color: var(--oop-muted);
   font-size: 1.18rem;
   line-height: 1.55;
-}
-
-.course-meta-table {
-  width: 100%;
-  margin: 1.7rem 0 2rem;
-  table-layout: fixed;
-  border-collapse: collapse;
-  border-top: 1px solid var(--oop-rule-strong);
-  border-bottom: 1px solid var(--oop-rule-strong);
-}
-
-.course-meta-table th,
-.course-meta-table td {
-  width: 25%;
-  padding: 0.72rem 1rem;
-  border-right: 1px solid var(--oop-rule);
-  text-align: left;
-}
-
-.course-meta-table th:first-child,
-.course-meta-table td:first-child {
-  padding-left: 0;
-}
-
-.course-meta-table th:last-child,
-.course-meta-table td:last-child {
-  padding-right: 0;
-  border-right: 0;
-}
-
-.course-meta-table th {
-  color: var(--oop-muted);
-  font-family: var(--oop-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.course-meta-table td {
-  color: var(--oop-ink);
-  font-size: 0.95rem;
 }
 
 .schedule-note,
@@ -271,18 +219,10 @@ body {
   font-size: 0.93rem;
 }
 
-.main-content table.course-meta-table {
-  margin: 1.7rem 0 2rem;
-}
-
 .main-content table:not(.schedule-table) th {
   color: var(--oop-ink);
   background: var(--oop-blue-wash);
   font-weight: 700;
-}
-
-.main-content table.course-meta-table th {
-  background: transparent;
 }
 
 .main-content table:not(.schedule-table) th,
@@ -302,42 +242,13 @@ body {
   font-size: 0.82rem;
 }
 
-@media (max-width: 50rem) {
-  .course-meta-table th,
-  .course-meta-table td {
-    padding: 0.65rem 0.7rem;
-  }
-
-  .course-meta-table th:first-child,
-  .course-meta-table td:first-child {
-    padding-left: 0;
-  }
-}
-
 @media (max-width: 40rem) {
   .main-content h1 {
     font-size: 2rem;
   }
 
-  .course-kicker {
-    font-size: 0.65rem;
-  }
-
   .course-lede {
     font-size: 1.05rem;
-  }
-
-  .course-meta-table {
-    font-size: 0.78rem;
-  }
-
-  .course-meta-table th,
-  .course-meta-table td {
-    padding: 0.6rem 0.45rem;
-  }
-
-  .course-meta-table th {
-    font-size: 0.6rem;
   }
 
   .main-content table:not(.schedule-table) {

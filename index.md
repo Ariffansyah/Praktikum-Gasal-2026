@@ -5,18 +5,17 @@ nav_order: 1
 has_toc: false
 ---
 
-OOP 26 / GASAL 2026 / UNESA
-{: .course-kicker}
-
 # Pemrograman Berorientasi Objek
 
 Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Unesa.
 {: .course-lede}
 
-| Term | Meeting time | Location | Instructor |
-|:--|:--|:--|:--|
-| TBA | TBA | TBA | TBA |
-{: .course-meta-table}
+| Course detail | Information |
+|:--|:--|
+| Term | TBA |
+| Meeting time | TBA |
+| Location | TBA |
+| Instructor | TBA |
 
 The course schedule below is the main working document for the course. Replace each `TBA` entry with the final lecture topic, assignment, deadline, or resource when the course plan is ready.
 
