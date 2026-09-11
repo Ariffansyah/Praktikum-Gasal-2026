@@ -41,11 +41,12 @@ The practicum instructor and teaching assistants are listed below.
 
 .staff-member {
   flex: 1;
-  background: #fff;
-  border: 1px solid #e2e2e2;
+  background: var(--oop-sidebar);
+  color: var(--oop-ink);
+  border: 1px solid var(--oop-rule);
   border-radius: 12px;
   padding: 22px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 10px var(--oop-card-shadow);
 }
 
 .instructor-card {
@@ -61,8 +62,8 @@ The practicum instructor and teaching assistants are listed below.
   height: 30px;
   margin-bottom: 18px;
   border-radius: 50%;
-  background: #222;
-  color: #fff;
+  background: var(--oop-active-bg);
+  color: var(--oop-active-ink);
   font-size: 13px;
   font-weight: bold;
 }
@@ -79,10 +80,10 @@ The practicum instructor and teaching assistants are listed below.
   margin-bottom: 10px;
   padding: 4px 8px;
   border-radius: 5px;
-  background: #f0f0f0;
+  background: var(--oop-blue-wash);
   font-size: 11px;
   font-weight: 600;
-  color: #555;
+  color: var(--oop-muted);
 }
 
 .staff-email {
@@ -90,7 +91,7 @@ The practicum instructor and teaching assistants are listed below.
 }
 
 .staff-email a {
-  color: #777;
+  color: var(--oop-link);
   text-decoration: none;
 }
 
