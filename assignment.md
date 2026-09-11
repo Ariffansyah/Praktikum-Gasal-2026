@@ -1,6 +1,6 @@
 ---
-title: Readings
+title: Assignment
 layout: default
 parent: Resources
-nav_order: 1
+nav_order: 2
 ---
