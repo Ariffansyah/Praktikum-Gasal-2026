@@ -1,5 +1,4 @@
 ---
-
 title: Staff
 layout: default
 nav_order: 4
@@ -7,11 +6,25 @@ nav_order: 4
 
 # Staff
 
-The practicum instructor is listed below.
+The practicum instructor and teaching assistants are listed below.
 
-## Teaching team
+## Instructor
 
-* **Instructor:** Riskyana Dewi Instan Puspitasari, M. Kom.
+<div class="instructor-container">
+  <div class="staff-member instructor-card">
+    <div class="staff-role">Instructor</div>
+    <div class="staff-name">Riskyana Dewi Instan Puspitasari, M. Kom.</div>
+    <div class="staff-email">
+      <a href="mailto:riskyanapuspitasari@unesa.ac.id">
+        riskyanapuspitasari@unesa.ac.id
+      </a>
+    </div>
+  </div>
+</div>
+
+## Teaching Assistant
+
+<div class="staff-container" id="staff-members"></div>
 
 <style>
 .staff-container {
@@ -21,6 +34,11 @@ The practicum instructor is listed below.
   align-items: stretch;
 }
 
+.instructor-container {
+  display: flex;
+  margin: 24px 0 32px;
+}
+
 .staff-member {
   flex: 1;
   background: #fff;
@@ -28,6 +46,11 @@ The practicum instructor is listed below.
   border-radius: 12px;
   padding: 22px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.instructor-card {
+  width: 100%;
+  flex: none;
 }
 
 .staff-number {
@@ -82,8 +105,6 @@ The practicum instructor is listed below.
 }
 </style>
 
-<div class="staff-container" id="staff-members"></div>
-
 <script>
 const staff = [
   {
@@ -120,5 +141,4 @@ staff.forEach((member, index) => {
 
   container.appendChild(item);
 });
-
-
+</script>
