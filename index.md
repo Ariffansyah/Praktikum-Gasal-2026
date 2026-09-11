@@ -18,9 +18,21 @@ Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universita
 
 ## Class schedule
 
-| Wednesday                                        | Wednesday                                        | Friday                                           |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| 09:30–11:10<br>Class 2025C<br>Location: C01.04.03 | 13:00–14:40<br>Class 2025A<br>Location: C01.04.03 | 13:00–14:40<br>Class 2025B<br>Location: C01.03.03 |
+<table class="class-schedule">
+  <thead>
+    <tr>
+      <th colspan="2">Wednesday</th>
+      <th>Friday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>09:30-11:10<br>Class 2025C<br>Location: C01.04.03</td>
+      <td>13:00-14:40<br>Class 2025A<br>Location: C01.04.03</td>
+      <td>13:00-14:40<br>Class 2025B<br>Location: C01.03.03</td>
+    </tr>
+  </tbody>
+</table>
 
 
 The course schedule below is the main working document for the course. Each week uses one practicum topic across the three class meetings. Reading and assignment links are temporary placeholders and will be updated later.

@@ -72,6 +72,11 @@ body {
   background-image: none !important;
 }
 
+.side-bar .site-footer {
+  background-color: var(--oop-sidebar) !important;
+  background-image: none !important;
+}
+
 .site-title:hover {
   color: var(--oop-link);
   background-color: var(--oop-sidebar) !important;
