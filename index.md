@@ -14,7 +14,7 @@ Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, 
 
 - Term: Semester Gasal 2026
 - Instructor: Riskyana Dewi Instan Puspitasari, M. Kom.
-- Practicum format: One main topic per week for all three classes
+- Practicum focus: Object-oriented programming using Python
 
 ## Practicum schedule
 
