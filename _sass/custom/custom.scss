@@ -88,16 +88,25 @@ body {
   font-size: 0.875rem;
   font-weight: 650;
   white-space: nowrap;
+  background-image: none !important;
 }
 
 .nav-list-link:hover {
-  color: var(--oop-link);
-  background: var(--oop-blue-wash);
+  color: var(--oop-link) !important;
+  background: var(--oop-blue-wash) !important;
+  background-image: none !important;
 }
 
 .nav-list-link.active {
-  color: var(--oop-active-ink);
-  background: var(--oop-active-bg);
+  color: var(--oop-active-ink) !important;
+  background: var(--oop-active-bg) !important;
+  background-image: none !important;
+}
+
+.nav-list-link.active:hover {
+  color: var(--oop-active-ink) !important;
+  background: var(--oop-active-bg) !important;
+  background-image: none !important;
 }
 
 .nav-list .nav-list .nav-list-link {

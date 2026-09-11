@@ -28,47 +28,10 @@
     var setDark = jtd.getTheme() !== 'dark';
     document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
     jtd.setTheme(setDark ? 'dark' : 'default');
-
-    try {
-      localStorage.setItem('darkMode', String(setDark));
-    } catch (error) {
-      // Continue without persistence when storage is unavailable.
-    }
+    localStorage.setItem('darkMode', String(setDark));
   }
 
-  try {
-    if (localStorage.getItem('darkMode') === 'true') {
-      toggleDark();
-    }
-  } catch (error) {
-    // Continue with the default light theme when storage is unavailable.
-  }
-</script>
-
-<script>
-  /* The auxiliary navigation is rendered in the body, so bind the button there. */
-  function bindDarkModeToggle() {
-    var navList = document.querySelector('.aux-nav-list');
-    if (!navList || !navList.firstElementChild) {
-      return;
-    }
-
-    var darkToggle = navList.firstElementChild;
-    if (darkToggle.getAttribute('data-theme-bound') === 'true') {
-      return;
-    }
-
-    darkToggle.setAttribute('data-theme-bound', 'true');
-    darkToggle.setAttribute('aria-label', 'Toggle dark mode');
-    darkToggle.addEventListener('click', function (event) {
-      event.preventDefault();
-      toggleDark();
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindDarkModeToggle);
-  } else {
-    bindDarkModeToggle();
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
   }
 </script>
