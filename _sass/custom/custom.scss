@@ -1,26 +1,6 @@
 /* Hallmark - macrostructure: Long Document - tone: technical - anchor hue: blue */
 
 :root {
-  color-scheme: dark;
-  --oop-paper: oklch(20% 0.022 255);
-  --oop-sidebar: oklch(16% 0.022 255);
-  --oop-ink: oklch(92% 0.018 275);
-  --oop-muted: oklch(74% 0.022 275);
-  --oop-rule: oklch(38% 0.028 255);
-  --oop-rule-strong: oklch(52% 0.035 250);
-  --oop-link: oklch(82% 0.15 255);
-  --oop-link-hover: oklch(90% 0.12 255);
-  --oop-blue-wash: oklch(28% 0.045 250);
-  --oop-tba: oklch(72% 0.028 275);
-  --oop-active-bg: oklch(92% 0.018 250);
-  --oop-active-ink: oklch(24% 0.035 275);
-  --oop-row-hover: oklch(26% 0.035 250);
-  --oop-code-bg: oklch(14% 0.02 255);
-  --oop-button-bg: oklch(30% 0.04 250);
-  --oop-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
-}
-
-:root[data-theme="light"] {
   color-scheme: light;
   --oop-paper: oklch(99% 0.006 250);
   --oop-sidebar: oklch(97% 0.012 255);
@@ -37,6 +17,26 @@
   --oop-row-hover: oklch(98% 0.012 250);
   --oop-code-bg: oklch(96% 0.006 250);
   --oop-button-bg: oklch(97% 0.006 250);
+  --oop-mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --oop-paper: oklch(20% 0.022 255);
+  --oop-sidebar: oklch(16% 0.022 255);
+  --oop-ink: oklch(92% 0.018 275);
+  --oop-muted: oklch(74% 0.022 275);
+  --oop-rule: oklch(38% 0.028 255);
+  --oop-rule-strong: oklch(52% 0.035 250);
+  --oop-link: oklch(82% 0.15 255);
+  --oop-link-hover: oklch(90% 0.12 255);
+  --oop-blue-wash: oklch(28% 0.045 250);
+  --oop-tba: oklch(72% 0.028 275);
+  --oop-active-bg: oklch(92% 0.018 250);
+  --oop-active-ink: oklch(24% 0.035 275);
+  --oop-row-hover: oklch(26% 0.035 250);
+  --oop-code-bg: oklch(14% 0.02 255);
+  --oop-button-bg: oklch(30% 0.04 250);
 }
 
 html,
@@ -110,7 +110,12 @@ body {
 }
 
 .main {
-  max-width: 1180px;
+  max-width: 68.75rem;
+}
+
+.main-content-wrap {
+  max-width: 68.75rem;
+  margin: 0 auto;
 }
 
 .main-header {

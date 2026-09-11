@@ -1,68 +1,74 @@
+<link
+  rel="preload"
+  href="{{ '/assets/css/just-the-docs-dark.css' | relative_url }}"
+  as="style"
+>
+
+<!-- Dedicated stylesheet used by the persistent light/dark mode toggle. -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="{{ '/assets/css/just-the-docs-default.css' | relative_url }}"
+>
+
 <script>
-(function () {
-  var storageKey = "oop26-theme";
-  var savedTheme = null;
+  /* Persistent dark mode logic based on the course-site template. */
+  jtd.getTheme = function () {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    var cssFileHref = cssFile.getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  function toggleDark() {
+    var setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+
+    try {
+      localStorage.setItem('darkMode', String(setDark));
+    } catch (error) {
+      // Continue without persistence when storage is unavailable.
+    }
+  }
 
   try {
-    savedTheme = localStorage.getItem(storageKey);
-  } catch (error) {
-    savedTheme = null;
-  }
-
-  if (savedTheme === "light" || savedTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }
-
-  function initThemeToggle() {
-    var toggle = null;
-    var links = document.querySelectorAll(".aux-nav a.site-button");
-
-    for (var i = 0; i < links.length; i += 1) {
-      var label = links[i].textContent.trim();
-      if (label === "Dark Mode" || label === "Light Mode") {
-        toggle = links[i];
-        break;
-      }
+    if (localStorage.getItem('darkMode') === 'true') {
+      toggleDark();
     }
+  } catch (error) {
+    // Continue with the default light theme when storage is unavailable.
+  }
+</script>
 
-    if (!toggle || typeof jtd === "undefined") {
+<script>
+  /* The auxiliary navigation is rendered in the body, so bind the button there. */
+  function bindDarkModeToggle() {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) {
       return;
     }
 
-    function applyTheme(theme) {
-      var loadedTheme = jtd.getTheme();
-      if (loadedTheme === "default") {
-        loadedTheme = "dark";
-      }
-
-      document.documentElement.setAttribute("data-theme", theme);
-
-      if (loadedTheme !== theme) {
-        jtd.setTheme(theme);
-      }
-
-      toggle.textContent = theme === "dark" ? "Light Mode" : "Dark Mode";
-      toggle.setAttribute("aria-label", "Switch to " + (theme === "dark" ? "light" : "dark") + " mode");
-
-      try {
-        localStorage.setItem(storageKey, theme);
-      } catch (error) {
-        // Continue without persistence when storage is unavailable.
-      }
+    var darkToggle = navList.firstElementChild;
+    if (darkToggle.getAttribute('data-theme-bound') === 'true') {
+      return;
     }
 
-    toggle.addEventListener("click", function (event) {
+    darkToggle.setAttribute('data-theme-bound', 'true');
+    darkToggle.setAttribute('aria-label', 'Toggle dark mode');
+    darkToggle.addEventListener('click', function (event) {
       event.preventDefault();
-      applyTheme(jtd.getTheme() === "dark" ? "light" : "dark");
+      toggleDark();
     });
-
-    applyTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark");
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initThemeToggle);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindDarkModeToggle);
   } else {
-    initThemeToggle();
+    bindDarkModeToggle();
   }
-}());
 </script>
