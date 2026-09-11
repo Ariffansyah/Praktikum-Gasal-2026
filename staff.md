@@ -131,7 +131,6 @@ staff.forEach((member, index) => {
   item.className = "staff-member";
 
   item.innerHTML = `
-    <div class="staff-number">${index + 1}</div>
     <div class="staff-name">${member.name}</div>
     ${member.role ? `<div class="staff-role">${member.role}</div>` : ""}
     <div class="staff-email">
