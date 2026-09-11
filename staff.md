@@ -131,8 +131,8 @@ staff.forEach((member, index) => {
   item.className = "staff-member";
 
   item.innerHTML = `
+      ${member.role ? `<div class="staff-role">${member.role}</div>` : ""}
     <div class="staff-name">${member.name}</div>
-    ${member.role ? `<div class="staff-role">${member.role}</div>` : ""}
     <div class="staff-email">
       <a href="mailto:${email}">${email}</a>
     </div>

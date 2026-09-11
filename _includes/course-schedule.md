@@ -2,8 +2,8 @@
 
 | Time | Date | Lecture / Topic | Reading | Practicum Assignment |
 |:---|:---|:---|:---|:---|
-| Week 1 | Wed, 26 Aug (2025C, 2025A)<br>Fri, 28 Aug (2025B) | **Introduction to OOP concepts** ([pdf](https://drive.google.com/file/d/1v4irey6Hb2td0ezmso63NbymXaGIaJPT/view?usp=sharing)) | [Ch. 1](https://oop-ai26.github.io/Praktikum-Gasal-2026/readings-chapter1/) | - |
-| Week 2 | Wed, 2 Sep (2025C, 2025A)<br>Fri, 4 Sep (2025B) | **Property Visibility & Class Method** ([pdf](https://drive.google.com/file/d/1y2bwnMA9T9qMjPpk-a4Eca_mnzclWnfu/view?usp=sharing)) | [Ch. 2](https://oop-ai26.github.io/Praktikum-Gasal-2026/readings-chapter2/) | - |
+| Week 1 | Wed, 26 Aug (2025C, 2025A)<br>Fri, 28 Aug (2025B) | **Introduction to OOP concepts** ([pdf]({{ '/ppts/[2026_OOP] Pertemuan 1 - Pengantar OOP (1).pdf' | relative_url }})) | [Ch. 1]({{ '/readings-chapter1/' | relative_url }}) | - |
+| Week 2 | Wed, 2 Sep (2025C, 2025A)<br>Fri, 4 Sep (2025B) | **Property Visibility & Class Method** ([pdf]({{ '/ppts/[2026_OOP] Pertemuan 2 - Property Visibility & Class Method (1).pdf' | relative_url }})) | [Ch. 2]({{ '/readings-chapter2/' | relative_url }}) | - |
 | Week 3 | Wed, 16 Sep (2025C, 2025A)<br>Fri, 18 Sep (2025B) | **Encapsulation, visibility, properties, and attribute validation** ([pdf](#)) | [Ch. 3](#) | [#](#) |
 | Week 4 | Wed, 23 Sep (2025C, 2025A)<br>Fri, 25 Sep (2025B) | **Class methods, static methods, and decorators** ([pdf](#)) | [Ch. 4](#) | [#](#) |
 | Week 5 | Wed, 30 Sep (2025C, 2025A)<br>Fri, 2 Oct (2025B) | **Inheritance, overriding, nested inheritance, and multiple inheritance** ([pdf](#)) | [Ch. 5](#) | [#](#) |
