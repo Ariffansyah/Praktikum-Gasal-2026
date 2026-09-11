@@ -7,7 +7,7 @@ nav_order: 2
 
 # Reading 2 - Property, Visibility, dan Class Method
 
-<a href="{{ '/ppts/[2026_OOP] Pertemuan 2 - Property Visibility & Class Method (1).pdf' | relative_url }}">Buka slide Pertemuan 2 (PDF)</a>
+<a href="https://drive.google.com/file/d/1y2bwnMA9T9qMjPpk-a4Eca_mnzclWnfu/view?usp=sharing">Buka slide Pertemuan 2 (PDF)</a>
 
 ## Ringkasan
 
@@ -219,7 +219,3 @@ Static method biasanya digunakan untuk fungsi utilitas yang masih berkaitan deng
 - Encapsulation menyatukan data dan perilaku serta mengendalikan akses data.
 - Class method menggunakan `cls` dan `@classmethod`.
 - Static method tidak menggunakan `self` atau `cls` dan memakai `@staticmethod`.
-
-## Latihan singkat
-
-Buat class `RekeningBank` yang menerapkan encapsulation. Gunakan attribute private untuk saldo, instance method untuk setor dan tarik dana, class method untuk menghitung jumlah rekening, dan static method untuk memvalidasi nomor rekening.

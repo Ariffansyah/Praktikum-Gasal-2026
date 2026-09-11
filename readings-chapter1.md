@@ -7,7 +7,7 @@ nav_order: 1
 
 # Reading 1 - Pengantar OOP dan Class-Object
 
-<a href="{{ '/ppts/[2026_OOP] Pertemuan 1 - Pengantar OOP (1).pdf' | relative_url }}">Buka slide Pertemuan 1 (PDF)</a>
+<a href="https://drive.google.com/file/d/1v4irey6Hb2td0ezmso63NbymXaGIaJPT/view?usp=sharing">Buka slide Pertemuan 1 (PDF)</a>
 
 ## Ringkasan
 
@@ -146,7 +146,3 @@ class NeuralNetwork:
 - `self` merujuk pada instance yang sedang digunakan.
 - `__init__()` menyiapkan keadaan awal object.
 - Class attribute digunakan untuk data bersama, sedangkan instance attribute menyimpan data setiap object.
-
-## Latihan singkat
-
-Buat class `Buku` dengan attribute `judul`, `penulis`, dan `tahun_terbit`. Tambahkan method untuk menampilkan informasi buku dan method untuk mengubah status ketersediaan buku.
