@@ -27,6 +27,3 @@ This page contains the working information for the OOP practicum.
 - Wednesday, 13:00-14:40 - Class 2025A - Location C01.04.03
 - Friday, 13:00-14:40 - Class 2025B - Location C01.03.03
 
-## Course structure
-
-The course combines guided explanations, coding exercises, and practicum work. One main topic is used for the three class meetings in each week. Assessment weights, attendance rules, and the submission process are TBA.
