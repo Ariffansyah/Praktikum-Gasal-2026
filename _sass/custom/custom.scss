@@ -421,6 +421,10 @@ textarea:focus-visible {
   font-size: 0.82rem;
 }
 
+.print-cover {
+  display: none;
+}
+
 @media (max-width: 40rem) {
   .main-content h1 {
     font-size: 2rem;
@@ -436,12 +440,62 @@ textarea:focus-visible {
 }
 
 @media print {
+  @page {
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .skip-to-main,
   .side-bar,
   .main-header,
   .aux-nav,
   .search,
   .back-to-top {
     display: none !important;
+  }
+
+  .print-cover {
+    position: relative;
+    display: flex !important;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1in 0.8in;
+    page-break-after: always;
+    break-after: page;
+    background: #fff;
+    color: #000;
+    text-align: center;
+  }
+
+  .print-cover__title {
+    max-width: 85%;
+    margin: 0;
+    color: #000;
+    font-size: 28pt;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .print-cover__footer {
+    position: absolute;
+    right: 0;
+    bottom: 0.5in;
+    left: 0;
+    color: #000;
+    font-size: 10pt;
+    line-height: 1.2;
+    text-align: center;
   }
 
   .main {
