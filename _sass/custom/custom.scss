@@ -244,6 +244,11 @@ textarea:focus-visible {
   font-size: 1.18rem;
 }
 
+#weekly-schedule td[rowspan] {
+  text-align: center;
+  vertical-align: middle;
+}
+
 .main-content a {
   color: var(--oop-link);
 }
