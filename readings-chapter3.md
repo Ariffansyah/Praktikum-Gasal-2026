@@ -1,5 +1,5 @@
 ---
-title: Reading 3 - Visibility Property, Encapsulation, dan Validasi Data
+title: Chapter 3
 layout: default
 parent: Readings
 nav_order: 3
