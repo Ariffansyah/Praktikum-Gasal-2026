@@ -592,7 +592,8 @@ textarea:focus-visible {
   font-size: 0.82rem;
 }
 
-.print-cover {
+.print-cover,
+.print-page-number {
   display: none;
 }
 
@@ -639,6 +640,24 @@ textarea:focus-visible {
   .main-content > footer,
   .back-to-top {
     display: none !important;
+  }
+
+  .print-page-number {
+    position: fixed;
+    right: 0;
+    bottom: 0.38in;
+    left: 0;
+    z-index: 10;
+    display: block;
+    color: var(--oop-print-muted);
+    font-family: var(--oop-print-sans);
+    font-size: 8.5pt;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .print-page-number::after {
+    content: "Page " counter(page);
   }
 
   .print-cover {
