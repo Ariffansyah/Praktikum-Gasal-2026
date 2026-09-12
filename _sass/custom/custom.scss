@@ -823,7 +823,24 @@ textarea:focus-visible {
 
 @media print {
   @page {
+    margin: 0.38in 0 0.58in;
+
+    @bottom-center {
+      color: var(--oop-print-muted);
+      content: "Page " counter(page);
+      font-family: var(--oop-print-sans);
+      font-size: 8.5pt;
+      line-height: 1;
+    }
+  }
+
+  @page cover {
     margin: 0;
+    counter-reset: page 0;
+
+    @bottom-center {
+      content: none;
+    }
   }
 
   html,
@@ -853,25 +870,12 @@ textarea:focus-visible {
   }
 
   .print-page-number {
-    position: fixed;
-    right: 0;
-    bottom: 0.38in;
-    left: 0;
-    z-index: 10;
-    display: block;
-    color: var(--oop-print-muted);
-    font-family: var(--oop-print-sans);
-    font-size: 8.5pt;
-    line-height: 1;
-    text-align: center;
-  }
-
-  .print-page-number::after {
-    content: "Page " counter(page);
+    display: none !important;
   }
 
   .print-cover {
     position: relative;
+    page: cover;
     display: flex !important;
     width: 100%;
     height: 100vh;
