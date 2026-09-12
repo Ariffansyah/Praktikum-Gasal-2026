@@ -7,11 +7,14 @@ nav_order: 1
 
 # Gambaran Umum Mata Kuliah
 
-Praktikum ini memperkenalkan pemrograman berorientasi objek menggunakan Python dan menerapkan konsep-konsep tersebut melalui latihan pemrograman terstruktur serta sebuah proyek aplikasi sederhana.
+Mata kuliah ini membekali mahasiswa dengan prinsip, konsep, dan teknik pemrograman berorientasi objek (object-oriented programming/OOP) pada
+bahasa pemrograman Python. Mahasiswa akan mempelajari konsep kelas, objek, abstraksi (abstraction), enkapsulasi (encapsulation), pewarisan sifat
+(inheritance), polimorphism (polymorphism), dan komposisi (composition) dalam membangun perangkat lunak yang modular, terstruktur, dapat
+digunakan kembali, dan mudah dikembangkan. Dalam konteks Program Studi Kecerdasan Artifisial, OOP diarahkan agar mahasiswa mampu menggunakan konsep tersebut untuk membangun komponen perangkat lunak yang mendukung pengembangan aplikasi kecerdasan artifisial
+
 
 ## Deskripsi
-
-Urutan materi mingguan dimulai dari konsep dasar pemrograman berorientasi objek hingga organisasi perangkat lunak, penanganan eksepsi, pengelolaan berkas, integrasi GUI, perancangan aplikasi, implementasi, pengujian, dan demonstrasi aplikasi.
+Praktikum ini memperkenalkan pemrograman berorientasi objek menggunakan Python dan menerapkan konsep-konsep tersebut melalui latihan pemrograman terstruktur serta sebuah proyek aplikasi sederhana. Urutan materi mingguan dimulai dari konsep dasar pemrograman berorientasi objek hingga organisasi perangkat lunak, penanganan eksepsi, pengelolaan berkas, integrasi GUI, perancangan aplikasi, implementasi, pengujian, dan demonstrasi aplikasi.
 
 ## Capaian Pembelajaran
 
@@ -25,7 +28,6 @@ Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 ## Format Mingguan
 
-* **Penjelasan materi:** Satu materi utama dibagikan dan digunakan bersama oleh ketiga kelas setiap minggu.
 * **Praktik terbimbing:** Latihan pemrograman yang disesuaikan dengan materi mingguan.
 * **Pengerjaan tugas:** Tugas dan latihan pemrograman yang berkaitan dengan materi mingguan.
 * **Konsultasi:** Diskusi dan konsultasi mengenai latihan, tugas, serta proyek aplikasi.
@@ -35,6 +37,6 @@ Setelah menyelesaikan praktikum ini, mahasiswa diharapkan mampu:
 
 * Pelajari kembali materi mingguan sebelum mengikuti praktikum.
 * Siapkan lingkungan pengembangan **Python 3** yang dapat digunakan dengan baik.
-* Instal dan konfigurasi perangkat pengembangan yang diperlukan sebagaimana tercantum pada [Tools dan Setup](../resources/tools-and-setup).
+* Instal dan konfigurasi perangkat pengembangan yang diperlukan sebagaimana tercantum pada [Tools dan Setup](/resources/tools-and-setup).
 * Bawa materi praktikum dan berkas tugas yang diperlukan.
 * Bersiap untuk menulis, menjalankan, melakukan debugging, dan menguji program Python selama praktikum.
