@@ -79,7 +79,6 @@ class Mahasiswa:
         self._email = self._email.lower()
 ```
 
-{% include pyodide-exercise.html id="m3-protected-definition" title="Protected property" prompt="Buat class yang memiliki property protected dan method internal untuk menormalisasi nilainya." %}
 
 Satu underscore adalah tanda bahwa property atau method tersebut ditujukan untuk penggunaan internal class dan subclass. Python tetap mengizinkan kode luar mengakses `_email`, sehingga protected pada Python merupakan konvensi, bukan pembatas akses yang mutlak.
 
@@ -88,7 +87,6 @@ mhs = Mahasiswa("Andi", "ANDI@EXAMPLE.COM")
 print(mhs._email)
 ```
 
-{% include pyodide-exercise.html id="m3-protected-access" title="Mengamati protected property" prompt="Buat object dari class yang memiliki protected property, lalu amati bahwa Python masih mengizinkan akses langsung." %}
 
 Akses tersebut masih dapat berjalan, tetapi pengguna class sebaiknya menggunakan interface public yang disediakan oleh class. Dengan mematuhi konvensi ini, implementasi internal dapat diubah tanpa dianggap sebagai perubahan interface public.
 
@@ -108,7 +106,6 @@ rekening = RekeningBank(1000000)
 print(rekening.cek_saldo())
 ```
 
-{% include pyodide-exercise.html id="m3-private-property" title="Private property" prompt="Buat class dengan private property dan method public untuk membaca nilainya tanpa mengakses private property secara langsung." %}
 
 Kode di luar class tidak dapat mengakses attribute menggunakan nama awalnya.
 
@@ -117,7 +114,6 @@ Kode di luar class tidak dapat mengakses attribute menggunakan nama awalnya.
 # print(rekening.__saldo)
 ```
 
-{% include pyodide-exercise.html id="m3-private-access" title="Menguji akses private" prompt="Buat private property, lalu uji perbedaan akses melalui method public dan akses langsung dari luar class." %}
 
 Pemanggilan langsung tersebut menghasilkan `AttributeError` karena Python melakukan name mangling terhadap nama `__saldo`.
 
@@ -154,7 +150,6 @@ rekening = RekeningBank(500000)
 print(rekening.__dict__)
 ```
 
-{% include pyodide-exercise.html id="m3-name-mangling" title="Name mangling" prompt="Buat private property dan periksa __dict__ object untuk menemukan nama hasil name mangling." %}
 
 Secara konseptual, hasilnya memiliki key yang menyerupai berikut:
 
@@ -190,7 +185,6 @@ print(akun.tampilkan_kode())
 print(akun.tampilkan_kode_khusus())
 ```
 
-{% include pyodide-exercise.html id="m3-mangling-inheritance" title="Name mangling pada inheritance" prompt="Buat parent class dan child class dengan private property bernama sama, lalu amati bahwa keduanya disimpan terpisah." %}
 
 `__kode` pada `Akun` dan `__kode` pada `AkunKhusus` tidak menjadi attribute yang sama. Python menyimpannya dengan nama mangling berdasarkan class yang mendefinisikannya.
 
@@ -207,7 +201,6 @@ class Buku:
         return self.judul
 ```
 
-{% include pyodide-exercise.html id="m3-dunder-method" title="Dunder method" prompt="Buat class dengan __init__ dan __str__, lalu cetak object tersebut untuk mengamati protocol Python." %}
 
 `__init__` dan `__str__` merupakan bagian dari protocol Python, bukan private method yang dibuat untuk menyembunyikan implementasi class.
 
@@ -237,7 +230,6 @@ rekening.saldo = -500000
 print(rekening.saldo)
 ```
 
-{% include pyodide-exercise.html id="m3-without-encapsulation" title="Tanpa encapsulation" prompt="Buat class dengan saldo public, lalu tunjukkan bagaimana kode luar dapat memasukkan nilai yang tidak valid." %}
 
 Kode luar dapat mengubah saldo menjadi nilai negatif tanpa validasi. State object menjadi tidak konsisten.
 
@@ -292,7 +284,6 @@ class ProdukLama:
         self._harga = nilai
 ```
 
-{% include pyodide-exercise.html id="m3-explicit-getter-setter" title="Getter dan setter eksplisit" prompt="Buat getter dan setter eksplisit untuk sebuah property, lalu tambahkan validasi pada setter." %}
 
 Python menyediakan `@property` agar akses tetap terlihat seperti akses attribute, tetapi logika getter dan setter tetap dapat dijalankan.
 
@@ -317,7 +308,6 @@ suhu = Suhu(25)
 print(suhu.celsius)
 ```
 
-{% include pyodide-exercise.html id="m3-property-getter" title="Property getter" prompt="Buat class dengan @property getter sehingga nilai internal dapat dibaca menggunakan notasi titik." %}
 
 Caller menggunakan `suhu.celsius`, tetapi Python sebenarnya menjalankan method `celsius()`.
 
