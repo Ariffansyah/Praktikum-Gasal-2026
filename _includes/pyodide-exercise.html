@@ -25,7 +25,7 @@
       <div class="pyodide-editor__language">Python</div>
     </div>
 
-    <label class="pyodide-editor__label" for="{{ include.id | escape }}-editor">Starter code</label>
+    <label class="pyodide-editor__label" for="{{ include.id | escape }}-editor"></label>
     <div class="pyodide-editor__body">
       <div class="pyodide-editor__gutter" data-pyodide-line-numbers aria-hidden="true"><span>1</span></div>
       <textarea id="{{ include.id | escape }}-editor" class="pyodide-exercise__editor" data-pyodide-editor spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-label="Python code editor">{{ include.starter | default: "" | escape }}</textarea>
