@@ -56,8 +56,9 @@ The practicum instructor and teaching assistants are listed below.
 }
 
 .instructor-card {
-  width: 100%;
-  flex: none;
+  width: auto;
+  flex: 0 1 auto;
+  min-width: 400px;
 }
 
 .staff-number {
