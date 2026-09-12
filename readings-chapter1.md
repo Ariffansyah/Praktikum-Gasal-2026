@@ -7,7 +7,7 @@ nav_order: 1
 
 # Reading 1 - Pengantar OOP dan Class-Object
 
-<a href="{{ '/ppts/[2026_OOP] Pertemuan 1 - Pengantar OOP (1).pdf' | relative_url }}">Buka slide Pertemuan 1 (PDF)</a>
+<a href="https://drive.google.com/file/d/1v4irey6Hb2td0ezmso63NbymXaGIaJPT/view?usp=sharing">Buka slide Pertemuan 1 (PDF)</a>
 
 ## Ringkasan
 
