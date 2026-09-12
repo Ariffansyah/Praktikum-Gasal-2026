@@ -736,11 +736,6 @@
       ""
     );
 
-    setStatus(
-      exercise,
-      "Starter code kosong dan siap diisi.",
-      ""
-    );
 
     updateEditorUI(exercise);
 
