@@ -634,6 +634,7 @@ textarea:focus-visible {
   .search-footer,
   .search-overlay,
   .anchor-heading,
+  .pyodide-exercise,
   .main-content > hr,
   .main-content > footer,
   .back-to-top {
@@ -694,12 +695,14 @@ textarea:focus-visible {
   .main-content-wrap {
     max-width: none !important;
     margin: 0 !important;
-    padding: 1.05in 1.15in 1.15in !important;
+    padding: 1.25in 1.15in 1.35in !important;
   }
 
   .main-content {
     max-width: 7in;
     margin: 0 auto !important;
+    margin-top: 0.18in !important;
+    margin-bottom: 0.25in !important;
     padding: 0 !important;
     color: var(--oop-print-ink) !important;
     font-family: var(--oop-print-serif) !important;
@@ -746,13 +749,13 @@ textarea:focus-visible {
   }
 
   .main-content p {
-    margin: 0 0 0.14in;
+    margin: 0 0 0.11in;
   }
 
   .main-content ul,
   .main-content ol {
-    margin-top: 0.08in;
-    margin-bottom: 0.16in;
+    margin-top: 0.05in;
+    margin-bottom: 0.12in;
     padding-left: 0.3in;
   }
 
@@ -769,67 +772,7 @@ textarea:focus-visible {
     font-size: 0.92em;
   }
 
-  .pyodide-exercise {
-    margin: 0.3in 0 0.35in;
-    padding: 0.18in 0.2in 0.2in;
-    border: 0.75pt solid var(--oop-print-rule);
-    border-left: 2pt solid var(--oop-print-rule-strong);
-    background: transparent !important;
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
 
-  .pyodide-exercise__header {
-    display: block;
-  }
-
-  .pyodide-exercise__eyebrow {
-    margin: 0 0 0.05in;
-    color: var(--oop-print-muted) !important;
-    font-family: var(--oop-print-sans);
-    font-size: 8pt;
-    letter-spacing: 0.08em;
-  }
-
-  .pyodide-exercise__title {
-    color: var(--oop-print-ink) !important;
-    font-family: var(--oop-print-serif) !important;
-    font-size: 13pt;
-  }
-
-  .pyodide-exercise__runtime,
-  .pyodide-exercise__actions,
-  .pyodide-exercise__output {
-    display: none !important;
-  }
-
-  .pyodide-exercise__prompt {
-    margin: 0.1in 0;
-    color: var(--oop-print-ink) !important;
-    font-family: var(--oop-print-serif) !important;
-  }
-
-  .pyodide-exercise__label {
-    margin: 0.12in 0 0.05in;
-    color: var(--oop-print-muted) !important;
-    font-family: var(--oop-print-sans);
-    font-size: 8.5pt;
-  }
-
-  .pyodide-exercise__editor {
-    min-height: 1.7in;
-    resize: none;
-    padding: 0.12in;
-    border: 0.75pt solid var(--oop-print-rule-strong);
-    border-radius: 0;
-    background: var(--oop-print-paper) !important;
-    color: var(--oop-print-ink) !important;
-    font-family: var(--oop-mono);
-    font-size: 9pt;
-    line-height: 1.45;
-  }
-
-  .main-content div.highlighter-rouge,
   .main-content figure.highlight {
     margin: 0.18in 0;
     padding: 0;
