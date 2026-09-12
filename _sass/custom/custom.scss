@@ -27,6 +27,26 @@
   --oop-print-wash: oklch(97% 0 0);
   --oop-print-serif: Georgia, "Times New Roman", serif;
   --oop-print-sans: Arial, Helvetica, sans-serif;
+  --oop-playground-card: var(--oop-paper);
+  --oop-playground-card-ink: var(--oop-ink);
+  --oop-playground-rule: var(--oop-rule);
+  --oop-playground-subtle: var(--oop-blue-wash);
+  --oop-playground-editor: var(--oop-code-bg);
+  --oop-playground-editor-top: var(--oop-sidebar);
+  --oop-playground-editor-ink: var(--oop-ink);
+  --oop-playground-editor-muted: var(--oop-muted);
+  --oop-playground-editor-accent: var(--oop-link);
+  --oop-playground-editor-border: var(--oop-rule);
+  --oop-playground-output: var(--oop-sidebar);
+  --oop-playground-run: var(--oop-active-bg);
+  --oop-playground-run-hover: var(--oop-link-hover);
+  --oop-playground-run-ink: var(--oop-active-ink);
+  --oop-playground-reset: var(--oop-button-bg);
+  --oop-playground-reset-ink: var(--oop-ink);
+  --oop-playground-live: oklch(55% 0.16 145);
+  --oop-playground-success: oklch(42% 0.12 145);
+  --oop-playground-warning: oklch(48% 0.12 75);
+  --oop-playground-error: oklch(48% 0.16 25);
 }
 
 :root[data-theme="dark"] {
@@ -47,6 +67,12 @@
   --oop-code-bg: oklch(14% 0.02 255);
   --oop-button-bg: oklch(30% 0.04 250);
   --oop-card-shadow: rgba(0, 0, 0, 0.22);
+  --oop-playground-editor-border: var(--oop-rule);
+  --oop-playground-run-hover: var(--oop-link-hover);
+  --oop-playground-live: oklch(78% 0.15 145);
+  --oop-playground-success: oklch(78% 0.12 145);
+  --oop-playground-warning: oklch(80% 0.12 75);
+  --oop-playground-error: oklch(78% 0.16 25);
 }
 
 html,
@@ -429,7 +455,7 @@ textarea:focus-visible {
   overflow: hidden;
   border: 1px solid #d8dee4;
   border-radius: 10px;
-  background: #fff;
+  background: #0d1117;
 }
 
 .pyodide-exercise__header {
@@ -794,6 +820,149 @@ textarea:focus-visible {
     margin-top: 0.2rem;
     margin-left: 0;
   }
+}
+
+/* Theme-aware playground surfaces. */
+.pyodide-exercise,
+.pyodide-exercise__header {
+  border-color: var(--oop-playground-rule);
+  background: var(--oop-playground-card);
+  color: var(--oop-playground-card-ink);
+}
+
+.pyodide-exercise__eyebrow,
+.pyodide-exercise__runtime,
+.pyodide-exercise__language,
+.pyodide-editor__filename,
+.pyodide-editor__label,
+.pyodide-editor__footer,
+.pyodide-exercise__status,
+.pyodide-output__status {
+  color: var(--oop-playground-editor-muted);
+}
+
+.pyodide-exercise__title {
+  color: var(--oop-playground-card-ink);
+}
+
+.pyodide-exercise__runtime {
+  border-color: var(--oop-playground-rule);
+}
+
+.pyodide-exercise__runtime-dot {
+  background: var(--oop-playground-live);
+}
+
+.pyodide-exercise__prompt {
+  border-color: var(--oop-playground-rule);
+  background: var(--oop-playground-subtle);
+  color: var(--oop-playground-card-ink);
+}
+
+.pyodide-editor,
+.pyodide-editor__body,
+.pyodide-editor__gutter,
+.pyodide-exercise__editor,
+.pyodide-exercise__editor::-webkit-scrollbar-track,
+.pyodide-editor__gutter::-webkit-scrollbar-track {
+  border-color: var(--oop-playground-editor-border);
+  background: var(--oop-playground-editor);
+}
+
+.pyodide-editor__topbar,
+.pyodide-editor__footer {
+  border-color: var(--oop-playground-editor-border);
+  background: var(--oop-playground-editor-top);
+}
+
+.pyodide-editor__traffic span {
+  background: var(--oop-playground-editor-muted);
+}
+
+.pyodide-editor__gutter {
+  border-color: var(--oop-playground-editor-border);
+  color: var(--oop-playground-editor-muted);
+}
+
+.pyodide-exercise__editor {
+  color: var(--oop-playground-editor-ink);
+  caret-color: var(--oop-playground-editor-accent);
+}
+
+.pyodide-exercise__editor::selection {
+  background: color-mix(in oklch, var(--oop-playground-editor-accent) 35%, transparent);
+}
+
+.pyodide-editor__body:focus-within {
+  box-shadow: inset 2px 0 0 var(--oop-playground-editor-accent);
+}
+
+.pyodide-exercise__editor::-webkit-scrollbar-thumb,
+.pyodide-editor__gutter::-webkit-scrollbar-thumb {
+  background: var(--oop-playground-editor-border);
+}
+
+.pyodide-exercise__editor::-webkit-scrollbar-thumb:hover,
+.pyodide-editor__gutter::-webkit-scrollbar-thumb:hover {
+  background: var(--oop-playground-editor-muted);
+}
+
+.pyodide-exercise__actions button:focus-visible {
+  outline-color: var(--oop-playground-editor-accent);
+}
+
+.pyodide-exercise__run {
+  border-color: var(--oop-playground-run) !important;
+  background: var(--oop-playground-run) !important;
+  color: var(--oop-playground-run-ink) !important;
+}
+
+.pyodide-exercise__run:hover {
+  background: var(--oop-playground-run-hover) !important;
+}
+
+.pyodide-exercise__reset {
+  border-color: var(--oop-playground-rule);
+  background: var(--oop-playground-reset) !important;
+  color: var(--oop-playground-reset-ink) !important;
+}
+
+.pyodide-exercise__reset:hover {
+  background: var(--oop-playground-subtle) !important;
+}
+
+.pyodide-exercise__status[data-state="loading"] {
+  color: var(--oop-playground-warning);
+}
+
+.pyodide-exercise__status[data-state="success"] {
+  color: var(--oop-playground-success);
+}
+
+.pyodide-exercise__status[data-state="error"] {
+  color: var(--oop-playground-error);
+}
+
+.pyodide-output {
+  border-color: var(--oop-playground-rule);
+  background: var(--oop-playground-output);
+}
+
+.pyodide-output__header {
+  border-color: var(--oop-playground-rule);
+  color: var(--oop-playground-editor-muted);
+}
+
+.pyodide-exercise__output {
+  color: var(--oop-playground-editor-ink);
+}
+
+.pyodide-exercise__output[data-state="error"] {
+  color: var(--oop-playground-error);
+}
+
+.pyodide-exercise__output[data-state="success"] {
+  color: var(--oop-playground-success);
 }
 
 .site-footer {

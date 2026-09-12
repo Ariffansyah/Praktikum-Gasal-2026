@@ -451,7 +451,7 @@
         }
 
         /*
-         * Remove between 1–4 spaces.
+         * Remove between 1-4 spaces.
          */
         return line.replace(
           /^ {1,4}/,
