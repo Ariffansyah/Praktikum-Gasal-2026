@@ -423,6 +423,169 @@ textarea:focus-visible {
   background: var(--oop-code-bg);
 }
 
+.pyodide-exercise {
+  margin: 2rem 0 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--oop-rule);
+  border-left: 3px solid var(--oop-link);
+  background: var(--oop-sidebar);
+}
+
+.pyodide-exercise__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pyodide-exercise__eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--oop-link);
+  font-family: var(--oop-mono);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pyodide-exercise__title {
+  margin: 0;
+  color: var(--oop-ink);
+  font-size: 1.15rem;
+}
+
+.pyodide-exercise__runtime {
+  flex: 0 0 auto;
+  padding: 0.25rem 0.45rem;
+  border: 1px solid var(--oop-rule-strong);
+  color: var(--oop-muted);
+  font-family: var(--oop-mono);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.pyodide-exercise__prompt {
+  margin: 1rem 0 0.75rem;
+  color: var(--oop-muted);
+}
+
+.pyodide-exercise__label {
+  display: block;
+  margin: 1rem 0 0.4rem;
+  color: var(--oop-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.pyodide-exercise__editor {
+  display: block;
+  width: 100%;
+  min-height: 12rem;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 0.8rem;
+  border: 1px solid var(--oop-rule-strong);
+  border-radius: 0;
+  background: var(--oop-code-bg);
+  color: var(--oop-ink);
+  font-family: var(--oop-mono);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.pyodide-exercise__editor:focus {
+  border-color: var(--oop-link);
+  outline: 2px solid var(--oop-blue-wash);
+  outline-offset: 1px;
+}
+
+.pyodide-exercise__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.pyodide-exercise__actions button {
+  min-width: 4.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--oop-rule-strong);
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.pyodide-exercise__run {
+  background: var(--oop-active-bg) !important;
+  color: var(--oop-active-ink) !important;
+}
+
+.pyodide-exercise__reset {
+  background: transparent !important;
+  color: var(--oop-ink) !important;
+}
+
+.pyodide-exercise__actions button:hover {
+  border-color: var(--oop-link);
+}
+
+.pyodide-exercise__actions button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.pyodide-exercise__status {
+  color: var(--oop-muted);
+  font-size: 0.8rem;
+}
+
+.pyodide-exercise__status[data-state="loading"] {
+  color: var(--oop-link);
+}
+
+.pyodide-exercise__status[data-state="success"] {
+  color: var(--oop-link);
+}
+
+.pyodide-exercise__status[data-state="error"] {
+  color: var(--oop-ink);
+  font-weight: 700;
+}
+
+.pyodide-exercise__output {
+  margin: 0.85rem 0 0;
+  padding: 0.75rem;
+  border: 1px solid var(--oop-rule);
+  border-left: 3px solid var(--oop-rule-strong);
+  background: var(--oop-code-bg);
+  color: var(--oop-ink);
+  font-family: var(--oop-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.pyodide-exercise__output[data-state="error"] {
+  border-left-color: var(--oop-ink);
+}
+
+@media (max-width: 40rem) {
+  .pyodide-exercise {
+    padding: 1rem;
+  }
+
+  .pyodide-exercise__header {
+    display: block;
+  }
+
+  .pyodide-exercise__runtime {
+    display: inline-block;
+    margin-top: 0.6rem;
+  }
+}
+
 .site-footer {
   border-top: 1px solid var(--oop-rule);
   color: var(--oop-muted);
@@ -604,6 +767,66 @@ textarea:focus-visible {
     color: inherit !important;
     font-family: var(--oop-mono);
     font-size: 0.92em;
+  }
+
+  .pyodide-exercise {
+    margin: 0.3in 0 0.35in;
+    padding: 0.18in 0.2in 0.2in;
+    border: 0.75pt solid var(--oop-print-rule);
+    border-left: 2pt solid var(--oop-print-rule-strong);
+    background: transparent !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .pyodide-exercise__header {
+    display: block;
+  }
+
+  .pyodide-exercise__eyebrow {
+    margin: 0 0 0.05in;
+    color: var(--oop-print-muted) !important;
+    font-family: var(--oop-print-sans);
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+  }
+
+  .pyodide-exercise__title {
+    color: var(--oop-print-ink) !important;
+    font-family: var(--oop-print-serif) !important;
+    font-size: 13pt;
+  }
+
+  .pyodide-exercise__runtime,
+  .pyodide-exercise__actions,
+  .pyodide-exercise__output {
+    display: none !important;
+  }
+
+  .pyodide-exercise__prompt {
+    margin: 0.1in 0;
+    color: var(--oop-print-ink) !important;
+    font-family: var(--oop-print-serif) !important;
+  }
+
+  .pyodide-exercise__label {
+    margin: 0.12in 0 0.05in;
+    color: var(--oop-print-muted) !important;
+    font-family: var(--oop-print-sans);
+    font-size: 8.5pt;
+  }
+
+  .pyodide-exercise__editor {
+    min-height: 1.7in;
+    resize: none;
+    padding: 0.12in;
+    border: 0.75pt solid var(--oop-print-rule-strong);
+    border-radius: 0;
+    background: var(--oop-print-paper) !important;
+    color: var(--oop-print-ink) !important;
+    font-family: var(--oop-mono);
+    font-size: 9pt;
+    line-height: 1.45;
   }
 
   .main-content div.highlighter-rouge,

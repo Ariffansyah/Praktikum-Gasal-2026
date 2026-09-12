@@ -29,6 +29,8 @@ mhs1 = Mahasiswa("25123456787", "Wahyu Austin", 2025)
 mhs2 = Mahasiswa("25123456788", "Budi Santoso", 2025)
 ```
 
+{% include pyodide-exercise.html id="m2-class-object" title="Class dan object" prompt="Buat class Mahasiswa dan dua object dengan data yang berbeda." %}
+
 ## 2. Class Mobil dan instance method
 
 Class `Mobil` dapat memiliki data seperti merek, perusahaan produksi, tahun produksi, kondisi mesin, dan kilometer. Method digunakan untuk melakukan operasi yang berkaitan dengan data tersebut.
@@ -64,6 +66,8 @@ class Mobil:
         self.kilometer = 0
 ```
 
+{% include pyodide-exercise.html id="m2-mobil-class" title="Class Mobil" prompt="Buat class Mobil dengan attribute dan method untuk menyimpan serta menampilkan informasi mobil." %}
+
 Object kemudian dibuat dan method dipanggil dengan notasi titik.
 
 ```python
@@ -72,6 +76,8 @@ mobil1.tambah_kilometer(12000)
 print(mobil1.cek_kondisi_mesin())
 mobil1.tampilkan_info()
 ```
+
+{% include pyodide-exercise.html id="m2-mobil-object" title="Object dan method" prompt="Buat object Mobil, panggil method untuk mengubah kilometer, lalu tampilkan informasinya." %}
 
 ## 3. Argument pada method
 
@@ -94,6 +100,8 @@ mobil1.set_details(2022, "Mobil keluarga")
 mobil1.set_details(description="Mobil untuk perjalanan jauh")
 ```
 
+{% include pyodide-exercise.html id="m2-method-arguments" title="Argument pada method" prompt="Buat method yang dapat menerima positional argument, default argument, keyword argument, atau argument fleksibel." %}
+
 Contoh method dengan `**kwargs` dapat digunakan ketika attribute yang ingin diubah bersifat dinamis.
 
 ```python
@@ -105,6 +113,8 @@ class Profil:
 profil = Profil()
 profil.set_details(nama="Andi", angkatan=2025)
 ```
+
+{% include pyodide-exercise.html id="m2-kwargs" title="Method dengan **kwargs" prompt="Buat method set_details yang menerima beberapa keyword argument dan hanya mengubah attribute yang valid." %}
 
 Penggunaan argument yang fleksibel perlu tetap dikendalikan agar hanya attribute yang valid yang dapat diubah.
 
@@ -130,6 +140,8 @@ class Mobil:
 mobil1 = Mobil("Civic", 2022)
 mobil1.tampilkan_tahun()
 ```
+
+{% include pyodide-exercise.html id="m2-visibility" title="Visibility property" prompt="Buat class yang memiliki public, protected, dan private property, lalu amati cara akses masing-masing property." %}
 
 Pemanggilan `mobil1.__tahun_produksi` dari luar class tidak digunakan karena attribute tersebut dimaksudkan untuk penggunaan internal class.
 
@@ -165,6 +177,8 @@ class RekeningBank:
         return self.__saldo
 ```
 
+{% include pyodide-exercise.html id="m2-encapsulation" title="Encapsulation" prompt="Buat class RekeningBank yang mengendalikan perubahan saldo melalui method setor dan tarik." %}
+
 Pada contoh tersebut, saldo tidak diubah langsung dari luar object. Perubahan saldo harus melalui `setor_dana()` atau `tarik_dana()`.
 
 ## 6. Class method
@@ -188,6 +202,8 @@ class Mobil:
         return cls.jumlah_mobil
 ```
 
+{% include pyodide-exercise.html id="m2-classmethod-definition" title="Mendefinisikan class method" prompt="Buat class yang menyimpan jumlah object dan menyediakan class method untuk membaca jumlah tersebut." %}
+
 Class method cocok digunakan untuk operasi yang membutuhkan informasi bersama milik class, misalnya menghitung jumlah seluruh object atau mencari object dengan nilai tertentu.
 
 ```python
@@ -195,6 +211,8 @@ mobil1 = Mobil("Toyota", "Avanza", 2022)
 mobil2 = Mobil("Honda", "Civic", 2023)
 print(Mobil.total_mobil())
 ```
+
+{% include pyodide-exercise.html id="m2-classmethod-use" title="Menggunakan class method" prompt="Buat beberapa object dari satu class, kemudian gunakan class method untuk membaca informasi bersama milik class." %}
 
 ## 7. Static method
 
@@ -208,6 +226,8 @@ class Mobil:
 
 print(Mobil.validasi_nomor_polisi("L 1234 AB"))
 ```
+
+{% include pyodide-exercise.html id="m2-staticmethod" title="Static method" prompt="Buat static method yang memvalidasi sebuah nilai tanpa menggunakan self atau cls." %}
 
 Static method biasanya digunakan untuk fungsi utilitas yang masih berkaitan dengan konsep class, tetapi tidak membutuhkan data object atau data class.
 

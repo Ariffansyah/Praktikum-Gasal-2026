@@ -59,6 +59,8 @@ print(mhs.nama)
 print(mhs.tampilkan_identitas())
 ```
 
+{% include pyodide-exercise.html id="m3-public-property" title="Public property dan method" prompt="Buat class dengan public property dan public method, lalu gunakan object tersebut dari luar class." %}
+
 Pada contoh tersebut, `nama`, `angkatan`, dan `tampilkan_identitas()` merupakan property dan method public. Kode di luar class dapat mengaksesnya secara langsung.
 
 Public bukan berarti selalu tidak aman. Public berarti class memang menyediakan property atau method tersebut sebagai bagian dari cara penggunaan object.
@@ -77,12 +79,16 @@ class Mahasiswa:
         self._email = self._email.lower()
 ```
 
+{% include pyodide-exercise.html id="m3-protected-definition" title="Protected property" prompt="Buat class yang memiliki property protected dan method internal untuk menormalisasi nilainya." %}
+
 Satu underscore adalah tanda bahwa property atau method tersebut ditujukan untuk penggunaan internal class dan subclass. Python tetap mengizinkan kode luar mengakses `_email`, sehingga protected pada Python merupakan konvensi, bukan pembatas akses yang mutlak.
 
 ```python
 mhs = Mahasiswa("Andi", "ANDI@EXAMPLE.COM")
 print(mhs._email)
 ```
+
+{% include pyodide-exercise.html id="m3-protected-access" title="Mengamati protected property" prompt="Buat object dari class yang memiliki protected property, lalu amati bahwa Python masih mengizinkan akses langsung." %}
 
 Akses tersebut masih dapat berjalan, tetapi pengguna class sebaiknya menggunakan interface public yang disediakan oleh class. Dengan mematuhi konvensi ini, implementasi internal dapat diubah tanpa dianggap sebagai perubahan interface public.
 
@@ -102,12 +108,16 @@ rekening = RekeningBank(1000000)
 print(rekening.cek_saldo())
 ```
 
+{% include pyodide-exercise.html id="m3-private-property" title="Private property" prompt="Buat class dengan private property dan method public untuk membaca nilainya tanpa mengakses private property secara langsung." %}
+
 Kode di luar class tidak dapat mengakses attribute menggunakan nama awalnya.
 
 ```python
 # Tidak digunakan sebagai akses normal dari luar class.
 # print(rekening.__saldo)
 ```
+
+{% include pyodide-exercise.html id="m3-private-access" title="Menguji akses private" prompt="Buat private property, lalu uji perbedaan akses melalui method public dan akses langsung dari luar class." %}
 
 Pemanggilan langsung tersebut menghasilkan `AttributeError` karena Python melakukan name mangling terhadap nama `__saldo`.
 
@@ -144,6 +154,8 @@ rekening = RekeningBank(500000)
 print(rekening.__dict__)
 ```
 
+{% include pyodide-exercise.html id="m3-name-mangling" title="Name mangling" prompt="Buat private property dan periksa __dict__ object untuk menemukan nama hasil name mangling." %}
+
 Secara konseptual, hasilnya memiliki key yang menyerupai berikut:
 
 ```python
@@ -178,6 +190,8 @@ print(akun.tampilkan_kode())
 print(akun.tampilkan_kode_khusus())
 ```
 
+{% include pyodide-exercise.html id="m3-mangling-inheritance" title="Name mangling pada inheritance" prompt="Buat parent class dan child class dengan private property bernama sama, lalu amati bahwa keduanya disimpan terpisah." %}
+
 `__kode` pada `Akun` dan `__kode` pada `AkunKhusus` tidak menjadi attribute yang sama. Python menyimpannya dengan nama mangling berdasarkan class yang mendefinisikannya.
 
 ### 3. Dunder method bukan private property
@@ -192,6 +206,8 @@ class Buku:
     def __str__(self):
         return self.judul
 ```
+
+{% include pyodide-exercise.html id="m3-dunder-method" title="Dunder method" prompt="Buat class dengan __init__ dan __str__, lalu cetak object tersebut untuk mengamati protocol Python." %}
 
 `__init__` dan `__str__` merupakan bagian dari protocol Python, bukan private method yang dibuat untuk menyembunyikan implementasi class.
 
@@ -220,6 +236,8 @@ rekening = RekeningTanpaKontrol(1000000)
 rekening.saldo = -500000
 print(rekening.saldo)
 ```
+
+{% include pyodide-exercise.html id="m3-without-encapsulation" title="Tanpa encapsulation" prompt="Buat class dengan saldo public, lalu tunjukkan bagaimana kode luar dapat memasukkan nilai yang tidak valid." %}
 
 Kode luar dapat mengubah saldo menjadi nilai negatif tanpa validasi. State object menjadi tidak konsisten.
 
@@ -252,6 +270,8 @@ rekening.tarik_dana(100000)
 print(rekening.cek_saldo())
 ```
 
+{% include pyodide-exercise.html id="m3-with-encapsulation" title="Dengan encapsulation" prompt="Buat class rekening dengan saldo private dan method yang menolak setor atau tarik dengan nilai tidak valid." %}
+
 Saldo disimpan dalam `__saldo` dan hanya dapat berubah melalui method yang memeriksa aturan. Kode luar tidak perlu mengetahui cara saldo disimpan.
 
 ### 3. Keterbatasan getter dan setter eksplisit
@@ -271,6 +291,8 @@ class ProdukLama:
             raise ValueError("Harga harus lebih besar dari nol.")
         self._harga = nilai
 ```
+
+{% include pyodide-exercise.html id="m3-explicit-getter-setter" title="Getter dan setter eksplisit" prompt="Buat getter dan setter eksplisit untuk sebuah property, lalu tambahkan validasi pada setter." %}
 
 Python menyediakan `@property` agar akses tetap terlihat seperti akses attribute, tetapi logika getter dan setter tetap dapat dijalankan.
 
@@ -294,6 +316,8 @@ class Suhu:
 suhu = Suhu(25)
 print(suhu.celsius)
 ```
+
+{% include pyodide-exercise.html id="m3-property-getter" title="Property getter" prompt="Buat class dengan @property getter sehingga nilai internal dapat dibaca menggunakan notasi titik." %}
 
 Caller menggunakan `suhu.celsius`, tetapi Python sebenarnya menjalankan method `celsius()`.
 
@@ -323,6 +347,8 @@ suhu.celsius = 30
 print(suhu.celsius)
 ```
 
+{% include pyodide-exercise.html id="m3-property-setter" title="Property setter" prompt="Buat property dengan getter dan setter, lalu validasi nilai yang diberikan melalui assignment." %}
+
 Assignment `self.celsius = celsius` di dalam `__init__()` juga melewati setter. Dengan demikian, nilai awal dan nilai yang diberikan setelah object dibuat menggunakan aturan validasi yang sama.
 
 ### 3. Property read-only
@@ -342,6 +368,8 @@ class PersegiPanjang:
 kotak = PersegiPanjang(10, 5)
 print(kotak.luas)
 ```
+
+{% include pyodide-exercise.html id="m3-read-only-property" title="Property read-only" prompt="Buat property read-only yang menghitung nilai turunan dari dua atau lebih attribute object." %}
 
 `luas` dihitung dari `panjang` dan `lebar`. Tidak perlu menyediakan setter untuk `luas` karena nilainya harus mengikuti dua attribute tersebut.
 
@@ -370,6 +398,8 @@ class Mahasiswa:
 mhs = Mahasiswa("Andi", 3.75)
 print(mhs.ipk)
 ```
+
+{% include pyodide-exercise.html id="m3-type-range-validation" title="Validasi tipe dan rentang" prompt="Buat property IPK dengan validasi tipe data dan rentang nilai 0 sampai 4." %}
 
 Validasi tersebut memastikan bahwa object tidak dapat menyimpan IPK dengan tipe atau rentang yang salah.
 
@@ -411,6 +441,8 @@ class Produk:
 produk = Produk("Keyboard", 250000, 4)
 print(produk.total_nilai)
 ```
+
+{% include pyodide-exercise.html id="m3-product-validation" title="Validasi property produk" prompt="Buat class Produk dengan validasi harga dan stok, lalu hitung total nilai stok sebagai property read-only." %}
 
 Pada contoh tersebut, `harga` dan `stok` memiliki setter untuk validasi. `total_nilai` merupakan property read-only yang dihitung dari dua property lain.
 

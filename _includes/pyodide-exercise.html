@@ -1,0 +1,24 @@
+<section class="pyodide-exercise" data-pyodide-exercise>
+  <div class="pyodide-exercise__header">
+    <div>
+      <p class="pyodide-exercise__eyebrow">Try It Yourself</p>
+      <h3 class="pyodide-exercise__title">{{ include.title | default: "Latihan mandiri" | escape }}</h3>
+    </div>
+    <span class="pyodide-exercise__runtime">Python in browser</span>
+  </div>
+
+  {% if include.prompt %}
+    <p class="pyodide-exercise__prompt">{{ include.prompt | escape }}</p>
+  {% endif %}
+
+  <label class="pyodide-exercise__label" for="{{ include.id | escape }}-editor">Starter code</label>
+  <textarea id="{{ include.id | escape }}-editor" class="pyodide-exercise__editor" data-pyodide-editor spellcheck="false" autocapitalize="off" autocomplete="off">{{ include.starter | default: "" | escape }}</textarea>
+
+  <div class="pyodide-exercise__actions">
+    <button type="button" class="pyodide-exercise__run" data-pyodide-run>Run</button>
+    <button type="button" class="pyodide-exercise__reset" data-pyodide-reset>Reset</button>
+    <span class="pyodide-exercise__status" data-pyodide-status aria-live="polite">Starter code kosong dan siap diisi.</span>
+  </div>
+
+  <pre class="pyodide-exercise__output" data-pyodide-output aria-live="polite" hidden></pre>
+</section>
