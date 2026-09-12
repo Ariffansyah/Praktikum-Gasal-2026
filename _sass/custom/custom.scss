@@ -749,13 +749,13 @@ textarea:focus-visible {
   }
 
   .main-content p {
-    margin: 0 0 0.11in;
+    margin: 0 0 0.14in;
   }
 
   .main-content ul,
   .main-content ol {
-    margin-top: 0.05in;
-    margin-bottom: 0.12in;
+    margin-top: 0.08in;
+    margin-bottom: 0.16in;
     padding-left: 0.3in;
   }
 
@@ -773,6 +773,7 @@ textarea:focus-visible {
   }
 
 
+  .main-content div.highlighter-rouge,
   .main-content figure.highlight {
     margin: 0.18in 0;
     padding: 0;
