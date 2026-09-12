@@ -46,6 +46,11 @@ The practicum instructor and teaching assistants are listed below.
   border: 1px solid var(--oop-rule);
   border-radius: 12px;
   padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   box-shadow: 0 3px 10px var(--oop-card-shadow);
 }
 
