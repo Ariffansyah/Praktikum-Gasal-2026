@@ -2,6 +2,7 @@
 title: Chapter 3
 layout: default
 parent: Readings
+printtitle: Modul 3 - Visibility Property, Encapsulation dan Validasi Data
 nav_order: 3
 ---
 

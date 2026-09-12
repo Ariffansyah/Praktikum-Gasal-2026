@@ -24,7 +24,7 @@ aux_links_new_tab: false
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya"
+footer_content: "Object-Oriented Programming '26 - TAs"
 
 sass:
   quiet_deps: true

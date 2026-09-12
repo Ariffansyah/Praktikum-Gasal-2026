@@ -2,6 +2,7 @@
 title: Chapter 1
 layout: default
 parent: Readings
+printtitle: Modul 1 - Pengantar OOP dan Class-Object
 nav_order: 1
 ---
 
