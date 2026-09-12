@@ -50,6 +50,7 @@ The practicum instructor and teaching assistants are listed below.
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 
   box-shadow: 0 3px 10px var(--oop-card-shadow);
 }
