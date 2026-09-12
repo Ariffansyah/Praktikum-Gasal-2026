@@ -1,5 +1,5 @@
 ---
-title: Reading 2 - Property, Visibility, dan Class Method
+title: Chapter 2
 layout: default
 parent: Readings
 nav_order: 2

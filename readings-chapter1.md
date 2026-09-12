@@ -1,5 +1,5 @@
 ---
-title: Reading 1 - Pengantar OOP dan Class-Object
+title: Chapter 1
 layout: default
 parent: Readings
 nav_order: 1
