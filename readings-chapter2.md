@@ -2,6 +2,7 @@
 title: Chapter 2
 layout: default
 parent: Readings
+printtitle: Modul 2 - Property, Visibility, dan Class Method
 nav_order: 2
 ---
 
