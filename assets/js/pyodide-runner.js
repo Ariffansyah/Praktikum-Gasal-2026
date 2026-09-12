@@ -67,15 +67,55 @@
 
   function setOutput(exercise, message, state) {
     const output = exercise.querySelector("[data-pyodide-output]");
+    const panel = exercise.querySelector("[data-pyodide-output-panel]");
+    const stateLabel = exercise.querySelector("[data-pyodide-output-state]");
     output.textContent = message;
     output.dataset.state = state || "";
-    output.hidden = !message;
+    output.hidden = false;
+    panel.hidden = !message;
+
+    if (stateLabel) {
+      stateLabel.textContent = {
+        error: "Error",
+        loading: "Running",
+        success: "Completed",
+      }[state] || "";
+    }
   }
 
   function setButtonsDisabled(exercise, disabled) {
     exercise.querySelectorAll("button").forEach((button) => {
       button.disabled = disabled;
     });
+  }
+
+  function updateEditorUI(exercise) {
+    const editor = exercise.querySelector("[data-pyodide-editor]");
+    const gutter = exercise.querySelector("[data-pyodide-line-numbers]");
+
+    if (!editor || !gutter) {
+      return;
+    }
+
+    const lineCount = Math.max(1, editor.value.split("\n").length);
+    gutter.replaceChildren(
+      ...Array.from({ length: lineCount }, (_, index) => {
+        const line = document.createElement("span");
+        line.textContent = String(index + 1);
+        return line;
+      })
+    );
+    gutter.scrollTop = editor.scrollTop;
+
+    const textBeforeCursor = editor.value.slice(0, editor.selectionStart);
+    const lines = textBeforeCursor.split("\n");
+    const line = lines.length;
+    const column = lines[lines.length - 1].length + 1;
+    const cursor = exercise.querySelector("[data-pyodide-cursor]");
+
+    if (cursor) {
+      cursor.textContent = `Ln ${line}, Col ${column}`;
+    }
   }
 
   function resultToText(result) {
@@ -151,6 +191,7 @@
     editor.value = "";
     setOutput(exercise, "", "");
     setStatus(exercise, "Starter code kosong dan siap diisi.", "");
+    updateEditorUI(exercise);
     editor.focus();
   }
 
@@ -169,7 +210,17 @@
       resetButton.addEventListener("click", () => resetExercise(exercise));
       editor.addEventListener("input", () => {
         setStatus(exercise, "Starter code siap dijalankan.", "");
+        updateEditorUI(exercise);
       });
+      editor.addEventListener("click", () => updateEditorUI(exercise));
+      editor.addEventListener("keyup", () => updateEditorUI(exercise));
+      editor.addEventListener("scroll", () => {
+        const gutter = exercise.querySelector("[data-pyodide-line-numbers]");
+        if (gutter) {
+          gutter.scrollTop = editor.scrollTop;
+        }
+      });
+      updateEditorUI(exercise);
     });
   }
 
