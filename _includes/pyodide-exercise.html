@@ -1,4 +1,8 @@
-<section class="pyodide-exercise" data-pyodide-exercise>
+{% capture pyodide_real_newline %}
+{% endcapture %}
+{% assign pyodide_starter_encoded = include.starter | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+{% assign pyodide_tests_encoded = include.tests | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}">
   <div class="pyodide-exercise__header">
     <div>
       <p class="pyodide-exercise__eyebrow">Try It Yourself</p>
@@ -28,7 +32,7 @@
     <label class="pyodide-editor__label" for="{{ include.id | escape }}-editor"></label>
     <div class="pyodide-editor__body">
       <div class="pyodide-editor__gutter" data-pyodide-line-numbers aria-hidden="true"><span>1</span></div>
-      <textarea id="{{ include.id | escape }}-editor" class="pyodide-exercise__editor" data-pyodide-editor spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-label="Python code editor">{{ include.starter | default: "" | escape }}</textarea>
+      <textarea id="{{ include.id | escape }}-editor" class="pyodide-exercise__editor" data-pyodide-editor spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" aria-label="Python code editor"></textarea>
     </div>
 
     <div class="pyodide-editor__footer">
@@ -45,6 +49,13 @@
       Run
     </button>
     <button type="button" class="pyodide-exercise__reset" data-pyodide-reset>Reset</button>
+    {% if include.tests %}
+      <button type="button" class="pyodide-exercise__test" data-pyodide-run-tests>
+        <span class="pyodide-exercise__run-icon" aria-hidden="true"></span>
+        Run Tests
+      </button>
+    {% endif %}
+    <span class="pyodide-exercise__status" data-pyodide-status></span>
   </div>
 
   <div class="pyodide-output" data-pyodide-output-panel hidden>
@@ -54,4 +65,14 @@
     </div>
     <pre class="pyodide-exercise__output" data-pyodide-output aria-live="polite" hidden></pre>
   </div>
+
+  {% if include.tests %}
+    <div class="pyodide-tests" data-pyodide-tests-panel hidden>
+      <div class="pyodide-tests__header">
+        <span>Test Cases</span>
+        <span class="pyodide-tests__summary" data-pyodide-tests-summary></span>
+      </div>
+      <ol class="pyodide-tests__list" data-pyodide-tests-list></ol>
+    </div>
+  {% endif %}
 </section>

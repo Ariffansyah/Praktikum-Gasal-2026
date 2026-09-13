@@ -652,7 +652,7 @@
         resultToText(result);
 
       let output =
-        stdout.join("");
+        stdout.join("\n");
 
 
       if (resultText) {
@@ -673,7 +673,7 @@
             ? "\n"
             : "";
 
-        output += stderr.join("");
+        output += stderr.join("\n");
       }
 
 
@@ -716,6 +716,280 @@
 
 
   /* =========================================================
+     STARTER CODE
+     ========================================================= */
+
+  function decodePyodideText(encoded) {
+    return (encoded || "").replace(/\\n/g, "\n").replace(/\\s/g, " ");
+  }
+
+
+  function getStarterCode(exercise) {
+    return decodePyodideText(exercise.dataset.pyodideStarter);
+  }
+
+
+  /* =========================================================
+     TEST CASES
+     ========================================================= */
+
+  function getTestCases(exercise) {
+    const decoded = decodePyodideText(
+      exercise.dataset.pyodideTests
+    );
+
+    if (!decoded.trim()) {
+      return [];
+    }
+
+    return decoded
+      .split("\n@@CASE@@\n")
+      .map((block) => {
+        const [input, expected] = block.split(
+          "\n@@OUTPUT@@\n"
+        );
+
+        return {
+          input: input || "",
+          expected: expected || "",
+        };
+      });
+  }
+
+
+  function normalizeOutput(text) {
+    return String(text)
+      .split("\n")
+      .map((line) => line.replace(/\s+$/, ""))
+      .join("\n")
+      .replace(/\n+$/, "");
+  }
+
+
+  function renderTestResults(exercise, results) {
+    const list = exercise.querySelector(
+      "[data-pyodide-tests-list]"
+    );
+
+    const summary = exercise.querySelector(
+      "[data-pyodide-tests-summary]"
+    );
+
+    const panel = exercise.querySelector(
+      "[data-pyodide-tests-panel]"
+    );
+
+    if (!list || !panel) {
+      return;
+    }
+
+    panel.hidden = false;
+
+    const passedCount = results.filter(
+      (result) => result.passed
+    ).length;
+
+    if (summary) {
+      summary.textContent =
+        `${passedCount} / ${results.length} lulus`;
+    }
+
+    list.replaceChildren(
+      ...results.map((result, index) => {
+        const item = document.createElement("li");
+
+        item.className = "pyodide-tests__item";
+        item.dataset.state = result.passed ? "pass" : "fail";
+
+        const label = document.createElement("div");
+
+        label.className = "pyodide-tests__label";
+        label.textContent =
+          `Test ${index + 1}: ${result.passed ? "Lulus" : "Gagal"}`;
+
+        item.appendChild(label);
+
+        if (!result.passed) {
+          const details = document.createElement("details");
+
+          details.className = "pyodide-tests__details";
+
+          const detailsSummary =
+            document.createElement("summary");
+
+          detailsSummary.textContent = "Lihat detail";
+          details.appendChild(detailsSummary);
+
+          const grid = document.createElement("div");
+
+          grid.className = "pyodide-tests__grid";
+
+          [
+            ["Input", result.input],
+            ["Expected", result.expected],
+            ["Actual", result.actual],
+          ].forEach(([heading, value]) => {
+            const block = document.createElement("pre");
+
+            block.className = "pyodide-tests__block";
+            block.textContent = `${heading}:\n${value}`;
+
+            grid.appendChild(block);
+          });
+
+          details.appendChild(grid);
+          item.appendChild(details);
+        }
+
+        return item;
+      })
+    );
+  }
+
+
+  async function runTests(exercise) {
+    const editor = exercise.querySelector(
+      "[data-pyodide-editor]"
+    );
+
+    if (!editor) {
+      return;
+    }
+
+    const code = editor.value;
+    const cases = getTestCases(exercise);
+
+    if (!cases.length) {
+      setStatus(
+        exercise,
+        "Tidak ada test case yang terdaftar untuk latihan ini.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (!code.trim()) {
+      setStatus(
+        exercise,
+        "Belum ada kode untuk diuji.",
+        "error"
+      );
+
+      editor.focus();
+
+      return;
+    }
+
+    setButtonsDisabled(exercise, true);
+
+    setStatus(
+      exercise,
+      "Memuat Python runtime...",
+      "loading"
+    );
+
+    try {
+      const pyodide = await loadPyodideRuntime();
+      const results = [];
+
+      for (let index = 0; index < cases.length; index++) {
+        const testCase = cases[index];
+
+        setStatus(
+          exercise,
+          `Menjalankan test ${index + 1} dari ${cases.length}...`,
+          "loading"
+        );
+
+        const stdout = [];
+        const stderr = [];
+
+        pyodide.setStdout({
+          batched: (text) => stdout.push(text),
+        });
+
+        pyodide.setStderr({
+          batched: (text) => stderr.push(text),
+        });
+
+        pyodide.globals.set(
+          "_pyodide_test_stdin",
+          testCase.input
+        );
+
+        let actual = "";
+        let passed = false;
+
+        try {
+          await pyodide.runPythonAsync(
+            "import sys as _sys, io as _io\n_sys.stdin = _io.StringIO(_pyodide_test_stdin)"
+          );
+
+          const testGlobals = pyodide.globals.get("dict")();
+
+          try {
+            await pyodide.runPythonAsync(code, {
+              globals: testGlobals,
+            });
+          } finally {
+            testGlobals.destroy();
+          }
+
+          actual = stdout.join("\n");
+
+          if (stderr.length) {
+            actual +=
+              actual && !actual.endsWith("\n") ? "\n" : "";
+
+            actual += stderr.join("\n");
+          }
+
+          passed =
+            normalizeOutput(actual) ===
+            normalizeOutput(testCase.expected);
+        } catch (error) {
+          actual =
+            error && error.message
+              ? error.message
+              : String(error);
+
+          passed = false;
+        }
+
+        results.push({
+          input: testCase.input,
+          expected: testCase.expected,
+          actual,
+          passed,
+        });
+      }
+
+      renderTestResults(exercise, results);
+
+      const passedCount = results.filter(
+        (result) => result.passed
+      ).length;
+
+      setStatus(
+        exercise,
+        `${passedCount} dari ${results.length} test case lulus.`,
+        passedCount === results.length ? "success" : "error"
+      );
+    } catch (error) {
+      const message =
+        error && error.message
+          ? error.message
+          : String(error);
+
+      setStatus(exercise, message, "error");
+    } finally {
+      setButtonsDisabled(exercise, false);
+    }
+  }
+
+
+  /* =========================================================
      RESET
      ========================================================= */
 
@@ -728,7 +1002,7 @@
       return;
     }
 
-    editor.value = "";
+    editor.value = getStarterCode(exercise);
 
     setOutput(
       exercise,
@@ -830,6 +1104,11 @@
             "[data-pyodide-reset]"
           );
 
+        const runTestsButton =
+          exercise.querySelector(
+            "[data-pyodide-run-tests]"
+          );
+
         const editor =
           exercise.querySelector(
             "[data-pyodide-editor]"
@@ -839,6 +1118,8 @@
         if (!editor) {
           return;
         }
+
+        editor.value = getStarterCode(exercise);
 
 
         /* -------------------------
@@ -859,6 +1140,14 @@
             "click",
             () =>
               resetExercise(exercise)
+          );
+        }
+
+        if (runTestsButton) {
+          runTestsButton.addEventListener(
+            "click",
+            () =>
+              runTests(exercise)
           );
         }
 
