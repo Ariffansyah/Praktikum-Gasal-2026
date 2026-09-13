@@ -5,7 +5,7 @@ parent: Assignment 1
 grand_parent: Assignment
 printtitle: Study Case Kelas B (Assignment 1) - Slip Gaji Karyawan
 nav_order: 2
-tampil: false
+tampil: true
 ---
 
 # Study Case Kelas B (Assignment 1): Slip Gaji Karyawan

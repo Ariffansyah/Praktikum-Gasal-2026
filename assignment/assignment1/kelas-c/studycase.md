@@ -5,7 +5,7 @@ parent: Assignment 1
 grand_parent: Assignment
 printtitle: Study Case Kelas C (Assignment 1) - Inventori Produk Toko Online
 nav_order: 3
-tampil: false
+tampil: true
 ---
 
 # Study Case Kelas C (Assignment 1): Inventori Produk Toko Online
