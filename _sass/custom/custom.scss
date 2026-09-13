@@ -702,6 +702,16 @@ textarea:focus-visible {
   background: #f6f8fa !important;
 }
 
+.pyodide-exercise__test {
+  border: 1px solid #d0d7de;
+  background: #fff !important;
+  color: #374151 !important;
+}
+
+.pyodide-exercise__test:hover {
+  background: #f6f8fa !important;
+}
+
 .pyodide-exercise__run:disabled,
 .pyodide-exercise__reset:disabled {
   cursor: not-allowed;
@@ -790,6 +800,95 @@ textarea:focus-visible {
 
 .pyodide-exercise__output[data-state="success"] {
   color: #166534;
+}
+
+.pyodide-tests {
+  margin: 0 1rem 1rem;
+  overflow: hidden;
+  border: 1px solid #d8dee4;
+  border-radius: 7px;
+  background: #f6f8fa;
+}
+
+.pyodide-tests[hidden] {
+  display: none !important;
+}
+
+.pyodide-tests__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid #d8dee4;
+  color: #4b5563;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.pyodide-tests__summary {
+  color: #6b7280;
+  font-family: var(--oop-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+}
+
+.pyodide-tests__list {
+  margin: 0;
+  padding: 0.4rem 0.7rem 0.6rem;
+  list-style: none;
+}
+
+.pyodide-tests__item {
+  padding: 0.4rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.82rem;
+}
+
+.pyodide-tests__item + .pyodide-tests__item {
+  margin-top: 0.3rem;
+}
+
+.pyodide-tests__label {
+  font-weight: 600;
+}
+
+.pyodide-tests__item[data-state="pass"] .pyodide-tests__label {
+  color: #166534;
+}
+
+.pyodide-tests__item[data-state="fail"] .pyodide-tests__label {
+  color: #b91c1c;
+}
+
+.pyodide-tests__details {
+  margin-top: 0.4rem;
+}
+
+.pyodide-tests__details summary {
+  cursor: pointer;
+  color: #4b5563;
+  font-size: 0.75rem;
+}
+
+.pyodide-tests__grid {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.pyodide-tests__block {
+  overflow: auto;
+  margin: 0;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d8dee4;
+  border-radius: 5px;
+  background: #fff;
+  color: #1f2937;
+  font-family: var(--oop-mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 @media (max-width: 600px) {
@@ -921,13 +1020,15 @@ textarea:focus-visible {
   background: var(--oop-playground-run-hover) !important;
 }
 
-.pyodide-exercise__reset {
+.pyodide-exercise__reset,
+.pyodide-exercise__test {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-reset) !important;
   color: var(--oop-playground-reset-ink) !important;
 }
 
-.pyodide-exercise__reset:hover {
+.pyodide-exercise__reset:hover,
+.pyodide-exercise__test:hover {
   background: var(--oop-playground-subtle) !important;
 }
 
@@ -943,14 +1044,35 @@ textarea:focus-visible {
   color: var(--oop-playground-error);
 }
 
-.pyodide-output {
+.pyodide-output,
+.pyodide-tests {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-output);
 }
 
-.pyodide-output__header {
+.pyodide-output__header,
+.pyodide-tests__header {
   border-color: var(--oop-playground-rule);
   color: var(--oop-playground-editor-muted);
+}
+
+.pyodide-tests__summary,
+.pyodide-tests__details summary {
+  color: var(--oop-playground-editor-muted);
+}
+
+.pyodide-tests__block {
+  border-color: var(--oop-playground-editor-border);
+  background: var(--oop-playground-editor);
+  color: var(--oop-playground-editor-ink);
+}
+
+.pyodide-tests__item[data-state="pass"] .pyodide-tests__label {
+  color: var(--oop-playground-success);
+}
+
+.pyodide-tests__item[data-state="fail"] .pyodide-tests__label {
+  color: var(--oop-playground-error);
 }
 
 .pyodide-exercise__output {
