@@ -1142,7 +1142,9 @@ textarea:focus-visible {
 
 @media print {
   @page {
-    margin: 0 !important;
+    /* Print-only page spacing. This is independent of the browser's
+       Print Preview "Margins" dropdown and repeats on every sheet. */
+    margin: 0.48in 0 0.58in !important;
 
     @bottom-center {
       color: var(--oop-print-muted);
