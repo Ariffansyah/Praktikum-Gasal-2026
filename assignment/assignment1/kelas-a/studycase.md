@@ -17,56 +17,71 @@ variants:
       stok setelah satu kali peminjaman, status peminjaman, validitas ISBN,
       dan total_buku.
     prompt: |
-      Tujuan tugas
-      Buat class Buku untuk mengelola peminjaman buku perpustakaan. Program harus dapat menyimpan informasi buku, mengurangi stok ketika buku dipinjam, dan memvalidasi ISBN tanpa mengubah format output yang sudah disediakan.
+      Ketentuan Class
 
-      1. Attribute class
-      - Buat total_buku = 0 sebagai attribute class.
-      - Tambahkan total_buku sebanyak 1 setiap kali object Buku berhasil dibuat.
-      - Gunakan Buku.total_buku agar penghitung bersifat milik class, bukan penghitung terpisah untuk setiap object.
+      Buat class `Buku` dengan:
+      - `total_buku = 0` sebagai attribute class untuk mencatat jumlah object `Buku` yang dibuat.
+      - `judul`, `penulis`, dan `tahun_terbit` sebagai attribute public.
+      - `_status_pinjam` sebagai attribute protected dengan nilai awal `False`.
+      - `__stok` sebagai attribute private yang diakses melalui property `stok`.
+      - Constructor `__init__(self, judul, penulis, tahun_terbit, stok=1)` sesuai signature pada starter code.
 
-      2. Attribute object
-      - Simpan judul, penulis, dan tahun_terbit sebagai attribute public.
-      - Buat _status_pinjam sebagai attribute protected dengan nilai awal False.
-      - Simpan stok pada attribute private __stok. Jangan mengganti nama __stok dan jangan mengaksesnya langsung dari program utama.
+      Property `stok` harus menyediakan akses untuk membaca dan mengubah stok. Nilai stok tidak boleh negatif. Nilai negatif harus menghasilkan `ValueError("Stok tidak boleh negatif.")`.
 
-      3. Constructor __init__(self, judul, penulis, tahun_terbit, stok=1)
-      - Pertahankan nama, urutan, dan default parameter constructor.
-      - Isi attribute public dan _status_pinjam sesuai starter code.
-      - Tambahkan Buku.total_buku sebanyak 1.
-      - Isi nilai stok melalui self.stok, bukan langsung melalui self.__stok, supaya setter melakukan validasi sejak object dibuat.
+      Method `pinjam()` harus merepresentasikan satu proses peminjaman. Jika stok tersedia, proses berhasil dan kondisi buku mencerminkan bahwa satu stok telah dipinjam. Jika stok tidak tersedia, proses tidak berhasil dan kondisi buku tidak berubah. Method mengembalikan `True` atau `False` sesuai hasil proses.
 
-      4. Property stok
-      - Buat getter @property stok yang mengembalikan nilai private __stok.
-      - Buat setter @stok.setter stok(self, nilai).
-      - Jika nilai kurang dari 0, raise ValueError("Stok tidak boleh negatif.").
-      - Jika nilai valid, simpan nilai tersebut ke __stok.
-      - Method pinjam() harus mengubah stok melalui property, bukan mengubah __stok secara langsung.
+      Static method `validasi_isbn(isbn)` menentukan validitas ISBN berdasarkan panjangnya. ISBN dengan panjang 10 atau 13 karakter dianggap valid, sedangkan panjang lainnya dianggap tidak valid.
 
-      5. Method pinjam()
-      - Jika stok masih lebih besar dari 0, kurangi stok tepat 1 melalui property stok.
-      - Saat peminjaman berhasil, ubah _status_pinjam menjadi True dan kembalikan True.
-      - Jika stok sudah 0, jangan mengubah stok atau status, lalu kembalikan False.
+      Program Utama
 
-      6. Static method validasi_isbn(isbn)
-      - Tambahkan decorator @staticmethod.
-      - Kembalikan True jika panjang string ISBN tepat 10 atau 13 karakter.
-      - Kembalikan False untuk panjang selain 10 atau 13.
-      - Method ini tidak membutuhkan self karena hanya memeriksa nilai input.
+      Program utama membaca satu data buku, membuat object `Buku`, melakukan satu kali peminjaman, dan melakukan validasi ISBN. Bagian input dan output sudah tersedia pada starter code.
 
-      7. Program utama dan output
-      - Program utama sudah tersedia. Jangan menghapus, memindahkan, atau mengganti bagian input dan print.
-      - Satu baris input berisi judul, penulis, tahun_terbit, stok, dan isbn.
-      - Starter code sudah mengubah underscore pada judul dan penulis menjadi spasi.
-      - Method pinjam() dipanggil tepat satu kali dan validasi ISBN dilakukan melalui Buku.validasi_isbn(isbn).
-      - Jangan menambahkan print tambahan. Output harus tetap tujuh baris dengan label dan posisi titik dua seperti starter code.
+      Format Input
 
-      Checklist sebelum Run Tests
-      - total_buku bertambah satu untuk setiap object.
-      - stok divalidasi oleh setter dan tidak boleh negatif.
-      - pinjam() hanya mengurangi stok jika stok tersedia.
-      - validasi_isbn() hanya menerima panjang 10 atau 13.
-      - Nama method, nama attribute, dan format output tetap sama.
+      Satu baris dengan format:
+      `judul penulis tahun_terbit stok isbn`
+
+      Judul dan penulis yang terdiri dari beberapa kata menggunakan underscore (`_`) sebagai pengganti spasi. Starter code menangani perubahan tersebut.
+
+      Format Output
+
+      Output terdiri dari tujuh baris dengan label dan format yang sudah tersedia pada starter code:
+      - Judul
+      - Penulis
+      - Tahun Terbit
+      - Stok Tersisa
+      - Status Pinjam
+      - ISBN Valid
+      - Total Buku
+
+      Contoh Input
+
+      ```text
+      Laskar_Pelangi Andrea_Hirata 2005 3 9786020000001
+      ```
+
+      Contoh Output
+
+      ```text
+      Judul        : Laskar Pelangi
+      Penulis      : Andrea Hirata
+      Tahun Terbit : 2005
+      Stok Tersisa : 2
+      Status Pinjam: Dipinjam
+      ISBN Valid   : True
+      Total Buku   : 1
+      ```
+
+      Tabel Uji
+
+      Test case mencakup kondisi stok tersedia dan kosong, stok awal satu atau lebih, serta ISBN dengan panjang valid dan tidak valid. Hasil yang diperiksa meliputi stok akhir, status peminjaman, validitas ISBN, dan jumlah object yang tercatat.
+
+      Coba Kerangka Kode
+
+      Lengkapi bagian class `Buku` yang bertanda `TODO`. Bagian input dan pencetakan output sudah disediakan. Pertahankan nama attribute, signature method, dan format output karena hasil program dibandingkan dengan test case.
+
+      *Catatan:* fokus tugas adalah penerapan class attribute, visibility attribute, property getter/setter, instance method, dan static method.
+
     starter: |
       class Buku:
           total_buku = 0
@@ -190,57 +205,51 @@ variants:
       rak, dan total_koleksi.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelola data katalog perpustakaan. Object harus menyimpan kategori dan lokasi rak, dapat menambahkan jumlah halaman melalui property, serta dapat memeriksa apakah kode rak mengikuti pola yang ditentukan.
+
+      Buat class `Buku` untuk mengelola data katalog perpustakaan. Object harus menyimpan informasi buku dan lokasi rak, memiliki jumlah halaman yang dapat diperbarui, serta menyediakan pemeriksaan terhadap kode rak.
 
       1. Attribute class
-      - Buat total_koleksi = 0 sebagai attribute class.
-      - Tambahkan Buku.total_koleksi sebanyak 1 setiap kali object Buku dibuat.
-      - Jangan membuat total_koleksi sebagai attribute instance karena nilainya harus dihitung bersama oleh class.
+
+      - `total_koleksi = 0` merupakan attribute class yang mencatat jumlah object `Buku` yang dibuat.
 
       2. Attribute object
-      - Simpan judul, kategori, dan rak sebagai attribute public.
-      - Simpan jumlah halaman pada attribute private __halaman.
-      - Jangan mengubah nama __halaman dan jangan membaca attribute private tersebut secara langsung di luar property.
 
-      3. Constructor __init__(self, judul, kategori, halaman, rak="Umum")
-      - Pertahankan signature constructor dan default rak "Umum".
-      - Isi judul, kategori, dan rak.
-      - Tambahkan total_koleksi sebanyak 1.
-      - Isi jumlah halaman melalui self.halaman agar setter melakukan validasi.
+      - `judul`, `kategori`, dan `rak` merupakan attribute public.
+      - Jumlah halaman disimpan pada attribute private `__halaman`.
+      - Akses terhadap jumlah halaman dilakukan melalui property `halaman`.
 
-      4. Property halaman
-      - Buat getter @property halaman yang mengembalikan __halaman.
-      - Buat setter @halaman.setter halaman(self, nilai).
-      - Jumlah halaman harus minimal 1. Jika nilai kurang dari 1, raise ValueError.
-      - Jika nilai valid, simpan ke __halaman.
-      - Semua perubahan jumlah halaman harus melewati property ini.
+      3. Constructor `__init__(self, judul, kategori, halaman, rak="Umum")`
 
-      5. Method tambah_halaman(jumlah)
-      - Tambahkan jumlah ke halaman yang sedang tersimpan.
-      - Gunakan self.halaman saat membaca dan menulis nilai, sehingga setter tetap digunakan.
-      - Nilai tambahan 0 tetap dianggap valid selama jumlah halaman akhir masih memenuhi aturan.
-      - Tidak perlu membuat output tambahan dari method ini karena program utama sudah mencetak hasilnya.
+      Constructor harus mengikuti signature dan nilai default yang tersedia pada starter code. Data buku dan nilai awal jumlah halaman harus dapat digunakan oleh bagian program utama setelah object dibuat.
 
-      6. Static method kode_rak_valid(kode)
-      - Tambahkan decorator @staticmethod.
-      - Kembalikan True hanya jika kode memiliki format RA diikuti tepat dua digit angka, misalnya RA01 atau RA99.
-      - Kembalikan False jika awalan bukan RA, jumlah digit tidak tepat dua, atau terdapat karakter lain.
-      - Method ini tidak membutuhkan self.
+      4. Property `halaman`
+
+      Property `halaman` harus menyediakan getter dan setter.
+
+      Jumlah halaman yang valid adalah bilangan minimal `1`. Nilai kurang dari `1` harus menghasilkan `ValueError`.
+
+      5. Method `tambah_halaman(jumlah)`
+
+      Method menerima sejumlah halaman dan memperbarui jumlah halaman buku sesuai nilai tersebut. Setelah method dipanggil, property `halaman` harus merepresentasikan jumlah halaman terbaru.
+
+      6. Static method `kode_rak_valid(kode)`
+
+      Method menentukan validitas kode rak. Kode dianggap valid apabila memiliki awalan `RA` dan diikuti tepat dua digit angka. Format lain dianggap tidak valid.
 
       7. Program utama dan output
-      - Jangan menghapus atau mengubah bagian input dan print yang tersedia di starter code.
-      - Satu baris input berisi judul, kategori, halaman, rak, tambahan halaman, dan kode rak.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi.
-      - Buat object Buku, panggil tambah_halaman() satu kali, lalu cetak enam baris output sesuai label yang tersedia.
-      - Jangan menambahkan print atau mengubah kapitalisasi label karena output dibandingkan secara persis.
+
+      Program utama membaca judul, kategori, jumlah halaman, rak, tambahan halaman, dan kode rak. Object dibuat dan proses penambahan halaman dilakukan satu kali.
+
+      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah nama method, attribute, atau format output.
 
       Checklist sebelum Run Tests
-      - total_koleksi bertambah satu setiap object dibuat.
-      - halaman disimpan di __halaman melalui getter dan setter.
-      - Nilai halaman kurang dari 1 ditolak.
-      - tambah_halaman() memakai property halaman.
-      - kode_rak_valid() hanya menerima pola RA dan dua digit.
-      - Format output tetap enam baris seperti starter code.
+
+      - Jumlah object tercatat pada `total_koleksi`.
+      - Jumlah halaman memenuhi aturan validasi.
+      - Property `halaman` dapat membaca dan mengubah nilai halaman.
+      - `tambah_halaman()` menghasilkan jumlah halaman sesuai data yang diberikan.
+      - `kode_rak_valid()` membedakan kode rak valid dan tidak valid.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           total_koleksi = 0
@@ -354,54 +363,51 @@ variants:
       total_pengembalian.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mensimulasikan proses pengembalian buku di perpustakaan dan menghitung denda berdasarkan jumlah hari keterlambatan.
+
+      Buat class `Buku` untuk merepresentasikan proses pengembalian buku dan perhitungan denda berdasarkan keterlambatan.
 
       1. Attribute class
-      - Buat denda_harian = 2000. Nilai ini berlaku untuk semua object Buku dan menjadi tarif denda untuk setiap hari keterlambatan.
-      - Buat total_pengembalian = 0. Nilai ini menghitung jumlah object yang berhasil dicatat pengembaliannya.
+
+      - `denda_harian = 2000` merupakan tarif denda yang berlaku pada class.
+      - `total_pengembalian = 0` mencatat jumlah pengembalian yang berhasil dicatat.
 
       2. Attribute object
-      - judul dan tahun_terbit harus menjadi attribute public.
-      - hari keterlambatan harus disimpan dalam attribute private __hari_terlambat.
-      - Pada __init__, mulai __hari_terlambat dari 0. Jangan mengubah nama attribute private tersebut.
 
-      3. Property hari_terlambat
-      - Buat getter @property hari_terlambat yang mengembalikan nilai __hari_terlambat.
-      - Buat setter @hari_terlambat.setter untuk mengubah nilai melalui property.
-      - Nilai hari keterlambatan tidak boleh negatif. Jika nilai negatif diberikan, raise ValueError. Jika valid, simpan nilai tersebut ke __hari_terlambat.
+      - `judul` dan `tahun_terbit` merupakan attribute public.
+      - Jumlah hari keterlambatan disimpan pada attribute private `__hari_terlambat`.
 
-      4. Method hitung_denda()
-      - Kembalikan hasil perkalian hari_terlambat dengan denda_harian.
-      - Gunakan property hari_terlambat dan attribute class denda_harian, bukan membaca __hari_terlambat secara langsung.
-      - Contoh: jika terlambat 3 hari, denda yang dikembalikan adalah 3 * 2000 = 6000.
+      3. Property `hari_terlambat`
 
-      5. Method catat_pengembalian(hari)
-      - Terima jumlah hari keterlambatan melalui parameter hari.
-      - Isi nilai tersebut melalui property self.hari_terlambat agar setter dan validasinya digunakan.
-      - Tambahkan total_pengembalian sebanyak 1 setelah pengembalian berhasil dicatat.
-      - Kembalikan nilai denda dari method hitung_denda().
-      - Method ini dipanggil satu kali oleh program utama untuk setiap object Buku.
+      Sediakan getter dan setter untuk `hari_terlambat`.
 
-      6. Static method validasi_tahun(tahun)
-      - Buat @staticmethod dengan nama validasi_tahun(tahun).
-      - Kembalikan True jika tahun berada pada rentang 1900 sampai 2026, termasuk 1900 dan 2026.
-      - Kembalikan False jika tahun kurang dari 1900 atau lebih dari 2026.
-      - Method ini tidak membutuhkan self atau object Buku.
+      Jumlah hari keterlambatan tidak boleh negatif. Nilai negatif harus menghasilkan `ValueError`.
+
+      4. Method `hitung_denda()`
+
+      Method menghasilkan denda berdasarkan jumlah hari keterlambatan dan tarif denda harian yang berlaku.
+
+      5. Method `catat_pengembalian(hari)`
+
+      Method menerima jumlah hari keterlambatan dan mencatat proses pengembalian tersebut. Setelah proses berhasil dicatat, jumlah pengembalian pada tingkat class bertambah dan method menghasilkan nilai denda yang sesuai.
+
+      6. Static method `validasi_tahun(tahun)`
+
+      Tahun dianggap valid apabila berada pada rentang `1900` sampai `2026`, termasuk kedua batas. Method mengembalikan boolean.
 
       7. Program utama
-      - Bagian program utama dan print sudah disediakan di starter code. Jangan menghapus atau mengubah format print.
-      - Program membaca satu baris dengan format: judul tahun hari.
-      - Judul yang memakai underscore sudah diubah menjadi spasi oleh starter code.
-      - Buat object Buku, panggil catat_pengembalian() satu kali, lalu gunakan hasilnya untuk output.
-      - Jangan menambahkan print atau teks lain karena output akan dibandingkan persis dengan expected output.
+
+      Program utama membaca judul, tahun terbit, dan jumlah hari keterlambatan. Object dibuat dan proses pengembalian dilakukan satu kali.
+
+      Bagian input dan output sudah disediakan pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - Getter dan setter hari_terlambat sudah dibuat.
-      - __hari_terlambat tidak diakses langsung di luar property.
-      - catat_pengembalian() mengubah property, menambah total_pengembalian, dan mengembalikan denda.
-      - hitung_denda() memakai tarif denda_harian.
-      - validasi_tahun() mengembalikan boolean sesuai rentang tahun.
-      - Output tetap memiliki enam baris dengan label yang sudah tersedia di starter code.
+
+      - Tarif denda tersedia pada tingkat class.
+      - Hari keterlambatan tidak dapat bernilai negatif.
+      - Denda sesuai dengan keterlambatan.
+      - Pengembalian yang berhasil tercatat pada `total_pengembalian`.
+      - Validasi tahun menghasilkan boolean sesuai rentang yang ditentukan.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           denda_harian = 2000
@@ -518,59 +524,56 @@ variants:
       validitas kode peminjam, dan total_reservasi.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelola jumlah reservasi buku perpustakaan. Program harus dapat menyimpan data peminjam, memeriksa kapasitas reservasi, mengubah jumlah reservasi secara aman melalui property, dan memvalidasi kode peminjam.
+
+      Buat class `Buku` untuk mengelola reservasi buku. Object harus menyimpan informasi buku dan peminjam, membatasi jumlah reservasi, serta menyediakan validasi kode peminjam.
 
       1. Attribute class
-      - Buat maksimal_reservasi = 5 sebagai batas reservasi satu object.
-      - Buat total_reservasi = 0 sebagai penghitung pada tingkat class.
-      - Gunakan Buku.total_reservasi agar penghitung tidak menjadi milik satu object saja.
+
+      - `maksimal_reservasi = 5` merupakan batas jumlah reservasi.
+      - `total_reservasi = 0` mencatat jumlah pengajuan reservasi yang diproses.
 
       2. Attribute object
-      - Simpan judul dan peminjam sebagai attribute public.
-      - Buat _status sebagai attribute protected dengan nilai awal "tersedia".
-      - Simpan jumlah reservasi pada attribute private __reservasi.
-      - Jangan mengganti nama attribute dan jangan mengakses __reservasi langsung dari program utama.
 
-      3. Constructor __init__(self, judul, peminjam, reservasi_awal=0)
-      - Pertahankan signature constructor dan default reservasi_awal = 0.
-      - Isi judul, peminjam, serta _status sesuai starter code.
-      - Masukkan reservasi awal melalui self.reservasi agar setter memvalidasi nilai tersebut.
+      - `judul` dan `peminjam` merupakan attribute public.
+      - `_status` merupakan attribute protected dengan nilai awal `"tersedia"`.
+      - Jumlah reservasi disimpan pada attribute private `__reservasi`.
 
-      4. Property reservasi
-      - Buat getter @property reservasi yang mengembalikan __reservasi.
-      - Buat setter @reservasi.setter reservasi(self, nilai).
-      - Nilai reservasi harus berada pada rentang 0 sampai maksimal_reservasi, termasuk batas 0 dan 5.
-      - Jika nilai berada di luar rentang, raise ValueError.
-      - Perubahan jumlah reservasi harus melewati property reservasi.
+      3. Constructor `__init__(self, judul, peminjam, reservasi_awal=0)`
 
-      5. Method ajukan_reservasi(jumlah)
-      - Terima jumlah tambahan melalui parameter jumlah.
-      - Jika jumlah negatif atau reservasi + jumlah lebih besar dari maksimal_reservasi, kembalikan False.
-      - Pada kondisi gagal, jangan mengubah nilai reservasi.
-      - Jika kapasitas masih cukup, tambahkan jumlah ke self.reservasi dan kembalikan True.
-      - Setiap pemanggilan ajukan_reservasi() harus menambah Buku.total_reservasi tepat satu kali, baik berhasil maupun gagal.
+      Constructor harus mengikuti signature dan nilai default pada starter code. Object harus dapat dibuat dengan jumlah reservasi awal yang diberikan.
 
-      6. Static method kode_peminjam_valid(kode)
-      - Gunakan decorator @staticmethod.
-      - Kembalikan True hanya jika kode diawali huruf M dan diikuti tepat enam digit angka, misalnya M123456.
-      - Kembalikan False jika awalan, jumlah digit, atau karakter kode tidak sesuai.
-      - Method ini tidak membutuhkan self.
+      4. Property `reservasi`
+
+      Property harus menyediakan getter dan setter.
+
+      Jumlah reservasi yang valid berada pada rentang `0` sampai `maksimal_reservasi`, termasuk kedua batas. Nilai di luar rentang tersebut harus menghasilkan `ValueError`.
+
+      5. Method `ajukan_reservasi(jumlah)`
+
+      Method menerima jumlah reservasi yang diajukan.
+
+      Pengajuan hanya berhasil apabila hasil akhirnya tidak melebihi kapasitas reservasi dan jumlah yang diajukan tidak negatif. Jika pengajuan tidak dapat dilakukan, jumlah reservasi sebelumnya tetap dipertahankan.
+
+      Method mengembalikan `True` ketika pengajuan berhasil dan `False` ketika pengajuan ditolak. Setiap pengajuan yang diproses dihitung pada `total_reservasi`.
+
+      6. Static method `kode_peminjam_valid(kode)`
+
+      Kode peminjam dianggap valid apabila diawali huruf `M` dan diikuti tepat enam digit angka. Method mengembalikan boolean.
 
       7. Program utama dan output
-      - Program utama dan enam perintah print sudah disediakan. Jangan menghapus atau mengubahnya.
-      - Input satu baris berisi judul, peminjam, reservasi_awal, jumlah tambahan, dan kode.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi.
-      - Buat object Buku, panggil ajukan_reservasi() satu kali, lalu pertahankan output enam baris.
-      - Jangan menambahkan print atau teks debug karena hasil dibandingkan persis dengan expected output.
+
+      Program utama membaca judul, peminjam, reservasi awal, jumlah tambahan, dan kode validasi. Object dibuat dan satu kali pengajuan reservasi dilakukan.
+
+      Bagian input dan output sudah disediakan pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - maksimal_reservasi dan total_reservasi adalah attribute class.
-      - __reservasi hanya diakses melalui getter dan setter.
-      - Setter menolak nilai di luar 0 sampai 5.
-      - Pengajuan yang melebihi kapasitas tidak mengubah reservasi.
-      - total_reservasi bertambah pada setiap pemanggilan method.
-      - kode_peminjam_valid() memeriksa pola M dan enam digit.
-      - Nama method dan format output tetap sama.
+
+      - Kapasitas reservasi mengikuti batas yang ditentukan.
+      - Nilai reservasi tidak dapat berada di luar rentang yang diperbolehkan.
+      - Pengajuan yang melebihi kapasitas ditolak tanpa mengubah reservasi.
+      - `total_reservasi` mencatat pengajuan yang diproses.
+      - Kode peminjam divalidasi sesuai pola yang ditentukan.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           maksimal_reservasi = 5
@@ -684,57 +687,54 @@ variants:
       rating, dan total_ulasan.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelola rating buku dari pembaca. Program harus menyimpan informasi buku, memvalidasi rating melalui property, mengatur perubahan rating, dan menghitung jumlah ulasan yang diproses.
+
+      Buat class `Buku` untuk mengelola rating buku dari pembaca. Object harus menyimpan informasi buku dan rating, membatasi nilai rating, serta menyediakan pemeriksaan rating secara terpisah dari object.
 
       1. Attribute class
-      - Buat total_ulasan = 0 sebagai attribute class.
-      - Nilai total_ulasan menunjukkan jumlah pemanggilan beri_rating(), bukan rating sebuah object.
-      - Gunakan Buku.total_ulasan agar penghitung dapat digunakan bersama.
+
+      - `total_ulasan = 0` merupakan attribute class yang mencatat jumlah pemanggilan proses pemberian rating.
 
       2. Attribute object
-      - Simpan judul dan penulis sebagai attribute public.
-      - Simpan rating pada attribute private __rating.
-      - Jangan mengganti nama __rating dan jangan mengaksesnya langsung dari program utama.
 
-      3. Constructor __init__(self, judul, penulis, rating_awal=0)
-      - Pertahankan signature constructor dan default rating_awal = 0.
-      - Isi judul dan penulis.
-      - Masukkan rating awal melalui self.rating supaya setter digunakan.
+      - `judul` dan `penulis` merupakan attribute public.
+      - Rating disimpan pada attribute private `__rating`.
 
-      4. Property rating
-      - Buat getter @property rating yang mengembalikan __rating.
-      - Buat setter @rating.setter rating(self, nilai).
-      - Rating valid berada pada rentang 0 sampai 5, termasuk kedua batas.
-      - Jika nilai di luar rentang, raise ValueError.
-      - Semua perubahan rating harus dilakukan melalui property rating.
+      3. Constructor `__init__(self, judul, penulis, rating_awal=0)`
 
-      5. Method beri_rating(nilai)
-      - Terima rating baru melalui parameter nilai.
-      - Tambahkan Buku.total_ulasan tepat satu kali pada setiap pemanggilan method.
-      - Jika nilai valid, ubah self.rating melalui property dan kembalikan True.
-      - Jika nilai invalid, pertahankan rating lama dan kembalikan False.
-      - Tangani keputusan valid atau invalid di dalam method agar program utama dapat menyelesaikan test case.
+      Constructor harus mengikuti signature dan nilai default pada starter code. Rating awal harus mengikuti aturan validasi rating.
 
-      6. Static method rating_valid(nilai)
-      - Gunakan decorator @staticmethod.
-      - Kembalikan True jika nilai berada pada rentang 0 sampai 5.
-      - Kembalikan False jika nilai kurang dari 0 atau lebih dari 5.
-      - Method ini tidak membutuhkan self.
+      4. Property `rating`
+
+      Property `rating` harus menyediakan getter dan setter.
+
+      Rating valid berada pada rentang `0` sampai `5`, termasuk kedua batas. Nilai di luar rentang tersebut harus menghasilkan `ValueError`.
+
+      5. Method `beri_rating(nilai)`
+
+      Method menerima rating baru.
+
+      Jika nilai valid, rating buku diperbarui dan method mengembalikan `True`. Jika nilai tidak valid, rating sebelumnya tetap dipertahankan dan method mengembalikan `False`.
+
+      Setiap pemanggilan method dihitung sebagai satu ulasan.
+
+      6. Static method `rating_valid(nilai)`
+
+      Method menentukan apakah nilai yang diberikan berada pada rentang `0` sampai `5`. Hasilnya berupa `True` atau `False`.
 
       7. Program utama dan output
-      - Jangan menghapus atau mengubah bagian input dan print pada starter code.
-      - Input satu baris berisi judul, penulis, rating awal, rating baru, dan nilai kode rating.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi.
-      - Buat object Buku, panggil beri_rating() satu kali, lalu cetak enam baris output.
-      - Jangan menambahkan print, mengubah label, atau mengubah format angka.
+
+      Program utama membaca judul, penulis, rating awal, rating baru, dan nilai untuk validasi rating. Object dibuat dan proses pemberian rating dilakukan satu kali.
+
+      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - total_ulasan dibuat sebagai attribute class.
-      - Rating awal dan rating baru menggunakan property rating.
-      - Rating invalid tidak mengubah rating sebelumnya.
-      - total_ulasan bertambah pada setiap pemanggilan beri_rating().
-      - rating_valid() mengembalikan boolean sesuai rentang 0 sampai 5.
-      - Format output tetap enam baris seperti starter code.
+
+      - Rating mengikuti batas valid yang ditentukan.
+      - Rating invalid tidak menghilangkan rating sebelumnya.
+      - `beri_rating()` menghasilkan status keberhasilan yang sesuai.
+      - Setiap proses pemberian rating tercatat pada `total_ulasan`.
+      - `rating_valid()` menghasilkan boolean yang benar.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           total_ulasan = 0
@@ -845,56 +845,52 @@ variants:
       genre, usia buku, validitas genre, dan genre_populer.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelompokkan genre dan menghitung usia buku berdasarkan tahun terbit. Program harus menyimpan tahun terbit melalui property, menghitung usia dari tahun yang diberikan, dan memvalidasi genre tanpa mengubah format output.
+
+      Buat class `Buku` untuk mengelompokkan buku berdasarkan genre dan menghitung usia buku dari tahun terbitnya.
 
       1. Attribute class
-      - Buat genre_populer = "Fiksi" sebagai attribute class.
-      - Nilai genre_populer harus dapat dibaca melalui Buku.genre_populer.
-      - Jangan membuat genre_populer sebagai attribute instance karena nilainya berlaku sebagai informasi bersama pada class.
+
+      - `genre_populer = "Fiksi"` merupakan attribute class yang menunjukkan genre populer.
 
       2. Attribute object
-      - Simpan judul dan genre sebagai attribute public.
-      - Simpan tahun terbit pada attribute private __tahun_terbit.
-      - Jangan mengganti nama __tahun_terbit dan jangan mengakses attribute private tersebut secara langsung dari program utama.
 
-      3. Constructor __init__(self, judul, genre, tahun_terbit)
-      - Pertahankan signature constructor.
-      - Isi judul dan genre.
-      - Masukkan tahun terbit melalui self.tahun_terbit agar setter dipakai.
+      - `judul` dan `genre` merupakan attribute public.
+      - Tahun terbit disimpan pada attribute private `__tahun_terbit`.
 
-      4. Property tahun_terbit
-      - Buat getter @property tahun_terbit yang mengembalikan __tahun_terbit.
-      - Buat setter @tahun_terbit.setter tahun_terbit(self, nilai).
-      - Tahun terbit tidak boleh lebih besar dari 2026. Jika melanggar, raise ValueError.
-      - Tahun yang lebih kecil atau sama dengan 2026 disimpan melalui property.
-      - Perhatikan bahwa test case dapat memakai tahun di masa depan untuk menguji perilaku validasi yang diminta pada starter code.
+      3. Constructor `__init__(self, judul, genre, tahun_terbit)`
 
-      5. Method hitung_usia(tahun_sekarang)
-      - Kembalikan hasil tahun_sekarang - tahun_terbit.
-      - Gunakan property self.tahun_terbit, bukan __tahun_terbit secara langsung.
-      - Jangan menambahkan pembulatan, batas minimum, atau aturan lain yang tidak diminta.
+      Constructor harus mengikuti signature pada starter code dan memastikan tahun terbit mengikuti aturan property yang tersedia.
 
-      6. Static method genre_valid(genre)
-      - Gunakan decorator @staticmethod.
-      - Kembalikan True hanya untuk genre Fiksi, Nonfiksi, Puisi, atau Sejarah.
-      - Kembalikan False untuk genre lain, misalnya Biografi atau Drama.
-      - Perbandingan mengikuti teks input dan bersifat case-sensitive.
-      - Method ini tidak membutuhkan self.
+      4. Property `tahun_terbit`
+
+      Property harus menyediakan getter dan setter.
+
+      Tahun terbit tidak boleh lebih besar dari `2026`. Nilai yang melebihi batas tersebut harus menghasilkan `ValueError`.
+
+      5. Method `hitung_usia(tahun_sekarang)`
+
+      Method menghasilkan usia buku berdasarkan tahun sekarang dan tahun terbit buku.
+
+      6. Static method `genre_valid(genre)`
+
+      Genre yang dianggap valid adalah `Fiksi`, `Nonfiksi`, `Puisi`, dan `Sejarah`. Genre selain daftar tersebut dianggap tidak valid.
+
+      Perbandingan genre mengikuti penulisan pada input.
 
       7. Program utama dan output
-      - Jangan menghapus atau mengubah bagian input dan print pada starter code.
-      - Input satu baris berisi judul, genre, tahun terbit, dan tahun sekarang.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi.
-      - Buat object Buku, tampilkan tahun terbit melalui property, panggil hitung_usia(), lalu tampilkan hasil genre_valid().
-      - Jangan menambahkan print atau mengubah urutan enam baris output.
+
+      Program utama membaca judul, genre, tahun terbit, dan tahun sekarang. Object dibuat dan usia buku serta validitas genre ditampilkan.
+
+      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - genre_populer dibuat sebagai attribute class dengan nilai "Fiksi".
-      - __tahun_terbit diakses melalui getter dan setter.
-      - Setter menolak tahun lebih besar dari 2026.
-      - hitung_usia() menggunakan selisih tahun_sekarang dan property tahun_terbit.
-      - genre_valid() hanya menerima empat genre yang ditentukan.
-      - Format output tetap enam baris seperti starter code.
+
+      - `genre_populer` tersedia sebagai attribute class.
+      - Tahun terbit mengikuti aturan validasi.
+      - Property tahun terbit dapat membaca dan mengubah nilai.
+      - Usia buku sesuai dengan tahun yang diberikan.
+      - Hanya genre yang ditentukan yang dianggap valid.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           genre_populer = "Fiksi"
@@ -1005,56 +1001,50 @@ variants:
       total_lokasi.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelola lokasi fisik buku di perpustakaan. Program harus menyimpan kode buku melalui property, memindahkan buku ke rak baru, mengubah kode menjadi huruf besar, dan memvalidasi format kode.
+
+      Buat class `Buku` untuk mengelola lokasi fisik buku di perpustakaan. Object harus menyimpan informasi lokasi dan kode buku, dapat berpindah rak, serta dapat menentukan validitas kode.
 
       1. Attribute class
-      - Buat total_lokasi = 0 sebagai attribute class.
-      - Tambahkan Buku.total_lokasi sebanyak 1 ketika object Buku dibuat.
-      - Jangan membuat penghitung tersebut sebagai attribute instance.
+
+      - `total_lokasi = 0` merupakan attribute class yang mencatat jumlah object `Buku` yang dibuat.
 
       2. Attribute object
-      - Simpan judul, lantai, dan rak sebagai attribute public.
-      - Simpan kode pada attribute private __kode.
-      - Jangan mengganti nama __kode dan jangan mengaksesnya secara langsung dari program utama.
 
-      3. Constructor __init__(self, judul, lantai, rak, kode)
-      - Pertahankan signature constructor.
-      - Isi judul, lantai, dan rak.
-      - Masukkan kode melalui self.kode agar setter dapat menormalisasi nilainya.
-      - Tambahkan total_lokasi satu kali pada saat object dibuat.
+      - `judul`, `lantai`, dan `rak` merupakan attribute public.
+      - Kode buku disimpan pada attribute private `__kode`.
 
-      4. Property kode
-      - Buat getter @property kode yang mengembalikan __kode.
-      - Buat setter @kode.setter kode(self, nilai).
-      - Setter harus menyimpan kode dalam huruf besar menggunakan nilai.upper().
-      - Jangan mengubah kode di program utama setelah object dibuat; normalisasi menjadi tanggung jawab setter.
+      3. Constructor `__init__(self, judul, lantai, rak, kode)`
 
-      5. Method pindah_rak(rak_baru)
-      - Ubah attribute public rak menjadi rak_baru.
-      - Kembalikan nama rak baru setelah perubahan.
-      - Jangan membuat object baru dan jangan mengubah lantai atau kode.
+      Constructor harus mengikuti signature pada starter code. Setelah object dibuat, kode buku harus tersedia melalui property dan berada dalam bentuk huruf besar.
 
-      6. Static method kode_buku_valid(kode)
-      - Gunakan decorator @staticmethod.
-      - Kembalikan True jika kode memiliki tepat lima karakter dan seluruhnya alfanumerik.
-      - Kembalikan False jika panjangnya bukan lima atau terdapat karakter non-alfanumerik seperti tanda hubung.
-      - Validasi dilakukan terhadap kode yang diberikan ke method. Program utama memberikan buku.kode yang sudah dinormalisasi menjadi huruf besar.
-      - Method ini tidak membutuhkan self.
+      4. Property `kode`
+
+      Property `kode` harus menyediakan getter dan setter.
+
+      Nilai kode yang disimpan harus menggunakan huruf besar. Dengan demikian, kode yang diberikan dalam huruf kecil harus menghasilkan nilai property dalam bentuk huruf besar.
+
+      5. Method `pindah_rak(rak_baru)`
+
+      Method memindahkan buku ke rak yang diberikan dan mengembalikan lokasi rak setelah proses tersebut.
+
+      6. Static method `kode_buku_valid(kode)`
+
+      Kode buku dianggap valid apabila memiliki tepat lima karakter dan seluruh karakternya alfanumerik. Kode yang memiliki panjang berbeda atau karakter non-alfanumerik dianggap tidak valid.
 
       7. Program utama dan output
-      - Jangan menghapus atau mengubah bagian input dan print pada starter code.
-      - Input satu baris berisi judul, lantai, rak awal, rak baru, dan kode.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi.
-      - Buat object Buku, panggil pindah_rak() satu kali, lalu cetak enam baris output.
-      - Jangan menambahkan print karena output dibandingkan persis dengan expected output.
+
+      Program utama membaca judul, lantai, rak awal, rak baru, dan kode buku. Object dibuat dan satu kali perpindahan rak dilakukan.
+
+      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - total_lokasi bertambah satu saat object dibuat.
-      - __kode diakses melalui property kode.
-      - Setter kode selalu menyimpan huruf besar.
-      - pindah_rak() mengubah rak dan mengembalikan rak baru.
-      - kode_buku_valid() memeriksa tepat lima karakter alfanumerik.
-      - Format output tetap enam baris seperti starter code.
+
+      - Jumlah object tercatat pada `total_lokasi`.
+      - Kode dapat dibaca dan diubah melalui property.
+      - Nilai kode tersimpan dalam huruf besar.
+      - `pindah_rak()` menghasilkan rak baru yang sesuai.
+      - Validasi kode mengikuti panjang dan karakter yang ditentukan.
+      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           total_lokasi = 0
@@ -1168,56 +1158,53 @@ variants:
       class.
     prompt: |
       Tujuan tugas
-      Buat class Buku untuk mengelola buku digital di perpustakaan. Program harus menyimpan ukuran file melalui property, mencatat jumlah unduhan pada tingkat class dan object, serta memvalidasi format file.
+
+      Buat class `Buku` untuk mengelola buku digital. Object harus menyimpan informasi file, menyediakan akses terhadap ukuran file melalui property, mencatat unduhan, serta memvalidasi format file.
 
       1. Attribute class
-      - Buat total_unduhan = 0 sebagai attribute class.
-      - Attribute ini menyimpan total seluruh unduhan yang dicatat oleh method unduh().
-      - Gunakan Buku.total_unduhan ketika memperbarui dan membaca penghitung class.
+
+      - `total_unduhan = 0` merupakan attribute class yang mencatat jumlah seluruh unduhan yang diproses.
 
       2. Attribute object
-      - Simpan judul dan format_file sebagai attribute public.
-      - Simpan ukuran file pada attribute private __ukuran_mb.
-      - Jangan mengganti nama __ukuran_mb dan jangan mengaksesnya langsung dari program utama.
 
-      3. Constructor __init__(self, judul, format_file, ukuran_mb)
-      - Pertahankan signature constructor.
-      - Isi judul dan format_file.
-      - Masukkan ukuran melalui self.ukuran_mb agar setter melakukan validasi.
+      - `judul` dan `format_file` merupakan attribute public.
+      - Ukuran file disimpan pada attribute private `__ukuran_mb`.
 
-      4. Property ukuran_mb
-      - Buat getter @property ukuran_mb yang mengembalikan __ukuran_mb.
-      - Buat setter @ukuran_mb.setter ukuran_mb(self, nilai).
-      - Ukuran file harus lebih besar dari 0. Jika nilai kurang atau sama dengan 0, raise ValueError.
-      - Jika valid, simpan nilai ke __ukuran_mb tanpa mengubah tipe angka yang diterima.
+      3. Constructor `__init__(self, judul, format_file, ukuran_mb)`
 
-      5. Method unduh(jumlah)
-      - Terima jumlah unduhan melalui parameter jumlah.
-      - Tambahkan Buku.total_unduhan sebanyak jumlah.
-      - Kembalikan total unduhan yang dicatat oleh pemanggilan method tersebut.
-      - Pada setiap test case, object baru dibuat dalam lingkungan bersih sehingga nilai class dimulai dari 0.
-      - Jangan mengubah ukuran file atau format file di method ini.
+      Constructor harus mengikuti signature pada starter code. Ukuran file yang diberikan harus mengikuti aturan validasi.
 
-      6. Static method ekstensi_valid(format_file)
-      - Gunakan decorator @staticmethod.
-      - Kembalikan True hanya untuk format teks kecil pdf atau epub.
-      - Kembalikan False untuk format lain atau huruf besar seperti PDF jika starter code membandingkan teks secara case-sensitive.
-      - Method ini tidak membutuhkan self.
+      4. Property `ukuran_mb`
+
+      Property harus menyediakan getter dan setter.
+
+      Ukuran file harus lebih besar dari `0`. Nilai `0` atau kurang harus menghasilkan `ValueError`.
+
+      5. Method `unduh(jumlah)`
+
+      Method menerima jumlah unduhan dan mencatatnya pada penghitung unduhan tingkat class. Method mengembalikan jumlah unduhan yang tercatat setelah proses tersebut.
+
+      6. Static method `ekstensi_valid(format_file)`
+
+      Format file dianggap valid apabila bernilai `pdf` atau `epub`. Format lainnya dianggap tidak valid.
+
+      Perbandingan mengikuti teks input.
 
       7. Program utama dan output
-      - Jangan menghapus atau mengubah bagian input dan print pada starter code.
-      - Input satu baris berisi judul, format_file, ukuran_mb, dan jumlah unduhan.
-      - Starter code sudah mengubah underscore pada judul menjadi spasi dan mengubah ukuran menjadi float.
-      - Buat object Buku, panggil unduh() satu kali, lalu cetak enam baris output.
-      - Jangan menambahkan print atau mengubah jumlah angka desimal pada ukuran.
+
+      Program utama membaca judul, format file, ukuran file, dan jumlah unduhan. Object dibuat dan satu kali proses unduhan dilakukan.
+
+      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
 
       Checklist sebelum Run Tests
-      - total_unduhan dibuat dan diperbarui sebagai attribute class.
-      - __ukuran_mb diakses melalui getter dan setter.
-      - Setter menolak ukuran kurang atau sama dengan 0.
-      - unduh() menambahkan jumlah yang diterima dan mengembalikan totalnya.
-      - ekstensi_valid() hanya menerima pdf dan epub dalam huruf kecil.
-      - Format output tetap enam baris seperti starter code.
+
+      - Ukuran file harus memenuhi batas valid.
+      - Property ukuran file dapat membaca dan mengubah nilai.
+      - Jumlah unduhan tercatat pada tingkat class.
+      - `unduh()` menghasilkan total unduhan sesuai data yang diberikan.
+      - Validasi hanya menerima format `pdf` dan `epub`.
+      - Format output tetap sesuai starter code.
+
     starter: |
       class Buku:
           total_unduhan = 0
