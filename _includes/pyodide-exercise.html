@@ -29,7 +29,7 @@
   </div>
 
   {% if include.prompt %}
-    <p class="pyodide-exercise__prompt" data-pyodide-prompt>{{ include.prompt | escape }}</p>
+    <div class="pyodide-exercise__prompt" data-pyodide-prompt>{{ include.prompt | escape }}</div>
   {% endif %}
 
   {% if pyodide_has_variants %}
@@ -102,7 +102,8 @@
       {% for variant in pyodide_variants %}
         {% assign variant_starter_encoded = variant.starter | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
         {% assign variant_tests_encoded = variant.tests | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
-        <div data-pyodide-variant data-pyodide-variant-id="{{ variant.id }}" data-pyodide-variant-title="{{ variant.title | escape }}" data-pyodide-variant-brief="{{ variant.brief | escape }}" data-pyodide-variant-prompt="{{ variant.prompt | escape }}" data-pyodide-variant-starter="{{ variant_starter_encoded | escape }}" data-pyodide-variant-tests="{{ variant_tests_encoded | escape }}"></div>
+        {% assign variant_prompt_encoded = variant.prompt | default: "" | replace: pyodide_real_newline, "\n" %}
+        <div data-pyodide-variant data-pyodide-variant-id="{{ variant.id }}" data-pyodide-variant-title="{{ variant.title | escape }}" data-pyodide-variant-brief="{{ variant.brief | escape }}" data-pyodide-variant-prompt="{{ variant_prompt_encoded | escape }}" data-pyodide-variant-starter="{{ variant_starter_encoded | escape }}" data-pyodide-variant-tests="{{ variant_tests_encoded | escape }}"></div>
       {% endfor %}
     </div>
   {% endif %}

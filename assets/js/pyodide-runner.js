@@ -900,6 +900,149 @@
   }
 
 
+  function appendAutoFormattedText(parent, text) {
+    const autoCodePattern = /(?:self\.[A-Za-z_][A-Za-z0-9_]*|__[A-Za-z_][A-Za-z0-9_]*__|@[A-Za-z_][A-Za-z0-9_]*|[A-Za-z_][A-Za-z0-9_]*\(\)|[A-Za-z_][A-Za-z0-9_]*_[A-Za-z0-9_]+|\b(?:Buku|ValueError|True|False|None)\b)/g;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = autoCodePattern.exec(text)) !== null) {
+      const start = match.index;
+
+      if (start > lastIndex) {
+        parent.appendChild(
+          document.createTextNode(
+            text.slice(lastIndex, start)
+          )
+        );
+      }
+
+      const code = document.createElement("code");
+
+      code.textContent = match[0];
+      parent.appendChild(code);
+      lastIndex = start + match[0].length;
+    }
+
+    if (lastIndex < text.length) {
+      parent.appendChild(
+        document.createTextNode(
+          text.slice(lastIndex)
+        )
+      );
+    }
+  }
+
+
+  function appendPromptInline(parent, text) {
+    const markdownPattern = /(?:\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)/g;
+    let lastIndex = 0;
+
+    text.replace(
+      markdownPattern,
+      (match, offset) => {
+        if (offset > lastIndex) {
+          appendAutoFormattedText(
+            parent,
+            text.slice(lastIndex, offset)
+          );
+        }
+
+        let element;
+        let content;
+
+        if (match.startsWith("**")) {
+          element = document.createElement("strong");
+          content = match.slice(2, -2);
+        } else if (match.startsWith("`")) {
+          element = document.createElement("code");
+          content = match.slice(1, -1);
+        } else {
+          element = document.createElement("em");
+          content = match.slice(1, -1);
+        }
+
+        if (element.tagName === "CODE") {
+          element.textContent = content;
+        } else {
+          appendAutoFormattedText(element, content);
+        }
+
+        parent.appendChild(element);
+        lastIndex = offset + match.length;
+
+        return match;
+      }
+    );
+
+    if (lastIndex < text.length) {
+      appendAutoFormattedText(
+        parent,
+        text.slice(lastIndex)
+      );
+    }
+  }
+
+
+  function renderPrompt(prompt, text) {
+    if (!prompt) {
+      return;
+    }
+
+    prompt.replaceChildren();
+
+    const lines = String(text || "")
+      .split(String.fromCharCode(10))
+      .map((line) => line.replace(String.fromCharCode(13), ""));
+
+    let list;
+
+    lines.forEach((line) => {
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        list = null;
+        return;
+      }
+
+      if (trimmed.startsWith("- ")) {
+        if (!list) {
+          list = document.createElement("ul");
+          list.className =
+            "pyodide-exercise__prompt-list";
+          prompt.appendChild(list);
+        }
+
+        const item = document.createElement("li");
+
+        appendPromptInline(
+          item,
+          trimmed.slice(2)
+        );
+        list.appendChild(item);
+        return;
+      }
+
+      list = null;
+
+      const isSection =
+        /^\d+\.\s+/.test(trimmed) ||
+        trimmed === "Tujuan tugas" ||
+        trimmed === "Checklist sebelum Run Tests";
+
+      const block = document.createElement(
+        isSection ? "h4" : "p"
+      );
+
+      block.className = isSection
+        ? "pyodide-exercise__prompt-section"
+        : "pyodide-exercise__prompt-paragraph";
+
+      appendPromptInline(block, trimmed);
+      prompt.appendChild(block);
+    });
+  }
+
+
   function applyVariant(exercise, variant) {
     exercise.dataset.pyodideStarter =
       variant.dataset.pyodideVariantStarter ||
@@ -935,9 +1078,13 @@
     }
 
     if (prompt) {
-      prompt.textContent =
-        variant.dataset.pyodideVariantPrompt ||
-        "Lengkapi starter code sesuai ketentuan study case.";
+      renderPrompt(
+        prompt,
+        decodePyodideText(
+          variant.dataset.pyodideVariantPrompt ||
+            "Lengkapi starter code sesuai ketentuan study case."
+        )
+      );
     }
 
     if (brief) {

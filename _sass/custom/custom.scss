@@ -519,6 +519,52 @@ textarea:focus-visible {
   white-space: pre-line;
 }
 
+.pyodide-exercise__prompt > * {
+  white-space: normal;
+}
+
+.pyodide-exercise__prompt-section {
+  margin: 0.95rem 0 0.35rem;
+  color: #1f2937;
+  font-size: 0.86rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.pyodide-exercise__prompt-section:first-child {
+  margin-top: 0;
+}
+
+.pyodide-exercise__prompt-paragraph {
+  margin: 0.35rem 0;
+}
+
+.pyodide-exercise__prompt-list {
+  margin: 0.35rem 0 0.7rem;
+  padding-left: 1.35rem;
+}
+
+.pyodide-exercise__prompt-list li {
+  margin: 0.22rem 0;
+}
+
+.pyodide-exercise__prompt code {
+  padding: 0.08em 0.28em;
+  border-radius: 3px;
+  background: #e5e7eb;
+  color: #1f2937;
+  font-family: var(--oop-mono);
+  font-size: 0.9em;
+}
+
+.pyodide-exercise__prompt strong {
+  font-weight: 750;
+}
+
+.pyodide-exercise__prompt em {
+  color: #4b5563;
+}
+
 .pyodide-variant-brief {
   padding: 0.7rem 1.1rem;
   border-bottom: 1px solid #e5e7eb;
@@ -987,6 +1033,19 @@ textarea:focus-visible {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-subtle);
   color: var(--oop-playground-card-ink);
+}
+
+.pyodide-exercise__prompt-section {
+  color: var(--oop-playground-card-ink);
+}
+
+.pyodide-exercise__prompt code {
+  background: var(--oop-playground-editor);
+  color: var(--oop-playground-editor-ink);
+}
+
+.pyodide-exercise__prompt em {
+  color: var(--oop-playground-editor-muted);
 }
 
 .pyodide-variant-brief {
