@@ -6,13 +6,13 @@ nav_order: 4
 
 # Staff
 
-The practicum instructor and teaching assistants are listed below.
+Instruktur praktikum dan asisten praktikum tercantum di bawah ini.
 
-## Instructor
+## Instruktur
 
 <div class="instructor-container">
   <div class="staff-member instructor-card">
-    <div class="staff-role">Instructor</div>
+    <div class="staff-role">Instruktur</div>
     <div class="staff-name">Riskyana Dewi Instan Puspitasari, M. Kom.</div>
     <div class="staff-email">
       <a href="mailto:riskyanapuspitasari@unesa.ac.id">[email]</a>
@@ -20,7 +20,7 @@ The practicum instructor and teaching assistants are listed below.
   </div>
 </div>
 
-## Teaching Assistant
+## Asisten Praktikum / Teaching Assistant
 
 <div class="staff-container" id="staff-members"></div>
 
