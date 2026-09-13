@@ -5,7 +5,7 @@ parent: Assignment 1
 grand_parent: Assignment
 printtitle: Study Case Kelas A (Assignment 1) - Peminjaman Buku Perpustakaan
 nav_order: 1
-tampil: true
+tampil: false
 ---
 
 # Study Case Kelas A (Assignment 1): Peminjaman Buku Perpustakaan

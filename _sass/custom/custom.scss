@@ -347,11 +347,11 @@ textarea:focus-visible {
   letter-spacing: 0.025em;
 }
 
-.schedule-table th:nth-child(1) { width: 12%; }
-.schedule-table th:nth-child(2) { width: 30%; }
+.schedule-table th:nth-child(1) { width: 10%; }
+.schedule-table th:nth-child(2) { width: 20%; }
 .schedule-table th:nth-child(3) { width: 32%; }
-.schedule-table th:nth-child(4) { width: 13%; }
-.schedule-table th:nth-child(5) { width: 13%; }
+.schedule-table th:nth-child(4) { width: 12%; }
+.schedule-table th:nth-child(5) { width: 26%; }
 
 .schedule-table tbody tr:hover {
   background: var(--oop-row-hover);
