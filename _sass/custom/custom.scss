@@ -1142,7 +1142,7 @@ textarea:focus-visible {
 
 @media print {
   @page {
-    margin: 1.1in 0.75in 1in 0.75in !important;
+    margin: 1in 0.75in 0.85in 0.75in;
 
     @bottom-center {
       color: var(--oop-print-muted);
