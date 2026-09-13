@@ -262,13 +262,56 @@ variants:
       Input: judul, tahun terbit, dan jumlah hari terlambat. Output: data
       pengembalian, jumlah hari terlambat, denda, validitas tahun, dan
       total_pengembalian.
-    prompt: >-
-      Buat class Buku untuk mencatat pengembalian buku. Wajib memiliki class
-      attribute denda_harian dan total_pengembalian, attribute public judul
-      dan tahun_terbit, attribute private __hari_terlambat dengan property
-      hari_terlambat, method catat_pengembalian() dan hitung_denda(), serta
-      static method validasi_tahun(). Program membaca judul, tahun, dan hari
-      keterlambatan lalu mencetak hasil perhitungan sesuai starter code.
+    prompt: |
+      Tujuan tugas
+      Buat class Buku untuk mensimulasikan proses pengembalian buku di perpustakaan dan menghitung denda berdasarkan jumlah hari keterlambatan.
+
+      1. Attribute class
+      - Buat denda_harian = 2000. Nilai ini berlaku untuk semua object Buku dan menjadi tarif denda untuk setiap hari keterlambatan.
+      - Buat total_pengembalian = 0. Nilai ini menghitung jumlah object yang berhasil dicatat pengembaliannya.
+
+      2. Attribute object
+      - judul dan tahun_terbit harus menjadi attribute public.
+      - hari keterlambatan harus disimpan dalam attribute private __hari_terlambat.
+      - Pada __init__, mulai __hari_terlambat dari 0. Jangan mengubah nama attribute private tersebut.
+
+      3. Property hari_terlambat
+      - Buat getter @property hari_terlambat yang mengembalikan nilai __hari_terlambat.
+      - Buat setter @hari_terlambat.setter untuk mengubah nilai melalui property.
+      - Nilai hari keterlambatan tidak boleh negatif. Jika nilai negatif diberikan, raise ValueError. Jika valid, simpan nilai tersebut ke __hari_terlambat.
+
+      4. Method hitung_denda()
+      - Kembalikan hasil perkalian hari_terlambat dengan denda_harian.
+      - Gunakan property hari_terlambat dan attribute class denda_harian, bukan membaca __hari_terlambat secara langsung.
+      - Contoh: jika terlambat 3 hari, denda yang dikembalikan adalah 3 * 2000 = 6000.
+
+      5. Method catat_pengembalian(hari)
+      - Terima jumlah hari keterlambatan melalui parameter hari.
+      - Isi nilai tersebut melalui property self.hari_terlambat agar setter dan validasinya digunakan.
+      - Tambahkan total_pengembalian sebanyak 1 setelah pengembalian berhasil dicatat.
+      - Kembalikan nilai denda dari method hitung_denda().
+      - Method ini dipanggil satu kali oleh program utama untuk setiap object Buku.
+
+      6. Static method validasi_tahun(tahun)
+      - Buat @staticmethod dengan nama validasi_tahun(tahun).
+      - Kembalikan True jika tahun berada pada rentang 1900 sampai 2026, termasuk 1900 dan 2026.
+      - Kembalikan False jika tahun kurang dari 1900 atau lebih dari 2026.
+      - Method ini tidak membutuhkan self atau object Buku.
+
+      7. Program utama
+      - Bagian program utama dan print sudah disediakan di starter code. Jangan menghapus atau mengubah format print.
+      - Program membaca satu baris dengan format: judul tahun hari.
+      - Judul yang memakai underscore sudah diubah menjadi spasi oleh starter code.
+      - Buat object Buku, panggil catat_pengembalian() satu kali, lalu gunakan hasilnya untuk output.
+      - Jangan menambahkan print atau teks lain karena output akan dibandingkan persis dengan expected output.
+
+      Checklist sebelum Run Tests
+      - Getter dan setter hari_terlambat sudah dibuat.
+      - __hari_terlambat tidak diakses langsung di luar property.
+      - catat_pengembalian() mengubah property, menambah total_pengembalian, dan mengembalikan denda.
+      - hitung_denda() memakai tarif denda_harian.
+      - validasi_tahun() mengembalikan boolean sesuai rentang tahun.
+      - Output tetap memiliki enam baris dengan label yang sudah tersedia di starter code.
     starter: |
       class Buku:
           denda_harian = 2000

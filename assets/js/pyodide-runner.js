@@ -785,8 +785,42 @@
   }
 
 
+  const STUDENT_NIM_COOKIE = "oop_student_nim";
+
+
   function isValidStudentNim(nim) {
     return /^\d{6,20}$/.test(nim);
+  }
+
+
+  function getStudentNimCookie() {
+    const prefix = `${STUDENT_NIM_COOKIE}=`;
+    const cookie = document.cookie
+      .split(";")
+      .map((item) => item.trim())
+      .find((item) => item.startsWith(prefix));
+
+    if (!cookie) {
+      return "";
+    }
+
+    try {
+      return normalizeStudentNim(
+        decodeURIComponent(cookie.slice(prefix.length))
+      );
+    } catch (error) {
+      return "";
+    }
+  }
+
+
+  function setStudentNimCookie(nim) {
+    document.cookie = [
+      `${STUDENT_NIM_COOKIE}=${encodeURIComponent(nim)}`,
+      "max-age=31536000",
+      "path=/",
+      "SameSite=Lax",
+    ].join("; ");
   }
 
 
@@ -930,25 +964,31 @@
     if (isDebugExercise(exercise)) {
       variant = variants[0];
     } else {
-      const requestedNim = window.prompt(
-        "Masukkan NIM untuk memilih sub study case:",
-        ""
-      );
-
-      const nim = normalizeStudentNim(
-        requestedNim
-      );
+      let nim = getStudentNimCookie();
 
       if (!isValidStudentNim(nim)) {
-        setStatus(
-          exercise,
-          requestedNim === null
-            ? "Pengisian NIM dibatalkan."
-            : "NIM tidak valid. Masukkan 6 sampai 20 digit.",
-          "error"
+        const requestedNim = window.prompt(
+          "Masukkan NIM untuk memilih sub study case:",
+          ""
         );
 
-        return false;
+        nim = normalizeStudentNim(
+          requestedNim
+        );
+
+        if (!isValidStudentNim(nim)) {
+          setStatus(
+            exercise,
+            requestedNim === null
+              ? "Pengisian NIM dibatalkan."
+              : "NIM tidak valid. Masukkan 6 sampai 20 digit.",
+            "error"
+          );
+
+          return false;
+        }
+
+        setStudentNimCookie(nim);
       }
 
       exercise.dataset.pyodideStudentNim = nim;

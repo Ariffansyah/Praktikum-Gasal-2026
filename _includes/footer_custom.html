@@ -16,6 +16,28 @@
       event.preventDefault();
       toggleDark();
     });
+
+    var nimCookieName = 'oop_student_nim';
+
+    if (!document.querySelector('[data-nim-reset]')) {
+      var resetItem = document.createElement('li');
+      var resetButton = document.createElement('button');
+
+      resetItem.className = 'aux-nav-list-item';
+      resetButton.type = 'button';
+      resetButton.className = 'site-button nim-reset-button';
+      resetButton.setAttribute('data-nim-reset', 'true');
+      resetButton.setAttribute('aria-label', 'Reset NIM');
+      resetButton.textContent = 'Reset NIM';
+
+      resetButton.addEventListener('click', function () {
+        document.cookie = nimCookieName + '=; max-age=0; path=/; SameSite=Lax';
+        window.location.reload();
+      });
+
+      resetItem.appendChild(resetButton);
+      navList.appendChild(resetItem);
+    }
   }());
 </script>
 
