@@ -35,7 +35,7 @@ Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, 
 </table>
 
 
-Jadwal praktikum di bawah ini merupakan dokumen utama yang digunakan sebagai acuan pelaksanaan praktikum. Setiap minggu menggunakan satu topik praktikum yang sama untuk ketiga kelas. Tautan bacaan dan tugas yang masih berupa placeholder akan diperbarui kemudian.
+Jadwal praktikum di bawah ini merupakan dokumen utama yang digunakan sebagai acuan pelaksanaan praktikum. Setiap minggu menggunakan satu topik praktikum yang sama untuk ketiga kelas dengan tiga study case yang berbeda untuk masing-masing ketiga kelas. Modul untuk setiap praktikum akan di upload paling lambatnya di hari selasa, dan assignment praktikum akan di upload di hari-h praktikum untuk masing-masing kelas.
 
 ## Jadwal Mingguan
 
