@@ -1,12 +1,26 @@
 {% capture pyodide_real_newline %}
 {% endcapture %}
-{% assign pyodide_starter_encoded = include.starter | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
-{% assign pyodide_tests_encoded = include.tests | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
-<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}">
+{% assign pyodide_variants = page.variants %}
+{% assign pyodide_has_variants = false %}
+{% if pyodide_variants %}
+  {% assign pyodide_has_variants = true %}
+{% endif %}
+{% assign pyodide_debug = page.isdebug %}
+{% assign pyodide_assignment_id = page.assignment_id | default: include.id %}
+{% assign pyodide_variant_version = page.variant_version | default: 1 %}
+{% assign pyodide_starter_source = include.starter | default: "" %}
+{% assign pyodide_tests_source = include.tests | default: "" %}
+{% if pyodide_has_variants %}
+  {% assign pyodide_starter_source = "" %}
+  {% assign pyodide_tests_source = "" %}
+{% endif %}
+{% assign pyodide_starter_encoded = pyodide_starter_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+{% assign pyodide_tests_encoded = pyodide_tests_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}">
   <div class="pyodide-exercise__header">
     <div>
       <p class="pyodide-exercise__eyebrow">Try It Yourself</p>
-      <h3 class="pyodide-exercise__title">{{ include.title | default: "Latihan mandiri" | escape }}</h3>
+      <h3 class="pyodide-exercise__title" data-pyodide-title>{{ include.title | default: "Latihan mandiri" | escape }}</h3>
     </div>
     <span class="pyodide-exercise__runtime">
       <span class="pyodide-exercise__runtime-dot" aria-hidden="true"></span>
@@ -15,7 +29,11 @@
   </div>
 
   {% if include.prompt %}
-    <p class="pyodide-exercise__prompt">{{ include.prompt | escape }}</p>
+    <p class="pyodide-exercise__prompt" data-pyodide-prompt>{{ include.prompt | escape }}</p>
+  {% endif %}
+
+  {% if pyodide_has_variants %}
+    <div class="pyodide-variant-brief" data-pyodide-variant-brief hidden></div>
   {% endif %}
 
   <div class="pyodide-editor">
@@ -49,7 +67,7 @@
       Run
     </button>
     <button type="button" class="pyodide-exercise__reset" data-pyodide-reset>Reset</button>
-    {% if include.tests %}
+    {% if include.tests or pyodide_has_variants %}
       <button type="button" class="pyodide-exercise__test" data-pyodide-run-tests>
         <span class="pyodide-exercise__run-icon" aria-hidden="true"></span>
         Run Tests
@@ -69,13 +87,23 @@
     <pre class="pyodide-exercise__output" data-pyodide-output aria-live="polite" hidden></pre>
   </div>
 
-  {% if include.tests %}
+  {% if include.tests or pyodide_has_variants %}
     <div class="pyodide-tests" data-pyodide-tests-panel hidden>
       <div class="pyodide-tests__header">
         <span>Test Cases</span>
         <span class="pyodide-tests__summary" data-pyodide-tests-summary></span>
       </div>
       <ol class="pyodide-tests__list" data-pyodide-tests-list></ol>
+    </div>
+  {% endif %}
+
+  {% if pyodide_has_variants %}
+    <div class="pyodide-variant-data" data-pyodide-variant-data hidden aria-hidden="true">
+      {% for variant in pyodide_variants %}
+        {% assign variant_starter_encoded = variant.starter | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+        {% assign variant_tests_encoded = variant.tests | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
+        <div data-pyodide-variant data-pyodide-variant-id="{{ variant.id }}" data-pyodide-variant-title="{{ variant.title | escape }}" data-pyodide-variant-brief="{{ variant.brief | escape }}" data-pyodide-variant-prompt="{{ variant.prompt | escape }}" data-pyodide-variant-starter="{{ variant_starter_encoded | escape }}" data-pyodide-variant-tests="{{ variant_tests_encoded | escape }}"></div>
+      {% endfor %}
     </div>
   {% endif %}
 </section>

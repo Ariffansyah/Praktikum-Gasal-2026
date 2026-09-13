@@ -581,6 +581,22 @@
       return;
     }
 
+    if (
+      hasVariants(exercise) &&
+      exercise.dataset.pyodideVariantReady !==
+        "true"
+    ) {
+      const variantReady =
+        initializeVariantExercise(exercise);
+
+      if (!variantReady) {
+        return;
+      }
+
+      editor.value = getStarterCode(exercise);
+      updateEditorUI(exercise);
+    }
+
     const code = editor.value;
 
 
@@ -740,6 +756,224 @@
   }
 
 
+  function getVariantElements(exercise) {
+    return Array.from(
+      exercise.querySelectorAll(
+        "[data-pyodide-variant]"
+      )
+    );
+  }
+
+
+  function hasVariants(exercise) {
+    return getVariantElements(exercise).length > 0;
+  }
+
+
+  function isDebugExercise(exercise) {
+    return (
+      String(exercise.dataset.pyodideDebug)
+        .toLowerCase() === "true"
+    );
+  }
+
+
+  function normalizeStudentNim(value) {
+    return String(value || "")
+      .trim()
+      .replace(/\s+/g, "");
+  }
+
+
+  function isValidStudentNim(nim) {
+    return /^\d{6,20}$/.test(nim);
+  }
+
+
+  function stableHash(value) {
+    let hash = 2166136261;
+
+    for (let index = 0; index < value.length; index++) {
+      hash ^= value.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+
+    return hash >>> 0;
+  }
+
+
+  function createSeededRandom(seed) {
+    let state = seed >>> 0;
+
+    return () => {
+      state += 0x6d2b79f5;
+      let value = state;
+      value = Math.imul(
+        value ^ (value >>> 15),
+        value | 1
+      );
+      value ^= value + Math.imul(
+        value ^ (value >>> 7),
+        value | 61
+      );
+
+      return (
+        (value ^ (value >>> 14)) >>> 0
+      ) / 4294967296;
+    };
+  }
+
+
+  function getStudentVariant(exercise, variants, nim) {
+    const assignmentId =
+      exercise.dataset.pyodideAssignmentId ||
+      "assignment";
+
+    const version =
+      exercise.dataset.pyodideVariantVersion ||
+      "1";
+
+    const seed = [
+      assignmentId,
+      version,
+      nim,
+    ].join("|");
+
+    const shuffled = [...variants];
+    const random = createSeededRandom(
+      stableHash(seed)
+    );
+
+    for (
+      let index = shuffled.length - 1;
+      index > 0;
+      index--
+    ) {
+      const swapIndex = Math.floor(
+        random() * (index + 1)
+      );
+
+      [
+        shuffled[index],
+        shuffled[swapIndex],
+      ] = [
+        shuffled[swapIndex],
+        shuffled[index],
+      ];
+    }
+
+    return shuffled[0];
+  }
+
+
+  function applyVariant(exercise, variant) {
+    exercise.dataset.pyodideStarter =
+      variant.dataset.pyodideVariantStarter ||
+      "";
+
+    exercise.dataset.pyodideTests =
+      variant.dataset.pyodideVariantTests ||
+      "";
+
+    exercise.dataset.pyodideVariantId =
+      variant.dataset.pyodideVariantId ||
+      "";
+
+    exercise.dataset.pyodideVariantReady =
+      "true";
+
+    const title = exercise.querySelector(
+      "[data-pyodide-title]"
+    );
+
+    const prompt = exercise.querySelector(
+      "[data-pyodide-prompt]"
+    );
+
+    const brief = exercise.querySelector(
+      "[data-pyodide-variant-brief]"
+    );
+
+    if (title) {
+      title.textContent =
+        variant.dataset.pyodideVariantTitle ||
+        "Latihan mandiri";
+    }
+
+    if (prompt) {
+      prompt.textContent =
+        variant.dataset.pyodideVariantPrompt ||
+        "Lengkapi starter code sesuai ketentuan study case.";
+    }
+
+    if (brief) {
+      brief.textContent =
+        variant.dataset.pyodideVariantBrief ||
+        "Sub study case perpustakaan telah dipilih.";
+      brief.hidden = false;
+    }
+  }
+
+
+  function initializeVariantExercise(exercise) {
+    const variants = getVariantElements(exercise);
+
+    if (!variants.length) {
+      return true;
+    }
+
+    exercise.dataset.pyodideVariantReady =
+      "false";
+
+    let variant;
+
+    if (isDebugExercise(exercise)) {
+      variant = variants[0];
+    } else {
+      const requestedNim = window.prompt(
+        "Masukkan NIM untuk memilih sub study case:",
+        ""
+      );
+
+      const nim = normalizeStudentNim(
+        requestedNim
+      );
+
+      if (!isValidStudentNim(nim)) {
+        setStatus(
+          exercise,
+          requestedNim === null
+            ? "Pengisian NIM dibatalkan."
+            : "NIM tidak valid. Masukkan 6 sampai 20 digit.",
+          "error"
+        );
+
+        return false;
+      }
+
+      exercise.dataset.pyodideStudentNim = nim;
+
+      variant = getStudentVariant(
+        exercise,
+        variants,
+        nim
+      );
+    }
+
+    applyVariant(exercise, variant);
+
+    setStatus(
+      exercise,
+      isDebugExercise(exercise)
+        ? "Mode debug: sub study case 1 dimuat."
+        : "Sub study case berhasil dimuat.",
+      "success"
+    );
+
+    return true;
+  }
+
+
   /* =========================================================
      TEST CASES
      ========================================================= */
@@ -865,6 +1099,22 @@
 
     if (!editor) {
       return;
+    }
+
+    if (
+      hasVariants(exercise) &&
+      exercise.dataset.pyodideVariantReady !==
+        "true"
+    ) {
+      const variantReady =
+        initializeVariantExercise(exercise);
+
+      if (!variantReady) {
+        return;
+      }
+
+      editor.value = getStarterCode(exercise);
+      updateEditorUI(exercise);
     }
 
     const code = editor.value;
@@ -1116,6 +1366,19 @@
       return;
     }
 
+    if (
+      hasVariants(exercise) &&
+      exercise.dataset.pyodideVariantReady !==
+        "true"
+    ) {
+      const variantReady =
+        initializeVariantExercise(exercise);
+
+      if (!variantReady) {
+        return;
+      }
+    }
+
     editor.value = getStarterCode(exercise);
 
     setSaveButtonVisible(exercise, false);
@@ -1240,7 +1503,15 @@
           return;
         }
 
-        editor.value = getStarterCode(exercise);
+        const variantReady = initializeVariantExercise(
+          exercise
+        );
+
+        editor.value = variantReady
+          ? getStarterCode(exercise)
+          : "";
+
+        updateEditorUI(exercise);
 
 
         /* -------------------------

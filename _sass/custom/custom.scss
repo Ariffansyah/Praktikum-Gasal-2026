@@ -513,6 +513,19 @@ textarea:focus-visible {
   line-height: 1.55;
 }
 
+.pyodide-variant-brief {
+  padding: 0.7rem 1.1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+  color: #4b5563;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.pyodide-variant-brief[hidden] {
+  display: none !important;
+}
+
 .pyodide-editor {
   margin: 1rem;
   overflow: hidden;
@@ -968,6 +981,12 @@ textarea:focus-visible {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-subtle);
   color: var(--oop-playground-card-ink);
+}
+
+.pyodide-variant-brief {
+  border-color: var(--oop-playground-rule);
+  background: var(--oop-playground-subtle);
+  color: var(--oop-playground-editor-muted);
 }
 
 .pyodide-editor,
