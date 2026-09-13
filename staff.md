@@ -15,9 +15,7 @@ The practicum instructor and teaching assistants are listed below.
     <div class="staff-role">Instructor</div>
     <div class="staff-name">Riskyana Dewi Instan Puspitasari, M. Kom.</div>
     <div class="staff-email">
-      <a href="mailto:riskyanapuspitasari@unesa.ac.id">
-        riskyanapuspitasari@unesa.ac.id
-      </a>
+      <a href="mailto:riskyanapuspitasari@unesa.ac.id">[email]</a>
     </div>
   </div>
 </div>
@@ -132,17 +130,17 @@ const staff = [
 
 const container = document.getElementById("staff-members");
 
-staff.forEach((member, index) => {
+staff.forEach((member) => {
   const email = `${member.nim}@mhs.unesa.ac.id`;
 
   const item = document.createElement("div");
   item.className = "staff-member";
 
   item.innerHTML = `
-      ${member.role ? `<div class="staff-role">${member.role}</div>` : ""}
+    ${member.role ? `<div class="staff-role">${member.role}</div>` : ""}
     <div class="staff-name">${member.name}</div>
     <div class="staff-email">
-      <a href="mailto:${email}">${email}</a>
+      <a href="mailto:${email}">[email]</a>
     </div>
   `;
 
