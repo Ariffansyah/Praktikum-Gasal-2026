@@ -1142,7 +1142,7 @@ textarea:focus-visible {
 
 @media print {
   @page {
-    margin: 1.1in 0.75in 1in 0.75in !important;
+    margin: 0.62in 0 0.82in;
 
     @bottom-center {
       color: var(--oop-print-muted);
@@ -1247,13 +1247,14 @@ textarea:focus-visible {
   .main-content-wrap {
     max-width: none !important;
     margin: 0 !important;
-    /* Horizontal print inset stays the same; vertical spacing is controlled by @page. */
-    padding: 0 1.15in !important;
+    padding: 1.25in 1.15in 1.35in !important;
   }
 
   .main-content {
     max-width: 7in;
     margin: 0 auto !important;
+    margin-top: 0.18in !important;
+    margin-bottom: 0.25in !important;
     padding: 0 !important;
     color: var(--oop-print-ink) !important;
     font-family: var(--oop-print-serif) !important;
