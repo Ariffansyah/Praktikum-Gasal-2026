@@ -149,7 +149,7 @@
 
   function setButtonsDisabled(exercise, disabled) {
     exercise
-      .querySelectorAll("button")
+      .querySelectorAll("button, select")
       .forEach((button) => {
         button.disabled = disabled;
       });
@@ -1059,6 +1059,16 @@
     exercise.dataset.pyodideVariantReady =
       "true";
 
+    const variantSelect = exercise.querySelector(
+      "[data-pyodide-variant-select]"
+    );
+
+    if (variantSelect) {
+      variantSelect.value =
+        variant.dataset.pyodideVariantId ||
+        "";
+    }
+
     const title = exercise.querySelector(
       "[data-pyodide-title]"
     );
@@ -1093,6 +1103,43 @@
         "Sub study case perpustakaan telah dipilih.";
       brief.hidden = false;
     }
+  }
+
+
+  function switchDebugVariant(exercise, variantId) {
+    if (!isDebugExercise(exercise)) {
+      return;
+    }
+
+    const variant = getVariantElements(exercise).find(
+      (item) =>
+        item.dataset.pyodideVariantId ===
+        variantId
+    );
+
+    if (!variant) {
+      return;
+    }
+
+    applyVariant(exercise, variant);
+
+    const editor = exercise.querySelector(
+      "[data-pyodide-editor]"
+    );
+
+    if (editor) {
+      editor.value = getStarterCode(exercise);
+    }
+
+    setSaveButtonVisible(exercise, false);
+    clearTestResults(exercise);
+    setOutput(exercise, "", "");
+    updateEditorUI(exercise);
+    setStatus(
+      exercise,
+      `Mode debug: ${variant.dataset.pyodideVariantTitle || "sub study case"} dimuat.`,
+      "success"
+    );
   }
 
 
@@ -1195,6 +1242,33 @@
       .map((line) => line.replace(/\s+$/, ""))
       .join("\n")
       .replace(/\n+$/, "");
+  }
+
+
+  function clearTestResults(exercise) {
+    const list = exercise.querySelector(
+      "[data-pyodide-tests-list]"
+    );
+
+    const summary = exercise.querySelector(
+      "[data-pyodide-tests-summary]"
+    );
+
+    const panel = exercise.querySelector(
+      "[data-pyodide-tests-panel]"
+    );
+
+    if (list) {
+      list.replaceChildren();
+    }
+
+    if (summary) {
+      summary.textContent = "";
+    }
+
+    if (panel) {
+      panel.hidden = true;
+    }
   }
 
 
@@ -1569,6 +1643,7 @@
     editor.value = getStarterCode(exercise);
 
     setSaveButtonVisible(exercise, false);
+    clearTestResults(exercise);
 
     setOutput(
       exercise,
@@ -1675,6 +1750,11 @@
             "[data-pyodide-run-tests]"
           );
 
+        const variantSelect =
+          exercise.querySelector(
+            "[data-pyodide-variant-select]"
+          );
+
         const saveButton =
           exercise.querySelector(
             "[data-pyodide-save]"
@@ -1727,6 +1807,19 @@
             "click",
             () =>
               runTests(exercise)
+          );
+        }
+
+
+        if (variantSelect) {
+          variantSelect.addEventListener(
+            "change",
+            (event) => {
+              switchDebugVariant(
+                exercise,
+                event.target.value
+              );
+            }
           );
         }
 

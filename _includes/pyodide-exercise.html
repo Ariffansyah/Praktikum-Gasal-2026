@@ -17,6 +17,17 @@
 {% assign pyodide_starter_encoded = pyodide_starter_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
 {% assign pyodide_tests_encoded = pyodide_tests_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
 <section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}">
+  {% if pyodide_has_variants and pyodide_debug %}
+    <div class="pyodide-debug-controls" data-pyodide-debug-controls>
+      <label class="pyodide-debug-controls__label" for="{{ include.id | escape }}-variant-select">Debug sub study case</label>
+      <select id="{{ include.id | escape }}-variant-select" class="pyodide-debug-controls__select" data-pyodide-variant-select aria-label="Pilih sub study case untuk debug">
+        {% for variant in pyodide_variants %}
+          <option value="{{ variant.id | escape }}">{{ variant.title | escape }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  {% endif %}
+
   <div class="pyodide-exercise__header">
     <div>
       <p class="pyodide-exercise__eyebrow">Try It Yourself</p>

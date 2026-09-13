@@ -6,7 +6,7 @@ grand_parent: Assignment
 printtitle: Study Case Kelas A (Assignment 1) - Peminjaman Buku Perpustakaan
 nav_order: 1
 tampil: true
-isdebug: false
+isdebug: true
 assignment_id: assignment1-kelas-a
 variant_version: 1
 variants:
@@ -1319,10 +1319,6 @@ Soal ini tetap menggunakan satu topik besar, yaitu pengelolaan buku perpustakaan
 
 - Assignment ini memakai delapan sub study case dengan topik perpustakaan yang sama.
 - Setiap sub study case memiliki tujuh test case.
-- Mapping sub study case dipilih secara konsisten berdasarkan NIM, sehingga NIM yang sama akan selalu mendapatkan sub study case yang sama.
-- Pada mode debug, sistem langsung memakai Variant 1 dan tidak meminta NIM.
-- Pada mode normal, sistem meminta NIM melalui popup sebelum menampilkan kerangka tugas.
-- Jangan menyalin solusi mahasiswa lain. Walaupun topiknya sama, setiap variant memiliki kontrak class yang berbeda.
 
 ## Coba Kerangka Kode
 
