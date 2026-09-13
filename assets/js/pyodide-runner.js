@@ -1027,6 +1027,53 @@
       return;
     }
 
+    const requestedFilename = window.prompt(
+      "Masukkan nama file Python:",
+      "main.py"
+    );
+
+    if (requestedFilename === null) {
+      setStatus(
+        exercise,
+        "Penyimpanan dibatalkan.",
+        ""
+      );
+
+      return;
+    }
+
+    const filename = requestedFilename.trim();
+
+    if (!filename) {
+      setStatus(
+        exercise,
+        "Nama file tidak boleh kosong.",
+        "error"
+      );
+
+      return;
+    }
+
+    if (
+      /[\u0000-\u001f<>:\"/\\|?*]/.test(filename) ||
+      filename === "." ||
+      filename === ".."
+    ) {
+      setStatus(
+        exercise,
+        "Nama file mengandung karakter yang tidak valid.",
+        "error"
+      );
+
+      return;
+    }
+
+    const downloadName = filename.toLowerCase().endsWith(
+      ".py"
+    )
+      ? filename
+      : `${filename}.py`;
+
     const file = new Blob(
       [editor.value],
       { type: "text/x-python;charset=utf-8" }
@@ -1036,7 +1083,7 @@
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = "main.py";
+    link.download = downloadName;
     link.style.display = "none";
 
     document.body.appendChild(link);
@@ -1050,7 +1097,7 @@
 
     setStatus(
       exercise,
-      "File main.py berhasil disimpan.",
+      `File ${downloadName} berhasil disimpan.`,
       "success"
     );
   }
