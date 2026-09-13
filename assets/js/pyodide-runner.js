@@ -156,6 +156,17 @@
   }
 
 
+  function setSaveButtonVisible(exercise, visible) {
+    const saveButton = exercise.querySelector(
+      "[data-pyodide-save]"
+    );
+
+    if (saveButton) {
+      saveButton.hidden = !visible;
+    }
+  }
+
+
   /* =========================================================
      EDITOR UI
      ========================================================= */
@@ -859,6 +870,8 @@
     const code = editor.value;
     const cases = getTestCases(exercise);
 
+    setSaveButtonVisible(exercise, false);
+
     if (!cases.length) {
       setStatus(
         exercise,
@@ -971,12 +984,22 @@
         (result) => result.passed
       ).length;
 
+      const allTestsPassed =
+        passedCount === results.length;
+
+      setSaveButtonVisible(
+        exercise,
+        allTestsPassed
+      );
+
       setStatus(
         exercise,
         `${passedCount} dari ${results.length} test case lulus.`,
-        passedCount === results.length ? "success" : "error"
+        allTestsPassed ? "success" : "error"
       );
     } catch (error) {
+      setSaveButtonVisible(exercise, false);
+
       const message =
         error && error.message
           ? error.message
@@ -986,6 +1009,50 @@
     } finally {
       setButtonsDisabled(exercise, false);
     }
+  }
+
+
+  function saveExercise(exercise) {
+    const editor = exercise.querySelector(
+      "[data-pyodide-editor]"
+    );
+
+    if (!editor || !editor.value.trim()) {
+      setStatus(
+        exercise,
+        "Belum ada kode untuk disimpan.",
+        "error"
+      );
+
+      return;
+    }
+
+    const file = new Blob(
+      [editor.value],
+      { type: "text/x-python;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(file);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "main.py";
+    link.style.display = "none";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    window.setTimeout(
+      () => URL.revokeObjectURL(url),
+      0
+    );
+
+    setStatus(
+      exercise,
+      "File main.py berhasil disimpan.",
+      "success"
+    );
   }
 
 
@@ -1003,6 +1070,8 @@
     }
 
     editor.value = getStarterCode(exercise);
+
+    setSaveButtonVisible(exercise, false);
 
     setOutput(
       exercise,
@@ -1109,6 +1178,11 @@
             "[data-pyodide-run-tests]"
           );
 
+        const saveButton =
+          exercise.querySelector(
+            "[data-pyodide-save]"
+          );
+
         const editor =
           exercise.querySelector(
             "[data-pyodide-editor]"
@@ -1152,6 +1226,15 @@
         }
 
 
+        if (saveButton) {
+          saveButton.addEventListener(
+            "click",
+            () =>
+              saveExercise(exercise)
+          );
+        }
+
+
         /* -------------------------
            Input
            ------------------------- */
@@ -1159,6 +1242,8 @@
         editor.addEventListener(
           "input",
           () => {
+            setSaveButtonVisible(exercise, false);
+
             setStatus(
               exercise,
               "Starter code siap dijalankan.",

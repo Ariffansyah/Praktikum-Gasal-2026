@@ -712,8 +712,20 @@ textarea:focus-visible {
   background: #f6f8fa !important;
 }
 
+.pyodide-exercise__save {
+  border: 1px solid #d0d7de;
+  background: #fff !important;
+  color: #374151 !important;
+}
+
+.pyodide-exercise__save:hover {
+  background: #f6f8fa !important;
+}
+
 .pyodide-exercise__run:disabled,
-.pyodide-exercise__reset:disabled {
+.pyodide-exercise__reset:disabled,
+.pyodide-exercise__test:disabled,
+.pyodide-exercise__save:disabled {
   cursor: not-allowed;
   opacity: 0.55;
 }
@@ -1021,14 +1033,16 @@ textarea:focus-visible {
 }
 
 .pyodide-exercise__reset,
-.pyodide-exercise__test {
+.pyodide-exercise__test,
+.pyodide-exercise__save {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-reset) !important;
   color: var(--oop-playground-reset-ink) !important;
 }
 
 .pyodide-exercise__reset:hover,
-.pyodide-exercise__test:hover {
+.pyodide-exercise__test:hover,
+.pyodide-exercise__save:hover {
   background: var(--oop-playground-subtle) !important;
 }
 

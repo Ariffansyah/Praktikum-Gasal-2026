@@ -7,7 +7,7 @@ nav_order: 1
 
 # Panduan Editor Python (Try It Yourself)
 
-Setiap halaman study case memiliki editor Python yang berjalan langsung di browser (Pyodide), tanpa perlu install apa pun. Editor ini punya tiga tombol: **Run**, **Reset**, dan **Run Tests**. Ketiganya punya fungsi yang berbeda. Halaman ini menjelaskan kapan memakai yang mana.
+Setiap halaman study case memiliki editor Python yang berjalan langsung di browser (Pyodide), tanpa perlu install apa pun. Editor ini memiliki tombol **Run** dan **Reset**. Playground yang memiliki test case juga memiliki tombol **Run Tests**. Setelah semua test case lulus, tombol **Save File** muncul untuk mengunduh kode sebagai file `main.py`.
 
 ## Run
 
@@ -58,6 +58,8 @@ print(kalkulator.riwayat)
 - Setiap test case dijalankan di lingkungan yang bersih (state class seperti `total_buku` atau `semua_produk` di-reset), jadi hasilnya konsisten seolah program dijalankan dari awal setiap kali, sama seperti menjalankan file `.py` secara terpisah untuk tiap test case.
 - Hasil ditampilkan per test case: **Lulus** atau **Gagal**. Untuk yang gagal, buka **Lihat detail** untuk membandingkan Input, Expected (output yang benar), dan Actual (output kode kamu).
 - Ini yang dipakai untuk mengecek apakah solusi sudah benar, mirip tombol "Run" di LeetCode/HackerRank.
+- Jika semua test case lulus, tombol **Save File** muncul di samping **Run Tests**. Tombol tersebut mengunduh kode yang sedang ada di editor sebagai `main.py`.
+- Jika kode diubah atau ada test case yang gagal, tombol **Save File** disembunyikan sampai semua test case lulus lagi.
 
 Contoh, program lengkap seperti ini (bukan dari soal manapun, hanya ilustrasi):
 
