@@ -11,9 +11,9 @@ variant_version: 2
 selection_mode: "nim"
 class_prompt: "Masukkan kelas (2025A / 2025B / 2025C):"
 unlock_at:
-  "2025A": "2026-09-12T13:00:00"
-  "2025B": "2026-09-18T13:00:00"
-  "2025C": "2026-09-16T09:30:00"
+  "2025A": "2026-09-16T13:30:00"
+  "2025B": "2026-09-18T13:30:00"
+  "2025C": "2026-09-16T10:00:00"
 variant_dir: "assignment/assignment1/homework/variants"
 description_file: "assignment/assignment1/homework/description.md"
 ---

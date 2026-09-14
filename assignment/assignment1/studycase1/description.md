@@ -32,10 +32,6 @@ Assignment ini tidak menggunakan inheritance, polymorphism, class method, static
 
 ## Coba Kerangka Kode
 
-- Mode debug (`isdebug: true`) menyediakan dropdown untuk berpindah antara kelas 2025A, 2025B, dan 2025C tanpa prompt kelas atau lock waktu.
-- Mode normal (`isdebug: false`) meminta kelas satu kali, menyimpan pilihan tersebut pada cookie, memilih study case yang sesuai, dan menerapkan waktu unlock dalam zona `Asia/Jakarta` (UTC+7). Pada mode normal tidak ada dropdown kelas.
-- Setelah study case dipilih, prompt lengkap dan starter code akan muncul pada playground di bawah. Gunakan alur berikut:
-
 1. Baca spesifikasi attribute dan tentukan mana yang public, protected, dan private.
 2. Implementasikan getter dan setter property terlebih dahulu.
 3. Implementasikan instance method dengan memakai property, bukan mengubah private attribute secara sembarangan.

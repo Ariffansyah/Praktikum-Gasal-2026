@@ -1044,7 +1044,12 @@ textarea:focus-visible {
 }
 
 /* Theme-aware playground surfaces. */
-.pyodide-exercise,
+.pyodide-exercise {
+  border-color: transparent;
+  background: var(--oop-playground-card);
+  color: var(--oop-playground-card-ink);
+}
+
 .pyodide-exercise__header {
   border-color: var(--oop-playground-rule);
   background: var(--oop-playground-card);
