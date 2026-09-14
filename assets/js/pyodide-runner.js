@@ -824,6 +824,90 @@
   }
 
 
+  const STUDENT_KELAS_COOKIE = "oop_student_kelas";
+  const VALID_STUDENT_KELAS = ["2025A", "2025B", "2025C"];
+
+
+  function normalizeStudentKelas(value) {
+    return String(value || "")
+      .trim()
+      .toUpperCase();
+  }
+
+
+  function isValidStudentKelas(kelas) {
+    return VALID_STUDENT_KELAS.includes(kelas);
+  }
+
+
+  function getStudentKelasCookie() {
+    const prefix = `${STUDENT_KELAS_COOKIE}=`;
+    const cookie = document.cookie
+      .split(";")
+      .map((item) => item.trim())
+      .find((item) => item.startsWith(prefix));
+
+    if (!cookie) {
+      return "";
+    }
+
+    try {
+      return normalizeStudentKelas(
+        decodeURIComponent(cookie.slice(prefix.length))
+      );
+    } catch (error) {
+      return "";
+    }
+  }
+
+
+  function setStudentKelasCookie(kelas) {
+    document.cookie = [
+      `${STUDENT_KELAS_COOKIE}=${encodeURIComponent(kelas)}`,
+      "max-age=31536000",
+      "path=/",
+      "SameSite=Lax",
+    ].join("; ");
+  }
+
+
+  function clearIdentityCookie(name) {
+    document.cookie = [
+      `${name}=`,
+      "max-age=0",
+      "path=/",
+      "SameSite=Lax",
+    ].join("; ");
+  }
+
+
+  function resetStudentIdentity() {
+    if (
+      !window.confirm(
+        "Hapus NIM dan kelas yang tersimpan? Kamu perlu memasukkannya lagi."
+      )
+    ) {
+      return;
+    }
+
+    clearIdentityCookie(STUDENT_NIM_COOKIE);
+    clearIdentityCookie(STUDENT_KELAS_COOKIE);
+    window.location.reload();
+  }
+
+
+  function getUnlockDateForKelas(exercise, kelas) {
+    try {
+      const map = JSON.parse(
+        exercise.dataset.pyodideUnlockDates || "{}"
+      );
+      return map[kelas] || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+
   function stableHash(value) {
     let hash = 2166136261;
 
@@ -1043,14 +1127,72 @@
   }
 
 
+  function decodeBase64Utf8(encoded) {
+    const binary = atob(encoded);
+    const bytes = Uint8Array.from(
+      binary,
+      (char) => char.charCodeAt(0)
+    );
+
+    return new TextDecoder("utf-8").decode(
+      bytes
+    );
+  }
+
+
+  function decodeVariantPayload(variant) {
+    const encoded =
+      variant.dataset.pyodideVariantPayload;
+
+    if (!encoded) {
+      return {};
+    }
+
+    try {
+      return JSON.parse(
+        decodeBase64Utf8(encoded)
+      );
+    } catch (error) {
+      return {};
+    }
+  }
+
+
+  function revealGatedBody(exercise) {
+    const gated = exercise.querySelector(
+      "[data-pyodide-gated-body]"
+    );
+
+    if (!gated) {
+      return;
+    }
+
+    const encoded =
+      gated.dataset.pyodideGatedPayload;
+
+    if (!encoded) {
+      return;
+    }
+
+    try {
+      gated.innerHTML = decodeBase64Utf8(
+        encoded
+      );
+      gated.hidden = false;
+    } catch (error) {
+      /* keep hidden if decoding fails */
+    }
+  }
+
+
   function applyVariant(exercise, variant) {
+    const payload = decodeVariantPayload(variant);
+
     exercise.dataset.pyodideStarter =
-      variant.dataset.pyodideVariantStarter ||
-      "";
+      payload.starter || "";
 
     exercise.dataset.pyodideTests =
-      variant.dataset.pyodideVariantTests ||
-      "";
+      payload.tests || "";
 
     exercise.dataset.pyodideVariantId =
       variant.dataset.pyodideVariantId ||
@@ -1083,7 +1225,7 @@
 
     if (title) {
       title.textContent =
-        variant.dataset.pyodideVariantTitle ||
+        payload.title ||
         "Latihan mandiri";
     }
 
@@ -1091,7 +1233,7 @@
       renderPrompt(
         prompt,
         decodePyodideText(
-          variant.dataset.pyodideVariantPrompt ||
+          payload.prompt ||
             "Lengkapi starter code sesuai ketentuan study case."
         )
       );
@@ -1099,7 +1241,7 @@
 
     if (brief) {
       brief.textContent =
-        variant.dataset.pyodideVariantBrief ||
+        payload.brief ||
         "Sub study case perpustakaan telah dipilih.";
       brief.hidden = false;
     }
@@ -1137,7 +1279,7 @@
     updateEditorUI(exercise);
     setStatus(
       exercise,
-      `Mode debug: ${variant.dataset.pyodideVariantTitle || "sub study case"} dimuat.`,
+      `Mode debug: ${decodeVariantPayload(variant).title || "sub study case"} dimuat.`,
       "success"
     );
   }
@@ -1187,6 +1329,50 @@
 
       exercise.dataset.pyodideStudentNim = nim;
 
+      let kelas = getStudentKelasCookie();
+
+      if (!isValidStudentKelas(kelas)) {
+        const requestedKelas = window.prompt(
+          "Masukkan kelas (2025A / 2025B / 2025C):",
+          ""
+        );
+
+        kelas = normalizeStudentKelas(
+          requestedKelas
+        );
+
+        if (!isValidStudentKelas(kelas)) {
+          setStatus(
+            exercise,
+            requestedKelas === null
+              ? "Pengisian kelas dibatalkan."
+              : "Kelas tidak valid. Gunakan 2025A, 2025B, atau 2025C.",
+            "error"
+          );
+
+          return false;
+        }
+
+        setStudentKelasCookie(kelas);
+      }
+
+      exercise.dataset.pyodideStudentKelas = kelas;
+
+      const unlockDate = getUnlockDateForKelas(
+        exercise,
+        kelas
+      );
+
+      if (unlockDate && new Date() < new Date(`${unlockDate}T00:00:00`)) {
+        setStatus(
+          exercise,
+          `Assignment ini baru dibuka mulai ${unlockDate} untuk kelas ${kelas}.`,
+          "error"
+        );
+
+        return false;
+      }
+
       variant = getStudentVariant(
         exercise,
         variants,
@@ -1195,6 +1381,7 @@
     }
 
     applyVariant(exercise, variant);
+    revealGatedBody(exercise);
 
     setStatus(
       exercise,
@@ -1799,6 +1986,18 @@
             "click",
             () =>
               resetExercise(exercise)
+          );
+        }
+
+        const resetIdentityButton =
+          exercise.querySelector(
+            "[data-pyodide-reset-identity]"
+          );
+
+        if (resetIdentityButton) {
+          resetIdentityButton.addEventListener(
+            "click",
+            resetStudentIdentity
           );
         }
 
