@@ -5,6 +5,7 @@ theme: just-the-docs
 url: "https://oop-ai26.github.io"
 baseurl: "/Praktikum-Gasal-2026"
 permalink: pretty
+timezone: Asia/Jakarta
 color_scheme: wider
 
 search_enabled: true
@@ -29,3 +30,9 @@ footer_content: "Object-Oriented Programming '26 - TAs"
 sass:
   quiet_deps: true
   silence_deprecations: [import]
+
+exclude:
+  - assignment/assignment1/studycase1/variants
+  - assignment/assignment1/studycase1/description.md
+  - assignment/assignment1/homework/variants
+  - assignment/assignment1/homework/description.md

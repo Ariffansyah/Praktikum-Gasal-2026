@@ -896,15 +896,178 @@
   }
 
 
-  function getUnlockDateForKelas(exercise, kelas) {
-    try {
-      const map = JSON.parse(
-        exercise.dataset.pyodideUnlockDates || "{}"
+  function resetExerciseState(exercise) {
+    const editor = exercise.querySelector(
+      "[data-pyodide-editor]"
+    );
+
+    if (!editor) {
+      return;
+    }
+
+    setSaveButtonVisible(exercise, false);
+    clearTestResults(exercise);
+    setOutput(exercise, "", "");
+    editor.value = getStarterCode(exercise);
+    updateEditorUI(exercise);
+  }
+
+
+  function switchClassVariant(exercise, classId) {
+    if (getSelectionMode(exercise) !== "kelas") {
+      return;
+    }
+
+    const option = getClassOption(exercise, classId);
+    if (!option) {
+      return;
+    }
+
+    if (
+      !isDebugExercise(exercise) &&
+      !isUnlockPassed(exercise, option.id)
+    ) {
+      setStatus(
+        exercise,
+        `Study case ${option.id} baru dibuka mulai ${formatUnlockAt(exercise, option.id)}.`,
+        "error"
       );
-      return map[kelas] || null;
+      return;
+    }
+
+    const variant = getVariantElements(exercise).find(
+      (item) =>
+        item.dataset.pyodideVariantId === option.variant_id
+    );
+
+    if (!variant) {
+      return;
+    }
+
+    exercise.dataset.pyodideStudentKelas = option.id;
+    setStudentKelasCookie(option.id);
+    applyVariant(exercise, variant);
+    resetExerciseState(exercise);
+    setStatus(
+      exercise,
+      `${option.title} dimuat. Mode kelas melewati input NIM dan lock waktu.`,
+      "success"
+    );
+  }
+
+
+  function getUnlockAtForKelas(exercise, kelas) {
+    try {
+      const parsed = JSON.parse(
+        exercise.dataset.pyodideUnlockAt || "{}"
+      );
+
+      if (typeof parsed === "string") {
+        return parsed;
+      }
+
+      return parsed[kelas] || null;
     } catch (error) {
       return null;
     }
+  }
+
+
+  function getSelectionMode(exercise) {
+    return String(
+      exercise.dataset.pyodideSelectionMode || "nim"
+    ).toLowerCase();
+  }
+
+
+
+  function getClassOptions(exercise) {
+    try {
+      const options = JSON.parse(
+        exercise.dataset.pyodideClassOptions || "[]"
+      );
+
+      return Array.isArray(options) ? options : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+
+  function getClassOption(exercise, classId) {
+    return getClassOptions(exercise).find(
+      (option) => option.id === classId
+    );
+  }
+
+
+  function parseZonedDateTime(value, timeZone) {
+    if (!value) {
+      return null;
+    }
+
+    const source = String(value).trim();
+
+    if (/[zZ]|[+-]\d{2}:?\d{2}$/.test(source)) {
+      const absolute = new Date(source);
+      return Number.isNaN(absolute.getTime()) ? null : absolute;
+    }
+
+    const match = source.match(
+      /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?$/
+    );
+
+    if (!match) {
+      return null;
+    }
+
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const hour = Number(match[4] || 0);
+    const minute = Number(match[5] || 0);
+    const second = Number(match[6] || 0);
+    const naiveUtc = Date.UTC(
+      year,
+      month - 1,
+      day,
+      hour,
+      minute,
+      second
+    );
+
+    if (timeZone !== "Asia/Jakarta") {
+      const fallback = new Date(`${source}Z`);
+      return Number.isNaN(fallback.getTime()) ? null : fallback;
+    }
+
+    return new Date(naiveUtc - (7 * 60 * 60 * 1000));
+  }
+
+
+  function isUnlockPassed(exercise, kelas) {
+    if (isDebugExercise(exercise)) {
+      return true;
+    }
+
+    const unlockAt = getUnlockAtForKelas(exercise, kelas);
+    const unlockDate = parseZonedDateTime(
+      unlockAt,
+      "Asia/Jakarta"
+    );
+
+    return !unlockDate || Date.now() >= unlockDate.getTime();
+  }
+
+
+  function formatUnlockAt(exercise, kelas) {
+    const unlockAt = getUnlockAtForKelas(exercise, kelas);
+
+    if (!unlockAt) {
+      return "waktu yang ditentukan";
+    }
+
+    return `${unlockAt} (Asia/Jakarta)`;
   }
 
 
@@ -1207,8 +1370,10 @@
 
     if (variantSelect) {
       variantSelect.value =
-        variant.dataset.pyodideVariantId ||
-        "";
+        getSelectionMode(exercise) === "kelas"
+          ? exercise.dataset.pyodideStudentKelas || ""
+          : variant.dataset.pyodideVariantId ||
+            "";
     }
 
     const title = exercise.querySelector(
@@ -1296,9 +1461,83 @@
       "false";
 
     let variant;
+    const selectionMode = getSelectionMode(exercise);
 
-    if (isDebugExercise(exercise)) {
+    if (isDebugExercise(exercise) && selectionMode === "kelas") {
+      const options = getClassOptions(exercise);
+      const option = options[0];
+      const classVariant = option && variants.find(
+        (item) =>
+          item.dataset.pyodideVariantId === option.variant_id
+      );
+
+      if (!option || !classVariant) {
+        setStatus(
+          exercise,
+          "Konfigurasi kelas study case tidak ditemukan.",
+          "error"
+        );
+        return false;
+      }
+
+      exercise.dataset.pyodideStudentKelas = option.id;
+      variant = classVariant;
+    } else if (isDebugExercise(exercise)) {
       variant = variants[0];
+    } else if (selectionMode === "kelas") {
+      const options = getClassOptions(exercise);
+      let selectedClass = getStudentKelasCookie();
+
+      if (!isValidStudentKelas(selectedClass)) {
+        const requestedKelas = window.prompt(
+          exercise.dataset.pyodideClassPrompt ||
+            "Masukkan kelas (2025A / 2025B / 2025C):",
+          ""
+        );
+
+        selectedClass = normalizeStudentKelas(requestedKelas);
+
+        if (!isValidStudentKelas(selectedClass)) {
+          setStatus(
+            exercise,
+            requestedKelas === null
+              ? "Pengisian kelas dibatalkan."
+              : "Kelas tidak valid. Gunakan 2025A, 2025B, atau 2025C.",
+            "error"
+          );
+          return false;
+        }
+
+        setStudentKelasCookie(selectedClass);
+      }
+
+      const option = getClassOption(exercise, selectedClass);
+      const classVariant = option && variants.find(
+        (item) =>
+          item.dataset.pyodideVariantId === option.variant_id
+      );
+
+      if (!option || !classVariant) {
+        setStatus(
+          exercise,
+          "Konfigurasi kelas study case tidak ditemukan.",
+          "error"
+        );
+        return false;
+      }
+
+      exercise.dataset.pyodideStudentKelas = option.id;
+      setStudentKelasCookie(option.id);
+      variant = classVariant;
+
+      if (!isUnlockPassed(exercise, option.id)) {
+        setStatus(
+          exercise,
+          `Study case ${option.id} baru dibuka mulai ${formatUnlockAt(exercise, option.id)}.`,
+          "error"
+        );
+        return false;
+      }
     } else {
       let nim = getStudentNimCookie();
 
@@ -1333,7 +1572,8 @@
 
       if (!isValidStudentKelas(kelas)) {
         const requestedKelas = window.prompt(
-          "Masukkan kelas (2025A / 2025B / 2025C):",
+          exercise.dataset.pyodideClassPrompt ||
+            "Masukkan kelas (2025A / 2025B / 2025C):",
           ""
         );
 
@@ -1358,15 +1598,10 @@
 
       exercise.dataset.pyodideStudentKelas = kelas;
 
-      const unlockDate = getUnlockDateForKelas(
-        exercise,
-        kelas
-      );
-
-      if (unlockDate && new Date() < new Date(`${unlockDate}T00:00:00`)) {
+      if (!isUnlockPassed(exercise, kelas)) {
         setStatus(
           exercise,
-          `Assignment ini baru dibuka mulai ${unlockDate} untuk kelas ${kelas}.`,
+          `Assignment ini baru dibuka mulai ${formatUnlockAt(exercise, kelas)} untuk kelas ${kelas}.`,
           "error"
         );
 
@@ -1385,7 +1620,9 @@
 
     setStatus(
       exercise,
-      isDebugExercise(exercise)
+      selectionMode === "kelas"
+        ? `Study case ${exercise.dataset.pyodideStudentKelas} dimuat.`
+        : isDebugExercise(exercise)
         ? "Mode debug: sub study case 1 dimuat."
         : "Sub study case berhasil dimuat.",
       "success"
@@ -2014,6 +2251,14 @@
           variantSelect.addEventListener(
             "change",
             (event) => {
+              if (getSelectionMode(exercise) === "kelas") {
+                switchClassVariant(
+                  exercise,
+                  event.target.value
+                );
+                return;
+              }
+
               switchDebugVariant(
                 exercise,
                 event.target.value

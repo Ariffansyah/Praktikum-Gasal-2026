@@ -8,7 +8,10 @@
 {% assign pyodide_debug = page.isdebug %}
 {% assign pyodide_assignment_id = page.assignment_id | default: include.id %}
 {% assign pyodide_variant_version = page.variant_version | default: 1 %}
-{% assign pyodide_unlock_dates = page.unlock_dates | jsonify %}
+{% assign pyodide_selection_mode = page.selection_mode | default: "nim" %}
+{% assign pyodide_class_prompt = page.class_prompt %}
+{% assign pyodide_unlock_at = page.unlock_at | jsonify %}
+{% assign pyodide_class_options = page.class_options | jsonify %}
 {% assign pyodide_starter_source = include.starter | default: "" %}
 {% assign pyodide_tests_source = include.tests | default: "" %}
 {% if pyodide_has_variants %}
@@ -18,21 +21,29 @@
 {% assign pyodide_starter_encoded = pyodide_starter_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
 {% assign pyodide_tests_encoded = pyodide_tests_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
 {% assign pyodide_body_text = page.body_text %}
-<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}" data-pyodide-unlock-dates="{{ pyodide_unlock_dates | escape }}">
+<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-selection-mode="{{ pyodide_selection_mode | escape }}" data-pyodide-class-prompt="{{ pyodide_class_prompt | escape }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}" data-pyodide-unlock-at="{{ pyodide_unlock_at | escape }}" data-pyodide-class-options="{{ pyodide_class_options | escape }}">
   {% if pyodide_body_text %}
     {% capture pyodide_body_html %}{{ pyodide_body_text | markdownify }}{% endcapture %}
     <div class="pyodide-gated-body" data-pyodide-gated-body hidden data-pyodide-gated-payload="{{ pyodide_body_html | base64_encode }}"></div>
   {% endif %}
 
-  {% if pyodide_has_variants and pyodide_debug %}
-    <div class="pyodide-debug-controls" data-pyodide-debug-controls>
-      <label class="pyodide-debug-controls__label" for="{{ include.id | escape }}-variant-select">Debug sub study case</label>
-      <select id="{{ include.id | escape }}-variant-select" class="pyodide-debug-controls__select" data-pyodide-variant-select aria-label="Pilih sub study case untuk debug">
-        {% for variant in pyodide_variants %}
-          <option value="{{ variant.id | escape }}">{{ variant.title | escape }}</option>
-        {% endfor %}
-      </select>
-    </div>
+  {% if pyodide_has_variants %}
+    {% if pyodide_debug %}
+      <div class="pyodide-debug-controls" data-pyodide-debug-controls>
+        <label class="pyodide-debug-controls__label" for="{{ include.id | escape }}-variant-select">{% if pyodide_selection_mode == "kelas" %}Pilih kelas{% else %}Debug sub study case{% endif %}</label>
+        <select id="{{ include.id | escape }}-variant-select" class="pyodide-debug-controls__select" data-pyodide-variant-select aria-label="{% if pyodide_selection_mode == "kelas" %}Pilih kelas{% else %}Pilih sub study case untuk debug{% endif %}">
+          {% if pyodide_selection_mode == "kelas" %}
+            {% for class_option in page.class_options %}
+              <option value="{{ class_option.id | escape }}">{{ class_option.title | escape }}</option>
+            {% endfor %}
+          {% else %}
+            {% for variant in pyodide_variants %}
+              <option value="{{ variant.id | escape }}">{{ variant.title | escape }}</option>
+            {% endfor %}
+          {% endif %}
+        </select>
+      </div>
+    {% endif %}
   {% endif %}
 
   <div class="pyodide-exercise__header">
@@ -50,9 +61,11 @@
     <div class="pyodide-exercise__prompt" data-pyodide-prompt>{{ include.prompt | escape }}</div>
   {% endif %}
 
-  {% if pyodide_has_variants %}
-    <button type="button" class="pyodide-exercise__reset" data-pyodide-reset-identity title="Hapus NIM dan kelas tersimpan, lalu muat ulang">Ganti NIM/Kelas</button>
-  {% endif %}
+  {% unless pyodide_debug %}
+    {% if pyodide_has_variants %}
+      <button type="button" class="pyodide-exercise__reset" data-pyodide-reset-identity title="Hapus identitas tersimpan, lalu muat ulang">{% if pyodide_selection_mode == "kelas" %}Ganti Kelas{% else %}Ganti NIM{% endif %}</button>
+    {% endif %}
+  {% endunless %}
 
   {% if pyodide_has_variants %}
     <div class="pyodide-variant-brief" data-pyodide-variant-brief hidden></div>
