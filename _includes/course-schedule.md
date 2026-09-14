@@ -4,7 +4,7 @@
 |:---|:---|:---|:---|:---|
 | Week 1 | Wed, 26 Aug (2025C, 2025A)<br>Fri, 28 Aug (2025B) | **Introduction to OOP concepts** ([pdf]({{ '/ppts/[2026_OOP] Pertemuan 1 - Pengantar OOP (1).pdf' | relative_url }})) | [Ch. 1]({{ '/readings-chapter1/' | relative_url }}) | - |
 | Week 2 | Wed, 2 Sep (2025C, 2025A)<br>Fri, 4 Sep (2025B) | **Property Visibility & Class Method** ([pdf]({{ '/ppts/[2026_OOP] Pertemuan 2 - Property Visibility & Class Method (1).pdf' | relative_url }})) | [Ch. 2]({{ '/readings-chapter2/' | relative_url }}) | - |
-| Week 3 | Wed, 16 Sep (2025C, 2025A)<br>Fri, 18 Sep (2025B) | **Encapsulation, visibility, properties, and attribute validation** (pdf) | [Ch. 3]({{ '/readings-chapter3/' | relative_url }}) | [Panduan Editor Python]({{ '/assignment/panduan-editor/' | relative_url }}), [Assignment 1]({{ '/assignment/assignment1/' | relative_url }}) |
+| Week 3 | Wed, 16 Sep (2025C, 2025A)<br>Fri, 18 Sep (2025B) | **Encapsulation, visibility, properties, and attribute validation** (pdf) | [Ch. 3]({{ '/readings-chapter3/' | relative_url }}) | [Panduan Editor Python]({{ '/assignment/panduan-editor/' | relative_url }}), [Assignment 1]({{ 'assignment1/studycase1/' | relative_url }}) |
 | Week 4 | Wed, 23 Sep (2025C, 2025A)<br>Fri, 25 Sep (2025B) | **Class methods, static methods, and decorators** (pdf) | Ch. 4 | # |
 | Week 5 | Wed, 30 Sep (2025C, 2025A)<br>Fri, 2 Oct (2025B) | **Inheritance, overriding, nested inheritance, and multiple inheritance** (pdf) | Ch. 5 | # |
 | Week 6 | Wed, 7 Oct (2025C, 2025A)<br>Fri, 9 Oct (2025B) | **Abstract methods, data classes, mutability, and typing styles** (pdf) | Ch. 6 | # |

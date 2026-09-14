@@ -4,7 +4,7 @@ layout: default
 parent: Assignment
 printtitle: Study Case 1 - Peminjaman Buku Perpustakaan
 nav_order: 2
-tampil: false
+tampil: true
 isdebug: true
 assignment_id: assignment1-kelas-a
 variant_version: 1
@@ -1307,3 +1307,5 @@ Soal ini tetap menggunakan satu topik besar, yaitu pengelolaan buku perpustakaan
 Setelah sub study case dipilih, detail tugas dan starter code akan muncul pada playground di bawah. Lengkapi bagian `TODO`, lalu tekan **Run Tests** untuk menjalankan tujuh test case variant kamu.
 
 {% include pyodide-exercise.html id="assignment1-kelas-a" title="Memuat sub study case..." prompt="Masukkan NIM untuk memuat sub study case." %}
+
+Setelah mengerjakan tugas, semua mahasiswa diharapkan bisa mengisi survey [ini](https://forms.gle/BvBZVUGsP5BBaHxy9), cuma 3 pertanyaan kok
