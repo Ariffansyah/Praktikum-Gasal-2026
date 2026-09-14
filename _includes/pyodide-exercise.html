@@ -8,6 +8,7 @@
 {% assign pyodide_debug = page.isdebug %}
 {% assign pyodide_assignment_id = page.assignment_id | default: include.id %}
 {% assign pyodide_variant_version = page.variant_version | default: 1 %}
+{% assign pyodide_unlock_dates = page.unlock_dates | jsonify %}
 {% assign pyodide_starter_source = include.starter | default: "" %}
 {% assign pyodide_tests_source = include.tests | default: "" %}
 {% if pyodide_has_variants %}
@@ -16,7 +17,13 @@
 {% endif %}
 {% assign pyodide_starter_encoded = pyodide_starter_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
 {% assign pyodide_tests_encoded = pyodide_tests_source | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
-<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}">
+{% assign pyodide_body_text = page.body_text %}
+<section class="pyodide-exercise" data-pyodide-exercise data-pyodide-debug="{{ pyodide_debug }}" data-pyodide-assignment-id="{{ pyodide_assignment_id | escape }}" data-pyodide-variant-version="{{ pyodide_variant_version }}" data-pyodide-starter="{{ pyodide_starter_encoded | escape }}" data-pyodide-tests="{{ pyodide_tests_encoded | escape }}" data-pyodide-unlock-dates="{{ pyodide_unlock_dates | escape }}">
+  {% if pyodide_body_text %}
+    {% capture pyodide_body_html %}{{ pyodide_body_text | markdownify }}{% endcapture %}
+    <div class="pyodide-gated-body" data-pyodide-gated-body hidden data-pyodide-gated-payload="{{ pyodide_body_html | base64_encode }}"></div>
+  {% endif %}
+
   {% if pyodide_has_variants and pyodide_debug %}
     <div class="pyodide-debug-controls" data-pyodide-debug-controls>
       <label class="pyodide-debug-controls__label" for="{{ include.id | escape }}-variant-select">Debug sub study case</label>
@@ -41,6 +48,10 @@
 
   {% if include.prompt %}
     <div class="pyodide-exercise__prompt" data-pyodide-prompt>{{ include.prompt | escape }}</div>
+  {% endif %}
+
+  {% if pyodide_has_variants %}
+    <button type="button" class="pyodide-exercise__reset" data-pyodide-reset-identity title="Hapus NIM dan kelas tersimpan, lalu muat ulang">Ganti NIM/Kelas</button>
   {% endif %}
 
   {% if pyodide_has_variants %}
@@ -114,7 +125,8 @@
         {% assign variant_starter_encoded = variant.starter | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
         {% assign variant_tests_encoded = variant.tests | default: "" | replace: pyodide_real_newline, "\n" | replace: " ", "\s" %}
         {% assign variant_prompt_encoded = variant.prompt | default: "" | replace: pyodide_real_newline, "\n" %}
-        <div data-pyodide-variant data-pyodide-variant-id="{{ variant.id }}" data-pyodide-variant-title="{{ variant.title | escape }}" data-pyodide-variant-brief="{{ variant.brief | escape }}" data-pyodide-variant-prompt="{{ variant_prompt_encoded | escape }}" data-pyodide-variant-starter="{{ variant_starter_encoded | escape }}" data-pyodide-variant-tests="{{ variant_tests_encoded | escape }}"></div>
+        {% capture variant_payload_json %}{"title":{{ variant.title | default: "" | jsonify }},"brief":{{ variant.brief | default: "" | jsonify }},"prompt":{{ variant_prompt_encoded | jsonify }},"starter":{{ variant_starter_encoded | jsonify }},"tests":{{ variant_tests_encoded | jsonify }}}{% endcapture %}
+        <div data-pyodide-variant data-pyodide-variant-id="{{ variant.id }}" data-pyodide-variant-payload="{{ variant_payload_json | base64_encode }}"></div>
       {% endfor %}
     </div>
   {% endif %}
