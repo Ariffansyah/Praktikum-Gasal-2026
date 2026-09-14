@@ -1,12 +1,12 @@
 ---
-title: Study Case Kelas A
+title: Study Case 1
 layout: default
-parent: Assignment 1
+parent: Assignment
 grand_parent: Assignment
-printtitle: Study Case Kelas A (Assignment 1) - Peminjaman Buku Perpustakaan
-nav_order: 1
+printtitle: Study Case 1 - Peminjaman Buku Perpustakaan
+nav_order: 2
 tampil: true
-isdebug: true
+isdebug: false
 assignment_id: assignment1-kelas-a
 variant_version: 1
 variants:
