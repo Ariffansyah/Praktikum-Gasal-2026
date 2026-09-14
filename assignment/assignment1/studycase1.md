@@ -2,7 +2,6 @@
 title: Study Case 1
 layout: default
 parent: Assignment
-grand_parent: Assignment
 printtitle: Study Case 1 - Peminjaman Buku Perpustakaan
 nav_order: 2
 tampil: true
