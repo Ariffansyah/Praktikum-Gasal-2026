@@ -7,6 +7,7 @@ nav_order: 3
 ---
 
 #### Tabel Riwayat Revisi
+
 | Versi | Tanggal           | Page         |
 | ----- | ----------------- | ------------ |
 | 1.0   | 14 September 2026 | **Page ini** |
