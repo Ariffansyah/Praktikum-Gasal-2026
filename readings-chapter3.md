@@ -6,6 +6,11 @@ printtitle: Modul 3 - Visibility Property, Encapsulation dan Validasi Data
 nav_order: 3
 ---
 
+#### Tabel Riwayat Revisi
+| Versi | Tanggal | Page |
+|---|---|---|
+| 1.2 | 14 September 2026 | **Page ini** |
+
 # MODUL 3
 
 ## VISIBILITY PROPERTY, ENCAPSULATION, DAN VALIDASI DATA
