@@ -1068,7 +1068,7 @@ variants:
 
       - `genre_valid(genre)` adalah instance method yang mengembalikan boolean berdasarkan daftar genre valid.
       - `ubah_genre(genre_baru)` memeriksa `genre_valid(genre_baru)`, lalu mengubah property `genre` jika valid. Return `True` jika berhasil dan `False` jika invalid. Genre lama harus tetap tersimpan jika gagal.
-      - `hitung_usia(tahun_sekarang)` mengembalikan `tahun_sekarang - tahun_terbit`. Jika tahun sekarang lebih kecil dari tahun terbit, kembalikan `-1` dan set status `"Tidak Valid"`.
+      - `hitung_usia(tahun_sekarang)` mengembalikan `tahun_sekarang - tahun_terbit`. Jika tahun sekarang lebih kecil dari tahun terbit, hasilnya akan negatif dan status harus menjadi `"Tidak Valid"`.
       - Jika usia 0 sampai 5, status `"Baru"`; usia 6 sampai 20, `"Menengah"`; usia lebih dari 20, `"Lama"`.
       - `status_usia()` mengembalikan protected state `_status_usia`.
 
