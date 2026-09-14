@@ -53,23 +53,6 @@ variants:
       - ISBN Valid
       - Total Buku
 
-      Contoh Input
-
-      ```text
-      Laskar_Pelangi Andrea_Hirata 2005 3 9786020000001
-      ```
-
-      Contoh Output
-
-      ```text
-      Judul        : Laskar Pelangi
-      Penulis      : Andrea Hirata
-      Tahun Terbit : 2005
-      Stok Tersisa : 2
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
-      ```
 
       Tabel Uji
 
@@ -1308,7 +1291,7 @@ variants:
       Unduhan Class: 6
 ---
 
-# Study Case Kelas A (Assignment 1): Peminjaman Buku Perpustakaan
+# (Assignment 1): Peminjaman Buku Perpustakaan
 
 **Tingkat:** Easy
 
