@@ -1,17 +1,14 @@
 ---
-title: Chapter 3
+title: Chapter 3 - v01
 layout: default
-parent: Readings
 printtitle: Modul 3 - Visibility Property, Encapsulation dan Validasi Data
-nav_order: 3
 ---
 
 #### Tabel Riwayat Revisi
 
 | Versi | Tanggal           | Page         |
 | ----- | ----------------- | ------------ |
-| 1.1   | 14 September 2026 | **Page ini** |
-| 1.0   | 14 September 2026 |  [Ch. 3]({{ '/readings-chapter3old/' | relative_url }}) |
+| 1.0   | 14 September 2026 | **Page ini** |
 
 
 
@@ -168,8 +165,36 @@ Secara konseptual, hasilnya memiliki key yang menyerupai berikut:
 
 Name mangling membantu mencegah subclass secara tidak sengaja menggunakan nama attribute internal yang sama. Name mangling bukan pengamanan mutlak karena nama hasil mangling masih dapat ditemukan jika seseorang sengaja memeriksa struktur object.
 
+### 2. Name mangling pada inheritance
 
-### 2. Dunder method bukan private property
+Name mangling berguna ketika parent class dan child class memiliki attribute internal dengan nama yang sama.
+
+```python
+class Akun:
+    def __init__(self):
+        self.__kode = "kode-akun"
+
+    def tampilkan_kode(self):
+        return self.__kode
+
+
+class AkunKhusus(Akun):
+    def __init__(self):
+        super().__init__()
+        self.__kode = "kode-khusus"
+
+    def tampilkan_kode_khusus(self):
+        return self.__kode
+
+akun = AkunKhusus()
+print(akun.tampilkan_kode())
+print(akun.tampilkan_kode_khusus())
+```
+
+
+`__kode` pada `Akun` dan `__kode` pada `AkunKhusus` tidak menjadi attribute yang sama. Python menyimpannya dengan nama mangling berdasarkan class yang mendefinisikannya.
+
+### 3. Dunder method bukan private property
 
 Nama seperti `__init__` dan `__str__` memiliki dua underscore di awal dan akhir. Nama tersebut disebut dunder method atau special method. Nama dengan dua underscore di awal dan dua underscore di akhir tidak diproses seperti private property biasa.
 
