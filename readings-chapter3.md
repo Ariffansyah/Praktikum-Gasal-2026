@@ -11,7 +11,7 @@ nav_order: 3
 | Versi | Tanggal           | Page         |
 | ----- | ----------------- | ------------ |
 | 1.1   | 14 September 2026 | **Page ini** |
-| 1.0   | 14 September 2026 |  [Ch. 3]({{ '/readings-chapter3old/' | relative_url }}) |
+| 1.0   | 14 September 2026 |  [Ch. 3]({{ '/old/readings-chapter3old/' | relative_url }}) |
 
 
 

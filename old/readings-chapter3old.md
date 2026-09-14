@@ -1,6 +1,5 @@
 ---
 title: Chapter 3 - v01
-layout: default
 printtitle: Modul 3 - Visibility Property, Encapsulation dan Validasi Data
 ---
 
