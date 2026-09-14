@@ -4,8 +4,8 @@ layout: default
 parent: Assignment
 printtitle: Study Case 1 - Peminjaman Buku Perpustakaan
 nav_order: 2
-tampil: true
-isdebug: false
+tampil: false
+isdebug: true
 assignment_id: assignment1-kelas-a
 variant_version: 1
 variants:
