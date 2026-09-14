@@ -7,74 +7,90 @@ nav_order: 2
 tampil: false
 isdebug: false
 assignment_id: assignment1-kelas-a
-variant_version: 1
+variant_version: 2
 variants:
   - id: v1
-    title: Variant 1 - Peminjaman dan Validasi ISBN
-    brief: >-
-      Input: judul, penulis, tahun terbit, stok, dan ISBN. Output: data buku,
-      stok setelah satu kali peminjaman, status peminjaman, validitas ISBN,
-      dan total_buku.
+    title: Variant 1 - Peminjaman dan Pengembalian Buku
+    brief: |
+      Modelkan stok buku yang dapat dipinjam dan dikembalikan. Kamu akan mengelola dua perubahan state dalam satu object.
     prompt: |
-      Ketentuan Class
+      Tugas
 
-      Buat class `Buku` dengan:
-      - `total_buku = 0` sebagai attribute class untuk mencatat jumlah object `Buku` yang dibuat.
-      - `judul`, `penulis`, dan `tahun_terbit` sebagai attribute public.
-      - `_status_pinjam` sebagai attribute protected dengan nilai awal `False`.
-      - `__stok` sebagai attribute private yang diakses melalui property `stok`.
-      - Constructor `__init__(self, judul, penulis, tahun_terbit, stok=1)` sesuai signature pada starter code.
+      Implementasikan class `Buku` untuk memodelkan proses peminjaman dan pengembalian buku. Satu input akan membuat satu object, menjalankan satu percobaan peminjaman, lalu menjalankan satu percobaan pengembalian.
 
-      Property `stok` harus menyediakan akses untuk membaca dan mengubah stok. Nilai stok tidak boleh negatif. Nilai negatif harus menghasilkan `ValueError("Stok tidak boleh negatif.")`.
+      1. Tujuan Pembelajaran
 
-      Method `pinjam()` harus merepresentasikan satu proses peminjaman. Jika stok tersedia, proses berhasil dan kondisi buku mencerminkan bahwa satu stok telah dipinjam. Jika stok tidak tersedia, proses tidak berhasil dan kondisi buku tidak berubah. Method mengembalikan `True` atau `False` sesuai hasil proses.
+      Terapkan class attribute, instance attribute, public attribute, protected attribute, private attribute dengan name mangling, property getter/setter, dan instance method.
 
-      Static method `validasi_isbn(isbn)` menentukan validitas ISBN berdasarkan panjangnya. ISBN dengan panjang 10 atau 13 karakter dianggap valid, sedangkan panjang lainnya dianggap tidak valid.
+      2. Spesifikasi Class
 
-      Program Utama
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, penulis, stok=1)`.
 
-      Program utama membaca satu data buku, membuat object `Buku`, melakukan satu kali peminjaman, dan melakukan validasi ISBN. Bagian input dan output sudah tersedia pada starter code.
+      - `total_buku = 0` adalah class attribute. Tambahkan tepat satu setiap object `Buku` dibuat.
+      - `batas_peminjaman = 3` adalah class attribute. Satu pemanggilan `pinjam` tidak boleh memproses lebih dari batas ini.
+      - `judul` dan `penulis` adalah public instance attribute.
+      - `_status` dan `_jumlah_dipinjam` adalah protected instance attribute.
+      - `__stok` adalah private instance attribute. Jangan menyimpan stok langsung pada `self.stok` tanpa property.
 
-      Format Input
+      3. Property `stok`
 
-      Satu baris dengan format:
-      `judul penulis tahun_terbit stok isbn`
+      Buat getter dan setter `stok`.
 
-      Judul dan penulis yang terdiri dari beberapa kata menggunakan underscore (`_`) sebagai pengganti spasi. Starter code menangani perubahan tersebut.
+      - Stok harus berupa bilangan bulat yang tidak negatif.
+      - Setter harus menghasilkan `ValueError("Stok tidak boleh negatif.")` jika nilai kurang dari nol.
+      - Method lain harus mengubah stok melalui property `stok`.
+      - Di dalam class, private attribute diakses sebagai `self.__stok`. Python akan melakukan name mangling terhadap nama tersebut.
 
-      Format Output
+      4. Method
 
-      Output terdiri dari tujuh baris dengan label dan format yang sudah tersedia pada starter code:
-      - Judul
-      - Penulis
-      - Tahun Terbit
-      - Stok Tersisa
-      - Status Pinjam
-      - ISBN Valid
-      - Total Buku
+      Buat instance method berikut.
 
+      - `pinjam(jumlah)` mengembalikan `True` jika `jumlah` lebih dari nol, tidak lebih besar dari stok, dan tidak lebih besar dari `batas_peminjaman`. Jika berhasil, kurangi stok dan tambah `_jumlah_dipinjam`. Jika gagal, kembalikan `False` tanpa mengubah state.
+      - `kembalikan(jumlah)` mengembalikan `True` jika `jumlah` lebih dari nol dan tidak lebih besar dari `_jumlah_dipinjam`. Jika berhasil, tambah stok dan kurangi `_jumlah_dipinjam`. Jika gagal, kembalikan `False` tanpa mengubah state.
+      - `status()` mengembalikan `"Dipinjam"` jika masih ada buku yang sedang dipinjam, dan `"Tersedia"` jika tidak ada.
+      - `jumlah_dipinjam()` mengembalikan jumlah buku yang sedang dipinjam.
 
-      Tabel Uji
+      Status harus diperbarui setelah operasi yang berhasil. Operasi pengembalian tidak boleh mengembalikan buku yang belum dipinjam.
 
-      Test case mencakup kondisi stok tersedia dan kosong, stok awal satu atau lebih, serta ISBN dengan panjang valid dan tidak valid. Hasil yang diperiksa meliputi stok akhir, status peminjaman, validitas ISBN, dan jumlah object yang tercatat.
+      5. Program Utama
 
-      Coba Kerangka Kode
+      Jangan mengubah bagian program utama pada starter code.
 
-      Lengkapi bagian class `Buku` yang bertanda `TODO`. Bagian input dan pencetakan output sudah disediakan. Pertahankan nama attribute, signature method, dan format output karena hasil program dibandingkan dengan test case.
+      Format Input:
+      `judul penulis stok jumlah_pinjam jumlah_kembali`
 
-      *Catatan:* fokus tugas adalah penerapan class attribute, visibility attribute, property getter/setter, instance method, dan static method.
+      `judul` dan `penulis` menggunakan underscore sebagai pengganti spasi. Program utama sudah mengubah underscore menjadi spasi.
+
+      Format Output harus tepat delapan baris sesuai starter code:
+      `Judul`, `Penulis`, `Stok Tersisa`, `Jumlah Dipinjam`, `Pinjam Berhasil`, `Kembali Berhasil`, `Status`, dan `Total Buku`.
+
+      6. Constraints
+
+      - `stok`, `jumlah_pinjam`, dan `jumlah_kembali` dibaca sebagai integer.
+      - Nilai jumlah operasi dapat nol atau negatif. Tangani nilai tersebut dengan mengembalikan `False`, bukan dengan mengubah state.
+      - Jangan menambahkan print lain karena output dibandingkan secara tepat.
+      - Jangan mengganti nama class, attribute, property, method, signature, atau format output.
+
+      7. Checklist sebelum Run Tests
+
+      - Class attribute `total_buku` berubah pada tingkat class, bukan hanya pada object.
+      - `__stok` benar-benar private dan diakses melalui property.
+      - Kegagalan peminjaman dan pengembalian tidak mengubah state.
+      - Dua operasi diproses berurutan pada object yang sama.
+      - Semua output memiliki label dan kapitalisasi yang sama dengan starter code.
 
     starter: |
       class Buku:
           total_buku = 0
+          batas_peminjaman = 3
 
-          def __init__(self, judul, penulis, tahun_terbit, stok=1):
+          def __init__(self, judul, penulis, stok=1):
               self.judul = judul
               self.penulis = penulis
-              self.tahun_terbit = tahun_terbit
-              self._status_pinjam = False
-              # TODO: tambah Buku.total_buku sebanyak 1
-              # TODO: isi stok lewat property (bukan langsung ke __stok)
+              self._status = "Tersedia"
+              self._jumlah_dipinjam = 0
+              Buku.total_buku += 1
+              self.stok = stok
 
           @property
           def stok(self):
@@ -83,165 +99,209 @@ variants:
 
           @stok.setter
           def stok(self, nilai):
-              # TODO: validasi nilai >= 0, lalu simpan ke __stok
+              # TODO: validasi stok tidak negatif, lalu simpan ke __stok
               pass
 
-          def pinjam(self):
-              # TODO: kurangi stok jika tersedia, set status, return True/False
+          def pinjam(self, jumlah):
+              # TODO: ubah state jika jumlah valid dan stok mencukupi
               pass
 
-          @staticmethod
-          def validasi_isbn(isbn):
-              # TODO: True jika panjang isbn 10 atau 13
+          def kembalikan(self, jumlah):
+              # TODO: kembalikan buku yang sedang dipinjam
+              pass
+
+          def status(self):
+              # TODO: kembalikan status buku
+              pass
+
+          def jumlah_dipinjam(self):
+              # TODO: kembalikan jumlah buku yang sedang dipinjam
               pass
 
 
-      judul, penulis, tahun_terbit, stok, isbn = input().split()
-      buku = Buku(judul.replace("_", " "), penulis.replace("_", " "), int(tahun_terbit), int(stok))
-      hasil_pinjam = buku.pinjam()
-      isbn_valid = Buku.validasi_isbn(isbn)
+      judul, penulis, stok, jumlah_pinjam, jumlah_kembali = input().split()
+      buku = Buku(judul.replace("_", " "), penulis.replace("_", " "), int(stok))
+      berhasil_pinjam = buku.pinjam(int(jumlah_pinjam))
+      berhasil_kembali = buku.kembalikan(int(jumlah_kembali))
 
-      print(f"{'Judul':<13}: {buku.judul}")
-      print(f"{'Penulis':<13}: {buku.penulis}")
-      print(f"{'Tahun Terbit':<13}: {buku.tahun_terbit}")
-      print(f"{'Stok Tersisa':<13}: {buku.stok}")
-      print(f"{'Status Pinjam':<13}: {'Dipinjam' if hasil_pinjam else 'Tidak Dipinjam'}")
-      print(f"{'ISBN Valid':<13}: {isbn_valid}")
-      print(f"{'Total Buku':<13}: {Buku.total_buku}")
+      print(f"Judul: {buku.judul}")
+      print(f"Penulis: {buku.penulis}")
+      print(f"Stok Tersisa: {buku.stok}")
+      print(f"Jumlah Dipinjam: {buku.jumlah_dipinjam()}")
+      print(f"Pinjam Berhasil: {berhasil_pinjam}")
+      print(f"Kembali Berhasil: {berhasil_kembali}")
+      print(f"Status: {buku.status()}")
+      print(f"Total Buku: {Buku.total_buku}")
     tests: |
-      Laskar_Pelangi Andrea_Hirata 2005 3 9786020000001
+      Laskar_Pelangi Andrea_Hirata 3 2 1
       @@OUTPUT@@
-      Judul        : Laskar Pelangi
-      Penulis      : Andrea Hirata
-      Tahun Terbit : 2005
-      Stok Tersisa : 2
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
+      Judul: Laskar Pelangi
+      Penulis: Andrea Hirata
+      Stok Tersisa: 2
+      Jumlah Dipinjam: 1
+      Pinjam Berhasil: True
+      Kembali Berhasil: True
+      Status: Dipinjam
+      Total Buku: 1
       @@CASE@@
-      Bumi_Manusia Pramoedya_Ananta_Toer 1980 0 12345
+      Bumi_Manusia Pramoedya 0 1 0
       @@OUTPUT@@
-      Judul        : Bumi Manusia
-      Penulis      : Pramoedya Ananta Toer
-      Tahun Terbit : 1980
-      Stok Tersisa : 0
-      Status Pinjam: Tidak Dipinjam
-      ISBN Valid   : False
-      Total Buku   : 1
+      Judul: Bumi Manusia
+      Penulis: Pramoedya
+      Stok Tersisa: 0
+      Jumlah Dipinjam: 0
+      Pinjam Berhasil: False
+      Kembali Berhasil: False
+      Status: Tersedia
+      Total Buku: 1
       @@CASE@@
-      Negeri_5_Menara Ahmad_Fuadi 2009 1 9786020000
+      Negeri_5_Menara Ahmad_Fuadi 1 1 1
       @@OUTPUT@@
-      Judul        : Negeri 5 Menara
-      Penulis      : Ahmad Fuadi
-      Tahun Terbit : 2009
-      Stok Tersisa : 0
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
+      Judul: Negeri 5 Menara
+      Penulis: Ahmad Fuadi
+      Stok Tersisa: 1
+      Jumlah Dipinjam: 0
+      Pinjam Berhasil: True
+      Kembali Berhasil: True
+      Status: Tersedia
+      Total Buku: 1
       @@CASE@@
-      Laut_Bercerita Leila_S_Chudori 2017 5 9786024246940
+      Laut_Bercerita Leila_S_Chudori 5 0 3
       @@OUTPUT@@
-      Judul        : Laut Bercerita
-      Penulis      : Leila S Chudori
-      Tahun Terbit : 2017
-      Stok Tersisa : 4
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
+      Judul: Laut Bercerita
+      Penulis: Leila S Chudori
+      Stok Tersisa: 5
+      Jumlah Dipinjam: 0
+      Pinjam Berhasil: False
+      Kembali Berhasil: False
+      Status: Tersedia
+      Total Buku: 1
       @@CASE@@
-      Ronggeng_Dukuh_Paruk Ahmad_Tohari 1982 1 1234567890
+      Ronggeng_Dukuh_Paruk Ahmad_Tohari 2 3 0
       @@OUTPUT@@
-      Judul        : Ronggeng Dukuh Paruk
-      Penulis      : Ahmad Tohari
-      Tahun Terbit : 1982
-      Stok Tersisa : 0
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
+      Judul: Ronggeng Dukuh Paruk
+      Penulis: Ahmad Tohari
+      Stok Tersisa: 2
+      Jumlah Dipinjam: 0
+      Pinjam Berhasil: False
+      Kembali Berhasil: False
+      Status: Tersedia
+      Total Buku: 1
       @@CASE@@
-      Cantik_Itu_Luka Eka_Kurniawan 2002 0 123456789012
+      Cantik_Itu_Luka Eka_Kurniawan 4 2 5
       @@OUTPUT@@
-      Judul        : Cantik Itu Luka
-      Penulis      : Eka Kurniawan
-      Tahun Terbit : 2002
-      Stok Tersisa : 0
-      Status Pinjam: Tidak Dipinjam
-      ISBN Valid   : False
-      Total Buku   : 1
+      Judul: Cantik Itu Luka
+      Penulis: Eka Kurniawan
+      Stok Tersisa: 2
+      Jumlah Dipinjam: 2
+      Pinjam Berhasil: True
+      Kembali Berhasil: False
+      Status: Dipinjam
+      Total Buku: 1
       @@CASE@@
-      Perahu_Kertas Dee_Lestari 2009 2 9786022916629
+      Perahu_Kertas Dee_Lestari 2 -1 1
       @@OUTPUT@@
-      Judul        : Perahu Kertas
-      Penulis      : Dee Lestari
-      Tahun Terbit : 2009
-      Stok Tersisa : 1
-      Status Pinjam: Dipinjam
-      ISBN Valid   : True
-      Total Buku   : 1
+      Judul: Perahu Kertas
+      Penulis: Dee Lestari
+      Stok Tersisa: 2
+      Jumlah Dipinjam: 0
+      Pinjam Berhasil: False
+      Kembali Berhasil: False
+      Status: Tersedia
+      Total Buku: 1
+      @@CASE@@
+      Buku_Pulang Rani 6 3 1
+      @@OUTPUT@@
+      Judul: Buku Pulang
+      Penulis: Rani
+      Stok Tersisa: 4
+      Jumlah Dipinjam: 2
+      Pinjam Berhasil: True
+      Kembali Berhasil: True
+      Status: Dipinjam
+      Total Buku: 1
 
   - id: v2
-    title: Variant 2 - Katalog Buku dan Validasi Rak
-    brief: >-
-      Input: judul, kategori, halaman, rak, tambahan halaman, dan kode rak.
-      Output: data katalog, jumlah halaman setelah penambahan, validitas kode
-      rak, dan total_koleksi.
+    title: Variant 2 - Progress Membaca Buku
+    brief: |
+      Modelkan halaman, progress membaca, dan status bacaan. Satu object menerima satu pembaruan progress melalui property yang tervalidasi.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelola data katalog perpustakaan. Object harus menyimpan informasi buku dan lokasi rak, memiliki jumlah halaman yang dapat diperbarui, serta menyediakan pemeriksaan terhadap kode rak.
+      Implementasikan class `Buku` untuk mengelola progress membaca sebuah buku. Program membuat satu object, mencoba menambah progress membaca, lalu menghitung sisa halaman.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `total_koleksi = 0` merupakan attribute class yang mencatat jumlah object `Buku` yang dibuat.
+      Gunakan class attribute, instance attribute, protected state, private state, property dengan validasi, dan instance method yang mengubah state secara terkontrol.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul`, `kategori`, dan `rak` merupakan attribute public.
-      - Jumlah halaman disimpan pada attribute private `__halaman`.
-      - Akses terhadap jumlah halaman dilakukan melalui property `halaman`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, kategori, halaman, progres_awal=0)`.
 
-      3. Constructor `__init__(self, judul, kategori, halaman, rak="Umum")`
+      - `total_koleksi = 0` adalah class attribute. Tambahkan satu saat object dibuat.
+      - `maksimal_progress = 100` adalah class attribute.
+      - `judul` dan `kategori` adalah public instance attribute.
+      - `_status` adalah protected instance attribute.
+      - `__halaman` dan `__progres` adalah private instance attribute.
 
-      Constructor harus mengikuti signature dan nilai default yang tersedia pada starter code. Data buku dan nilai awal jumlah halaman harus dapat digunakan oleh bagian program utama setelah object dibuat.
+      3. Property dan Validasi
 
-      4. Property `halaman`
+      Buat getter dan setter untuk `halaman` dan `progres`.
 
-      Property `halaman` harus menyediakan getter dan setter.
+      - `halaman` harus berupa bilangan bulat minimal 1. Nilai kurang dari 1 menghasilkan `ValueError("Jumlah halaman minimal 1.")`.
+      - `progres` harus berada pada rentang 0 sampai 100, termasuk kedua batas. Nilai di luar rentang menghasilkan `ValueError("Progress harus berada pada rentang 0 sampai 100.")`.
+      - Gunakan `self.__halaman` dan `self.__progres` di dalam property. Nama private tersebut mengalami name mangling.
+      - Constructor harus mengisi nilai melalui property, bukan menulis langsung ke private attribute.
 
-      Jumlah halaman yang valid adalah bilangan minimal `1`. Nilai kurang dari `1` harus menghasilkan `ValueError`.
+      4. Method
 
-      5. Method `tambah_halaman(jumlah)`
+      Buat instance method berikut.
 
-      Method menerima sejumlah halaman dan memperbarui jumlah halaman buku sesuai nilai tersebut. Setelah method dipanggil, property `halaman` harus merepresentasikan jumlah halaman terbaru.
+      - `baca(persen)` menambah progress sebesar `persen`. Jika `persen` kurang dari atau sama dengan nol, atau progress baru lebih dari 100, kembalikan `False` tanpa mengubah progress. Jika valid, simpan progress baru melalui property dan kembalikan `True`.
+      - Jika `baca` berhasil, set `_status` menjadi `"Selesai"` ketika progress 100, atau `"Dibaca"` ketika progress kurang dari 100.
+      - `halaman_tersisa()` mengembalikan `halaman * (100 - progres) // 100`.
+      - `status()` mengembalikan nilai `_status`. Progress awal 0 berarti `"Belum Dibaca"`, progress awal 100 berarti `"Selesai"`, dan progress awal di antaranya berarti `"Dibaca"`.
 
-      6. Static method `kode_rak_valid(kode)`
+      5. Program Utama
 
-      Method menentukan validitas kode rak. Kode dianggap valid apabila memiliki awalan `RA` dan diikuti tepat dua digit angka. Format lain dianggap tidak valid.
+      Format Input:
+      `judul kategori halaman progres_awal tambahan_progress`
 
-      7. Program utama dan output
+      Program utama sudah mengubah underscore pada judul menjadi spasi. Jangan mengubah urutan operasi atau format output.
 
-      Program utama membaca judul, kategori, jumlah halaman, rak, tambahan halaman, dan kode rak. Object dibuat dan proses penambahan halaman dilakukan satu kali.
+      Format Output harus tepat tujuh baris: `Judul`, `Kategori`, `Halaman`, `Progres`, `Status`, `Halaman Tersisa`, dan `Total Koleksi`.
 
-      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah nama method, attribute, atau format output.
+      6. Constraints dan Aturan
 
-      Checklist sebelum Run Tests
+      - Semua nilai numerik pada input dibaca sebagai integer.
+      - Kegagalan update harus mengembalikan `False`, bukan membuat program berhenti.
+      - Jangan menambahkan print atau mengubah label output.
+      - Jangan menggunakan inheritance, classmethod, staticmethod, atau library tambahan.
 
-      - Jumlah object tercatat pada `total_koleksi`.
-      - Jumlah halaman memenuhi aturan validasi.
-      - Property `halaman` dapat membaca dan mengubah nilai halaman.
-      - `tambah_halaman()` menghasilkan jumlah halaman sesuai data yang diberikan.
-      - `kode_rak_valid()` membedakan kode rak valid dan tidak valid.
-      - Format output tetap sesuai starter code.
+      7. Checklist sebelum Run Tests
+
+      - Ada dua private attribute yang diakses melalui property.
+      - Setter memvalidasi nilai sebelum menyimpannya.
+      - `baca` memproses progress melalui property.
+      - Progress yang gagal tidak mengubah progress sebelumnya.
+      - Perhitungan halaman tersisa menggunakan pembagian bulat `//`.
+
     starter: |
       class Buku:
           total_koleksi = 0
+          maksimal_progress = 100
 
-          def __init__(self, judul, kategori, halaman, rak="Umum"):
+          def __init__(self, judul, kategori, halaman, progres_awal=0):
               self.judul = judul
               self.kategori = kategori
-              self.rak = rak
+              self._status = "Belum Dibaca"
               Buku.total_koleksi += 1
               self.halaman = halaman
+              self.progres = progres_awal
+              if self.progres == 100:
+                  self._status = "Selesai"
+              elif self.progres > 0:
+                  self._status = "Dibaca"
 
           @property
           def halaman(self):
@@ -250,155 +310,199 @@ variants:
 
           @halaman.setter
           def halaman(self, nilai):
-              # TODO: raise ValueError jika nilai < 1, lalu simpan
+              # TODO: validasi halaman minimal 1
               pass
 
-          def tambah_halaman(self, jumlah):
-              # TODO: tambahkan jumlah ke halaman melalui property
+          @property
+          def progres(self):
+              # TODO: kembalikan __progres
               pass
 
-          @staticmethod
-          def kode_rak_valid(kode):
-              # TODO: True jika kode diawali RA dan diikuti dua angka
+          @progres.setter
+          def progres(self, nilai):
+              # TODO: validasi 0 sampai 100
+              pass
+
+          def baca(self, persen):
+              # TODO: tambah progress melalui property dan perbarui status
+              pass
+
+          def halaman_tersisa(self):
+              # TODO: hitung halaman yang belum dibaca
+              pass
+
+          def status(self):
+              # TODO: kembalikan status
               pass
 
 
-      judul, kategori, halaman, rak, tambahan, kode = input().split()
-      buku = Buku(judul.replace("_", " "), kategori, int(halaman), rak)
-      buku.tambah_halaman(int(tambahan))
+      judul, kategori, halaman, progres_awal, tambahan = input().split()
+      buku = Buku(judul.replace("_", " "), kategori, int(halaman), int(progres_awal))
+      berhasil = buku.baca(int(tambahan))
 
       print(f"Judul: {buku.judul}")
       print(f"Kategori: {buku.kategori}")
-      print(f"Rak: {buku.rak}")
-      print(f"Jumlah Halaman: {buku.halaman}")
-      print(f"Rak Valid: {Buku.kode_rak_valid(kode)}")
+      print(f"Halaman: {buku.halaman}")
+      print(f"Progres: {buku.progres}")
+      print(f"Status: {buku.status()}")
+      print(f"Halaman Tersisa: {buku.halaman_tersisa()}")
       print(f"Total Koleksi: {Buku.total_koleksi}")
     tests: |
-      Laut_Senja Novel 120 RA01 15 RA01
+      Laut_Senja Novel 200 0 25
       @@OUTPUT@@
       Judul: Laut Senja
       Kategori: Novel
-      Rak: RA01
-      Jumlah Halaman: 135
-      Rak Valid: True
+      Halaman: 200
+      Progres: 25
+      Status: Dibaca
+      Halaman Tersisa: 150
       Total Koleksi: 1
       @@CASE@@
-      Jejak_Hujan Puisi 88 RA12 0 RA12
+      Jejak_Hujan Puisi 100 75 25
       @@OUTPUT@@
       Judul: Jejak Hujan
       Kategori: Puisi
-      Rak: RA12
-      Jumlah Halaman: 88
-      Rak Valid: True
+      Halaman: 100
+      Progres: 100
+      Status: Selesai
+      Halaman Tersisa: 0
       Total Koleksi: 1
       @@CASE@@
-      Kota_Lama Sejarah 200 RB03 25 BX03
-      @@OUTPUT@@
-      Judul: Kota Lama
-      Kategori: Sejarah
-      Rak: RB03
-      Jumlah Halaman: 225
-      Rak Valid: False
-      Total Koleksi: 1
-      @@CASE@@
-      Ruang_Biru Fiksi 1 RA99 4 RA99
+      Ruang_Biru Fiksi 1 99 1
       @@OUTPUT@@
       Judul: Ruang Biru
       Kategori: Fiksi
-      Rak: RA99
-      Jumlah Halaman: 5
-      Rak Valid: True
+      Halaman: 1
+      Progres: 100
+      Status: Selesai
+      Halaman Tersisa: 0
       Total Koleksi: 1
       @@CASE@@
-      Peta_Waktu Referensi 350 RA10 50 RA10
+      Peta_Waktu Referensi 80 100 10
       @@OUTPUT@@
       Judul: Peta Waktu
       Kategori: Referensi
-      Rak: RA10
-      Jumlah Halaman: 400
-      Rak Valid: True
+      Halaman: 80
+      Progres: 100
+      Status: Selesai
+      Halaman Tersisa: 0
       Total Koleksi: 1
       @@CASE@@
-      Taman_Rahasia Novel 75 RA07 10 RA7
+      Taman_Rahasia Novel 50 0 0
       @@OUTPUT@@
       Judul: Taman Rahasia
       Kategori: Novel
-      Rak: RA07
-      Jumlah Halaman: 85
-      Rak Valid: False
+      Halaman: 50
+      Progres: 0
+      Status: Belum Dibaca
+      Halaman Tersisa: 50
       Total Koleksi: 1
       @@CASE@@
-      Nada_Malam Puisi 42 RA02 8 ZZ02
+      Nada_Malam Puisi 120 40 70
       @@OUTPUT@@
       Judul: Nada Malam
       Kategori: Puisi
-      Rak: RA02
-      Jumlah Halaman: 50
-      Rak Valid: False
+      Halaman: 120
+      Progres: 40
+      Status: Dibaca
+      Halaman Tersisa: 72
+      Total Koleksi: 1
+      @@CASE@@
+      Buku_Kecil Fiksi 300 20 -5
+      @@OUTPUT@@
+      Judul: Buku Kecil
+      Kategori: Fiksi
+      Halaman: 300
+      Progres: 20
+      Status: Dibaca
+      Halaman Tersisa: 240
+      Total Koleksi: 1
+      @@CASE@@
+      Modul_Akhir Referensi 10 50 50
+      @@OUTPUT@@
+      Judul: Modul Akhir
+      Kategori: Referensi
+      Halaman: 10
+      Progres: 100
+      Status: Selesai
+      Halaman Tersisa: 0
       Total Koleksi: 1
 
   - id: v3
-    title: Variant 3 - Pengembalian Buku dan Denda
-    brief: >-
-      Input: judul, tahun terbit, dan jumlah hari terlambat. Output: data
-      pengembalian, jumlah hari terlambat, denda, validitas tahun, dan
-      total_pengembalian.
+    title: Variant 3 - Pengembalian dan Denda
+    brief: |
+      Modelkan pengembalian buku, denda keterlambatan, pembayaran sebagian, dan validasi tahun terbit pada satu object.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk merepresentasikan proses pengembalian buku dan perhitungan denda berdasarkan keterlambatan.
+      Implementasikan class `Buku` untuk mengelola pengembalian buku dan denda. Program akan mencatat satu proses pengembalian, menerima satu pembayaran, lalu menampilkan status pembayaran.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `denda_harian = 2000` merupakan tarif denda yang berlaku pada class.
+      Terapkan class attribute, public attribute, protected attribute, private attribute, read-only property, property setter, dan beberapa instance method yang bekerja pada state object yang sama.
+
+      2. Spesifikasi Class
+
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, tahun_terbit)`.
+
+      - `tarif_denda = 2000` adalah class attribute dalam rupiah per hari.
       - `total_pengembalian = 0` mencatat jumlah pengembalian yang berhasil dicatat.
+      - `judul` dan `tahun_terbit` adalah public instance attribute.
+      - `_status` adalah protected instance attribute.
+      - `__hari_terlambat` dan `__dibayar` adalah private instance attribute.
 
-      2. Attribute object
+      3. Property dan Encapsulation
 
-      - `judul` dan `tahun_terbit` merupakan attribute public.
-      - Jumlah hari keterlambatan disimpan pada attribute private `__hari_terlambat`.
+      Buat property `hari_terlambat` dengan getter dan setter.
 
-      3. Property `hari_terlambat`
+      - Hari terlambat harus bilangan bulat tidak negatif.
+      - Nilai negatif harus menghasilkan `ValueError("Hari terlambat tidak boleh negatif.")`.
+      - Buat property read-only `dibayar` untuk membaca jumlah pembayaran. Tidak perlu membuat setter untuk `dibayar`.
+      - Akses private attribute harus menggunakan `self.__hari_terlambat` dan `self.__dibayar` di dalam class. Nama tersebut mengalami name mangling.
 
-      Sediakan getter dan setter untuk `hari_terlambat`.
+      4. Method
 
-      Jumlah hari keterlambatan tidak boleh negatif. Nilai negatif harus menghasilkan `ValueError`.
+      - `catat_pengembalian(hari)` mencoba mengisi property `hari_terlambat`. Jika valid, kosongkan pembayaran sebelumnya, tambah `Buku.total_pengembalian` satu, atur status awal, dan kembalikan `True`. Jika invalid, kembalikan `False` tanpa menambah counter.
+      - `hitung_denda()` mengembalikan `hari_terlambat * Buku.tarif_denda`.
+      - `bayar(jumlah)` menerima jumlah pembayaran nol atau lebih. Tolak pembayaran jika jumlah negatif atau total pembayaran baru melebihi denda. Saat ditolak, state pembayaran tidak berubah. Status menjadi `"Lunas"`, `"Sebagian"`, atau `"Belum Lunas"`.
+      - `tahun_valid()` mengembalikan `True` jika tahun terbit berada pada rentang 1900 sampai 2026, termasuk batasnya.
+      - `status()` mengembalikan nilai protected `_status`.
 
-      4. Method `hitung_denda()`
+      5. Program Utama
 
-      Method menghasilkan denda berdasarkan jumlah hari keterlambatan dan tarif denda harian yang berlaku.
+      Format Input:
+      `judul tahun_terbit hari_terlambat jumlah_bayar`
 
-      5. Method `catat_pengembalian(hari)`
+      Program utama sudah membuat object, memanggil `catat_pengembalian`, lalu memanggil `bayar`. Jangan mengubah urutan tersebut.
 
-      Method menerima jumlah hari keterlambatan dan mencatat proses pengembalian tersebut. Setelah proses berhasil dicatat, jumlah pengembalian pada tingkat class bertambah dan method menghasilkan nilai denda yang sesuai.
+      Format Output harus tepat delapan baris: `Judul`, `Tahun Terbit`, `Hari Terlambat`, `Denda`, `Dibayar`, `Status`, `Tahun Valid`, dan `Total Pengembalian`.
 
-      6. Static method `validasi_tahun(tahun)`
+      6. Constraints dan Aturan
 
-      Tahun dianggap valid apabila berada pada rentang `1900` sampai `2026`, termasuk kedua batas. Method mengembalikan boolean.
+      - Tahun, hari, dan pembayaran dibaca sebagai integer.
+      - Pembayaran sebagian diperbolehkan selama tidak melebihi denda.
+      - Jika pencatatan pengembalian gagal, hari terlambat tetap 0 dan counter tidak bertambah.
+      - Jangan menambahkan print, inheritance, classmethod, staticmethod, atau library tambahan.
 
-      7. Program utama
+      7. Checklist sebelum Run Tests
 
-      Program utama membaca judul, tahun terbit, dan jumlah hari keterlambatan. Object dibuat dan proses pengembalian dilakukan satu kali.
+      - Tarif dan counter disimpan sebagai class attribute.
+      - Denda dihitung dari state object, bukan dari input secara langsung di program utama.
+      - Setter property dipakai untuk validasi hari terlambat.
+      - Pembayaran yang ditolak tidak mengubah `dibayar`.
+      - Status pembayaran mencerminkan state terakhir.
 
-      Bagian input dan output sudah disediakan pada starter code. Jangan mengubah format output.
-
-      Checklist sebelum Run Tests
-
-      - Tarif denda tersedia pada tingkat class.
-      - Hari keterlambatan tidak dapat bernilai negatif.
-      - Denda sesuai dengan keterlambatan.
-      - Pengembalian yang berhasil tercatat pada `total_pengembalian`.
-      - Validasi tahun menghasilkan boolean sesuai rentang yang ditentukan.
-      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
-          denda_harian = 2000
+          tarif_denda = 2000
           total_pengembalian = 0
 
           def __init__(self, judul, tahun_terbit):
               self.judul = judul
               self.tahun_terbit = tahun_terbit
+              self._status = "Belum Lunas"
               self.__hari_terlambat = 0
+              self.__dibayar = 0
 
           @property
           def hari_terlambat(self):
@@ -407,155 +511,201 @@ variants:
 
           @hari_terlambat.setter
           def hari_terlambat(self, nilai):
-              # TODO: nilai tidak boleh negatif
+              # TODO: validasi hari tidak negatif
               pass
 
-          def hitung_denda(self):
-              # TODO: kembalikan hari_terlambat * denda_harian
+          @property
+          def dibayar(self):
+              # TODO: kembalikan __dibayar
               pass
 
           def catat_pengembalian(self, hari):
-              # TODO: isi property, tambah total_pengembalian, return denda
+              # TODO: isi property, reset pembayaran, dan tambah counter jika valid
               pass
 
-          @staticmethod
-          def validasi_tahun(tahun):
-              # TODO: True jika tahun berada pada rentang 1900 sampai 2026
+          def hitung_denda(self):
+              # TODO: kembalikan denda berdasarkan tarif class
+              pass
+
+          def bayar(self, jumlah):
+              # TODO: tolak jumlah invalid atau melebihi denda
+              pass
+
+          def tahun_valid(self):
+              # TODO: validasi tahun 1900 sampai 2026
+              pass
+
+          def status(self):
+              # TODO: kembalikan status pembayaran
               pass
 
 
-      judul, tahun, hari = input().split()
+      judul, tahun, hari, bayar = input().split()
       buku = Buku(judul.replace("_", " "), int(tahun))
-      denda = buku.catat_pengembalian(int(hari))
+      berhasil_kembali = buku.catat_pengembalian(int(hari))
+      berhasil_bayar = buku.bayar(int(bayar))
 
       print(f"Judul: {buku.judul}")
       print(f"Tahun Terbit: {buku.tahun_terbit}")
       print(f"Hari Terlambat: {buku.hari_terlambat}")
-      print(f"Denda: {denda}")
-      print(f"Tahun Valid: {Buku.validasi_tahun(buku.tahun_terbit)}")
+      print(f"Denda: {buku.hitung_denda()}")
+      print(f"Dibayar: {buku.dibayar}")
+      print(f"Status: {buku.status()}")
+      print(f"Tahun Valid: {buku.tahun_valid()}")
       print(f"Total Pengembalian: {Buku.total_pengembalian}")
     tests: |
-      Novel_A 2020 3
+      Novel_A 2020 3 6000
       @@OUTPUT@@
       Judul: Novel A
       Tahun Terbit: 2020
       Hari Terlambat: 3
       Denda: 6000
+      Dibayar: 6000
+      Status: Lunas
       Tahun Valid: True
       Total Pengembalian: 1
       @@CASE@@
-      Buku_Lama 1899 0
+      Buku_Lama 1899 0 0
       @@OUTPUT@@
       Judul: Buku Lama
       Tahun Terbit: 1899
       Hari Terlambat: 0
       Denda: 0
+      Dibayar: 0
+      Status: Lunas
       Tahun Valid: False
       Total Pengembalian: 1
       @@CASE@@
-      Cerita_Kota 2005 7
+      Cerita_Kota 2005 7 10000
       @@OUTPUT@@
       Judul: Cerita Kota
       Tahun Terbit: 2005
       Hari Terlambat: 7
       Denda: 14000
+      Dibayar: 10000
+      Status: Sebagian
       Tahun Valid: True
       Total Pengembalian: 1
       @@CASE@@
-      Dasar_Python 2026 1
+      Dasar_Python 2026 1 2500
       @@OUTPUT@@
       Judul: Dasar Python
       Tahun Terbit: 2026
       Hari Terlambat: 1
       Denda: 2000
+      Dibayar: 0
+      Status: Belum Lunas
       Tahun Valid: True
       Total Pengembalian: 1
       @@CASE@@
-      Arsip_Nusantara 1890 12
+      Arsip_Nusantara 1890 12 -1
       @@OUTPUT@@
       Judul: Arsip Nusantara
       Tahun Terbit: 1890
       Hari Terlambat: 12
       Denda: 24000
+      Dibayar: 0
+      Status: Belum Lunas
       Tahun Valid: False
       Total Pengembalian: 1
       @@CASE@@
-      Langit_Sore 1999 0
+      Langit_Sore 1999 -2 0
       @@OUTPUT@@
       Judul: Langit Sore
       Tahun Terbit: 1999
       Hari Terlambat: 0
       Denda: 0
+      Dibayar: 0
+      Status: Lunas
       Tahun Valid: True
-      Total Pengembalian: 1
+      Total Pengembalian: 0
       @@CASE@@
-      Jejak_Waktu 2027 20
+      Jejak_Waktu 2027 20 40000
       @@OUTPUT@@
       Judul: Jejak Waktu
       Tahun Terbit: 2027
       Hari Terlambat: 20
       Denda: 40000
+      Dibayar: 40000
+      Status: Lunas
       Tahun Valid: False
+      Total Pengembalian: 1
+      @@CASE@@
+      Buku_Terlambat 2020 5 5000
+      @@OUTPUT@@
+      Judul: Buku Terlambat
+      Tahun Terbit: 2020
+      Hari Terlambat: 5
+      Denda: 10000
+      Dibayar: 5000
+      Status: Sebagian
+      Tahun Valid: True
       Total Pengembalian: 1
 
   - id: v4
     title: Variant 4 - Reservasi Buku
-    brief: >-
-      Input: judul, kode peminjam, reservasi awal, tambahan reservasi, dan
-      kode validasi. Output: jumlah reservasi, keberhasilan pengajuan,
-      validitas kode peminjam, dan total_reservasi.
+    brief: |
+      Modelkan kapasitas reservasi, pembatalan reservasi, status object, dan validasi kode peminjam melalui instance method.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelola reservasi buku. Object harus menyimpan informasi buku dan peminjam, membatasi jumlah reservasi, serta menyediakan validasi kode peminjam.
+      Implementasikan class `Buku` untuk mengelola reservasi buku. Satu object menerima satu pengajuan reservasi dan satu pembatalan secara berurutan.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `maksimal_reservasi = 5` merupakan batas jumlah reservasi.
-      - `total_reservasi = 0` mencatat jumlah pengajuan reservasi yang diproses.
+      Terapkan class attribute, instance attribute public, protected state, private state, property validation, name mangling, dan instance method untuk mengendalikan perubahan state.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul` dan `peminjam` merupakan attribute public.
-      - `_status` merupakan attribute protected dengan nilai awal `"tersedia"`.
-      - Jumlah reservasi disimpan pada attribute private `__reservasi`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, peminjam, reservasi_awal=0)`.
 
-      3. Constructor `__init__(self, judul, peminjam, reservasi_awal=0)`
+      - `maksimal_reservasi = 5` adalah class attribute.
+      - `total_reservasi = 0` adalah class attribute. Tambahkan satu untuk setiap pemanggilan `ajukan`, termasuk pengajuan yang ditolak.
+      - `judul` dan `peminjam` adalah public instance attribute.
+      - `_status` adalah protected instance attribute.
+      - `__reservasi` adalah private instance attribute.
 
-      Constructor harus mengikuti signature dan nilai default pada starter code. Object harus dapat dibuat dengan jumlah reservasi awal yang diberikan.
+      3. Property `reservasi`
 
-      4. Property `reservasi`
+      Buat getter dan setter `reservasi`.
 
-      Property harus menyediakan getter dan setter.
+      - Nilai harus berada pada rentang 0 sampai `maksimal_reservasi`, termasuk batas.
+      - Nilai di luar rentang menghasilkan `ValueError("Reservasi harus berada pada rentang 0 sampai 5.")`.
+      - Gunakan `self.__reservasi` di dalam property. Jangan mengakses name-mangled `_Buku__reservasi` dari program utama.
 
-      Jumlah reservasi yang valid berada pada rentang `0` sampai `maksimal_reservasi`, termasuk kedua batas. Nilai di luar rentang tersebut harus menghasilkan `ValueError`.
+      4. Method
 
-      5. Method `ajukan_reservasi(jumlah)`
+      - `ajukan(jumlah)` menaikkan reservasi jika `jumlah` lebih dari nol dan hasil akhirnya tidak melebihi kapasitas. Return `True` jika berhasil dan `False` jika ditolak. State lama harus dipertahankan ketika ditolak.
+      - `batalkan(jumlah)` menurunkan reservasi jika `jumlah` lebih dari nol dan tidak melebihi reservasi saat ini. Return `True` jika berhasil dan `False` jika ditolak.
+      - `kode_peminjam_valid(kode)` mengembalikan `True` jika kode diawali `M` dan diikuti tepat enam digit. Selain itu `False`.
+      - `status()` mengembalikan `"Aktif"` jika reservasi lebih dari 0 dan `"Kosong"` jika reservasi 0.
 
-      Method menerima jumlah reservasi yang diajukan.
+      Semua perubahan reservasi harus melewati property. Program utama tidak boleh mengubah private attribute secara langsung.
 
-      Pengajuan hanya berhasil apabila hasil akhirnya tidak melebihi kapasitas reservasi dan jumlah yang diajukan tidak negatif. Jika pengajuan tidak dapat dilakukan, jumlah reservasi sebelumnya tetap dipertahankan.
+      5. Program Utama
 
-      Method mengembalikan `True` ketika pengajuan berhasil dan `False` ketika pengajuan ditolak. Setiap pengajuan yang diproses dihitung pada `total_reservasi`.
+      Format Input:
+      `judul peminjam reservasi_awal jumlah_ajukan jumlah_batal kode_uji`
 
-      6. Static method `kode_peminjam_valid(kode)`
+      `judul` menggunakan underscore sebagai pengganti spasi. Peminjam hanya label public dan tidak perlu divalidasi.
 
-      Kode peminjam dianggap valid apabila diawali huruf `M` dan diikuti tepat enam digit angka. Method mengembalikan boolean.
+      Format Output harus tepat tujuh baris: `Judul`, `Peminjam`, `Reservasi`, `Ajukan Berhasil`, `Batal Berhasil`, `Kode Valid`, dan `Total Reservasi`.
 
-      7. Program utama dan output
+      6. Constraints dan Aturan
 
-      Program utama membaca judul, peminjam, reservasi awal, jumlah tambahan, dan kode validasi. Object dibuat dan satu kali pengajuan reservasi dilakukan.
+      - Semua nilai jumlah dibaca sebagai integer.
+      - `jumlah_ajukan` dan `jumlah_batal` dapat nol atau negatif.
+      - Counter `total_reservasi` bertambah tepat satu karena program utama memanggil `ajukan` tepat satu kali.
+      - Jangan menambahkan print atau memakai inheritance, classmethod, staticmethod, dan library tambahan.
 
-      Bagian input dan output sudah disediakan pada starter code. Jangan mengubah format output.
+      7. Checklist sebelum Run Tests
 
-      Checklist sebelum Run Tests
+      - Constructor memvalidasi `reservasi_awal` melalui property.
+      - Pengajuan yang melebihi kapasitas tidak mengubah nilai reservasi.
+      - Pembatalan diproses setelah pengajuan pada object yang sama.
+      - Validasi kode adalah instance method, bukan static method.
+      - Label output sama persis dengan starter code.
 
-      - Kapasitas reservasi mengikuti batas yang ditentukan.
-      - Nilai reservasi tidak dapat berada di luar rentang yang diperbolehkan.
-      - Pengajuan yang melebihi kapasitas ditolak tanpa mengubah reservasi.
-      - `total_reservasi` mencatat pengajuan yang diproses.
-      - Kode peminjam divalidasi sesuai pola yang ditentukan.
-      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           maksimal_reservasi = 5
@@ -564,8 +714,10 @@ variants:
           def __init__(self, judul, peminjam, reservasi_awal=0):
               self.judul = judul
               self.peminjam = peminjam
-              self._status = "tersedia"
+              self._status = "Kosong"
               self.reservasi = reservasi_awal
+              if self.reservasi > 0:
+                  self._status = "Aktif"
 
           @property
           def reservasi(self):
@@ -574,157 +726,193 @@ variants:
 
           @reservasi.setter
           def reservasi(self, nilai):
-              # TODO: validasi 0 <= nilai <= maksimal_reservasi
+              # TODO: validasi 0 sampai maksimal_reservasi
               pass
 
-          def ajukan_reservasi(self, jumlah):
-              # TODO: tambah reservasi jika masih cukup, return True/False
+          def ajukan(self, jumlah):
+              # TODO: tambah reservasi jika masih cukup
               pass
 
-          @staticmethod
-          def kode_peminjam_valid(kode):
-              # TODO: True jika diawali M dan diikuti enam angka
+          def batalkan(self, jumlah):
+              # TODO: kurangi reservasi jika jumlah valid
+              pass
+
+          def kode_peminjam_valid(self, kode):
+              # TODO: True jika kode M dan enam digit
+              pass
+
+          def status(self):
+              # TODO: kembalikan status reservasi
               pass
 
 
-      judul, peminjam, awal, tambahan, kode = input().split()
+      judul, peminjam, awal, tambahan, batal, kode = input().split()
       buku = Buku(judul.replace("_", " "), peminjam, int(awal))
-      berhasil = buku.ajukan_reservasi(int(tambahan))
+      berhasil_ajukan = buku.ajukan(int(tambahan))
+      berhasil_batal = buku.batalkan(int(batal))
 
       print(f"Judul: {buku.judul}")
       print(f"Peminjam: {buku.peminjam}")
       print(f"Reservasi: {buku.reservasi}")
-      print(f"Berhasil: {berhasil}")
-      print(f"Kode Valid: {Buku.kode_peminjam_valid(kode)}")
+      print(f"Ajukan Berhasil: {berhasil_ajukan}")
+      print(f"Batal Berhasil: {berhasil_batal}")
+      print(f"Kode Valid: {buku.kode_peminjam_valid(kode)}")
       print(f"Total Reservasi: {Buku.total_reservasi}")
     tests: |
-      Buku_Awal MhsA 1 2 M123456
+      Buku_Awal MhsA 1 2 1 M123456
       @@OUTPUT@@
       Judul: Buku Awal
       Peminjam: MhsA
-      Reservasi: 3
-      Berhasil: True
+      Reservasi: 2
+      Ajukan Berhasil: True
+      Batal Berhasil: True
       Kode Valid: True
       Total Reservasi: 1
       @@CASE@@
-      Buku_Baru MhsB 4 2 M234567
+      Buku_Baru MhsB 4 2 1 M234567
       @@OUTPUT@@
       Judul: Buku Baru
       Peminjam: MhsB
-      Reservasi: 4
-      Berhasil: False
+      Reservasi: 3
+      Ajukan Berhasil: False
+      Batal Berhasil: True
       Kode Valid: True
       Total Reservasi: 1
       @@CASE@@
-      Cerita_Lama MhsC 0 5 M345678
+      Cerita_Lama MhsC 0 5 0 M345678
       @@OUTPUT@@
       Judul: Cerita Lama
       Peminjam: MhsC
       Reservasi: 5
-      Berhasil: True
+      Ajukan Berhasil: True
+      Batal Berhasil: False
       Kode Valid: True
       Total Reservasi: 1
       @@CASE@@
-      Peta_Kota MhsD 2 0 X456789
+      Peta_Kota MhsD 5 1 5 X456789
       @@OUTPUT@@
       Judul: Peta Kota
       Peminjam: MhsD
-      Reservasi: 2
-      Berhasil: True
+      Reservasi: 0
+      Ajukan Berhasil: False
+      Batal Berhasil: True
       Kode Valid: False
       Total Reservasi: 1
       @@CASE@@
-      Arsip_Baru MhsE 5 1 M567890
+      Arsip_Baru MhsE 2 0 1 M567890
       @@OUTPUT@@
       Judul: Arsip Baru
       Peminjam: MhsE
-      Reservasi: 5
-      Berhasil: False
+      Reservasi: 1
+      Ajukan Berhasil: False
+      Batal Berhasil: True
       Kode Valid: True
       Total Reservasi: 1
       @@CASE@@
-      Novel_Pagi MhsF 3 1 M678901
+      Novel_Pagi MhsF 0 6 1 M678901
       @@OUTPUT@@
       Judul: Novel Pagi
       Peminjam: MhsF
-      Reservasi: 4
-      Berhasil: True
+      Reservasi: 0
+      Ajukan Berhasil: False
+      Batal Berhasil: False
       Kode Valid: True
       Total Reservasi: 1
       @@CASE@@
-      Buku_Senja MhsG 0 0 M12345
+      Buku_Senja MhsG 3 2 5 M12345
       @@OUTPUT@@
       Judul: Buku Senja
       Peminjam: MhsG
       Reservasi: 0
-      Berhasil: True
+      Ajukan Berhasil: True
+      Batal Berhasil: True
       Kode Valid: False
+      Total Reservasi: 1
+      @@CASE@@
+      Ruang_Baca MhsH 1 -1 1 M999999
+      @@OUTPUT@@
+      Judul: Ruang Baca
+      Peminjam: MhsH
+      Reservasi: 0
+      Ajukan Berhasil: False
+      Batal Berhasil: True
+      Kode Valid: True
       Total Reservasi: 1
 
   - id: v5
-    title: Variant 5 - Ulasan dan Rating Buku
-    brief: >-
-      Input: judul, penulis, rating awal, rating baru, dan rating untuk
-      validasi. Output: rating akhir, keberhasilan perubahan, validitas
-      rating, dan total_ulasan.
+    title: Variant 5 - Rating dan Ulasan Buku
+    brief: |
+      Modelkan rating buku dengan batas 0 sampai 5, kategori rating, dan counter ulasan pada tingkat class.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelola rating buku dari pembaca. Object harus menyimpan informasi buku dan rating, membatasi nilai rating, serta menyediakan pemeriksaan rating secara terpisah dari object.
+      Implementasikan class `Buku` untuk mengelola rating sebuah buku. Object memiliki rating awal, menerima satu rating baru, lalu menentukan kategori rating.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `total_ulasan = 0` merupakan attribute class yang mencatat jumlah pemanggilan proses pemberian rating.
+      Gunakan class attribute, public attribute, protected attribute, private attribute, property setter, property getter, dan instance method untuk validasi serta perubahan state.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul` dan `penulis` merupakan attribute public.
-      - Rating disimpan pada attribute private `__rating`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, penulis, rating_awal=0)`.
 
-      3. Constructor `__init__(self, judul, penulis, rating_awal=0)`
+      - `total_ulasan = 0` adalah class attribute. Tambahkan satu pada setiap pemanggilan `beri_rating`, termasuk nilai yang ditolak.
+      - `batas_rating = 5` adalah class attribute.
+      - `judul` dan `penulis` adalah public instance attribute.
+      - `_status` adalah protected instance attribute.
+      - `__rating` adalah private instance attribute.
 
-      Constructor harus mengikuti signature dan nilai default pada starter code. Rating awal harus mengikuti aturan validasi rating.
+      3. Property `rating`
 
-      4. Property `rating`
+      Buat getter dan setter `rating`.
 
-      Property `rating` harus menyediakan getter dan setter.
+      - Rating valid berada pada rentang 0 sampai 5, termasuk batas.
+      - Nilai di luar rentang menghasilkan `ValueError("Rating harus berada pada rentang 0 sampai 5.")`.
+      - Nilai rating boleh berupa integer atau float.
+      - Gunakan `self.__rating` melalui property. Jangan mengubah rating langsung dari program utama.
 
-      Rating valid berada pada rentang `0` sampai `5`, termasuk kedua batas. Nilai di luar rentang tersebut harus menghasilkan `ValueError`.
+      4. Method
 
-      5. Method `beri_rating(nilai)`
+      - `rating_valid(nilai)` mengembalikan boolean berdasarkan rentang rating. Method ini harus berupa instance method.
+      - `beri_rating(nilai)` menaikkan `Buku.total_ulasan` tepat satu, memeriksa nilai dengan `rating_valid`, lalu menyimpan nilai melalui property jika valid. Return `True` jika valid dan `False` jika invalid. Saat invalid, rating lama tetap dipertahankan.
+      - `kategori_rating()` mengembalikan `"Belum Dinilai"` untuk rating 0, `"Rendah"` untuk rating lebih dari 0 sampai kurang dari 2, `"Sedang"` untuk rating 2 sampai kurang dari 4, dan `"Tinggi"` untuk rating 4 sampai 5.
+      - `status()` mengembalikan `_status`. Setelah rating baru berhasil, `_status` harus sama dengan kategori rating terbaru.
 
-      Method menerima rating baru.
+      5. Program Utama
 
-      Jika nilai valid, rating buku diperbarui dan method mengembalikan `True`. Jika nilai tidak valid, rating sebelumnya tetap dipertahankan dan method mengembalikan `False`.
+      Format Input:
+      `judul penulis rating_awal rating_baru rating_uji`
 
-      Setiap pemanggilan method dihitung sebagai satu ulasan.
+      Program utama sudah mengubah underscore pada judul menjadi spasi dan mengubah tiga nilai rating menjadi float.
 
-      6. Static method `rating_valid(nilai)`
+      Format Output harus tepat tujuh baris: `Judul`, `Penulis`, `Rating`, `Berhasil`, `Kategori`, `Rating Uji Valid`, dan `Total Ulasan`.
 
-      Method menentukan apakah nilai yang diberikan berada pada rentang `0` sampai `5`. Hasilnya berupa `True` atau `False`.
+      6. Constraints dan Aturan
 
-      7. Program utama dan output
+      - Nilai 0 dan 5 adalah batas valid.
+      - Jangan membulatkan rating.
+      - Rating invalid tidak boleh mengubah nilai lama.
+      - Jangan menambahkan print atau memakai inheritance, classmethod, staticmethod, dan library tambahan.
 
-      Program utama membaca judul, penulis, rating awal, rating baru, dan nilai untuk validasi rating. Object dibuat dan proses pemberian rating dilakukan satu kali.
+      7. Checklist sebelum Run Tests
 
-      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
+      - `total_ulasan` diakses melalui nama class.
+      - Setter property menjadi satu-satunya jalur penyimpanan rating.
+      - `beri_rating` memeriksa nilai sebelum menulis melalui property.
+      - Kategori ditentukan dari rating yang benar-benar tersimpan.
+      - Semua angka float dicetak dengan format Python standar.
 
-      Checklist sebelum Run Tests
-
-      - Rating mengikuti batas valid yang ditentukan.
-      - Rating invalid tidak menghilangkan rating sebelumnya.
-      - `beri_rating()` menghasilkan status keberhasilan yang sesuai.
-      - Setiap proses pemberian rating tercatat pada `total_ulasan`.
-      - `rating_valid()` menghasilkan boolean yang benar.
-      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           total_ulasan = 0
+          batas_rating = 5
 
           def __init__(self, judul, penulis, rating_awal=0):
               self.judul = judul
               self.penulis = penulis
+              self._status = "Belum Dinilai"
               self.rating = rating_awal
+              self._status = self.kategori_rating()
 
           @property
           def rating(self):
@@ -733,28 +921,36 @@ variants:
 
           @rating.setter
           def rating(self, nilai):
-              # TODO: validasi 0 <= nilai <= 5
+              # TODO: validasi 0 sampai 5, lalu simpan ke __rating
+              pass
+
+          def rating_valid(self, nilai):
+              # TODO: kembalikan True jika nilai berada pada rentang valid
               pass
 
           def beri_rating(self, nilai):
-              # TODO: isi rating melalui property, tambah total_ulasan
+              # TODO: tambah counter, simpan jika valid, dan perbarui status
               pass
 
-          @staticmethod
-          def rating_valid(nilai):
-              # TODO: True jika nilai berada pada rentang 0 sampai 5
+          def kategori_rating(self):
+              # TODO: kembalikan kategori berdasarkan rating
+              pass
+
+          def status(self):
+              # TODO: kembalikan status rating
               pass
 
 
-      judul, penulis, awal, baru, kode = input().split()
-      buku = Buku(judul.replace("_", " "), penulis.replace("_", " "), float(awal))
+      judul, penulis, awal, baru, uji = input().split()
+      buku = Buku(judul.replace("_", " "), penulis, float(awal))
       berhasil = buku.beri_rating(float(baru))
 
       print(f"Judul: {buku.judul}")
       print(f"Penulis: {buku.penulis}")
       print(f"Rating: {buku.rating}")
       print(f"Berhasil: {berhasil}")
-      print(f"Rating Kode Valid: {Buku.rating_valid(float(kode))}")
+      print(f"Kategori: {buku.kategori_rating()}")
+      print(f"Rating Uji Valid: {buku.rating_valid(float(uji))}")
       print(f"Total Ulasan: {Buku.total_ulasan}")
     tests: |
       Senja_Terakhir Rani 3.5 4.5 4.5
@@ -763,7 +959,8 @@ variants:
       Penulis: Rani
       Rating: 4.5
       Berhasil: True
-      Rating Kode Valid: True
+      Kategori: Tinggi
+      Rating Uji Valid: True
       Total Ulasan: 1
       @@CASE@@
       Kota_Dalam Bima 2 5 5
@@ -772,7 +969,8 @@ variants:
       Penulis: Bima
       Rating: 5.0
       Berhasil: True
-      Rating Kode Valid: True
+      Kategori: Tinggi
+      Rating Uji Valid: True
       Total Ulasan: 1
       @@CASE@@
       Hujan_Pagi Sinta 4 0 0
@@ -781,7 +979,8 @@ variants:
       Penulis: Sinta
       Rating: 0.0
       Berhasil: True
-      Rating Kode Valid: True
+      Kategori: Belum Dinilai
+      Rating Uji Valid: True
       Total Ulasan: 1
       @@CASE@@
       Peta_Baru Dodi 1 5.5 5.5
@@ -790,97 +989,134 @@ variants:
       Penulis: Dodi
       Rating: 1.0
       Berhasil: False
-      Rating Kode Valid: False
+      Kategori: Rendah
+      Rating Uji Valid: False
       Total Ulasan: 1
       @@CASE@@
-      Buku_Kecil Nia 0 2.5 2.5
+      Buku_Kecil Nia 0 -1 2
       @@OUTPUT@@
       Judul: Buku Kecil
       Penulis: Nia
-      Rating: 2.5
-      Berhasil: True
-      Rating Kode Valid: True
+      Rating: 0.0
+      Berhasil: False
+      Kategori: Belum Dinilai
+      Rating Uji Valid: True
       Total Ulasan: 1
       @@CASE@@
-      Laut_Jauh Ari 5 -1 2
+      Laut_Jauh Ari 2.5 3 6
       @@OUTPUT@@
       Judul: Laut Jauh
       Penulis: Ari
-      Rating: 5.0
-      Berhasil: False
-      Rating Kode Valid: True
+      Rating: 3.0
+      Berhasil: True
+      Kategori: Sedang
+      Rating Uji Valid: False
       Total Ulasan: 1
       @@CASE@@
-      Arsip_Hari Tono 2.5 3 6
+      Arsip_Hari Tono 5 4.9 4.9
       @@OUTPUT@@
       Judul: Arsip Hari
       Penulis: Tono
-      Rating: 3.0
+      Rating: 4.9
       Berhasil: True
-      Rating Kode Valid: False
+      Kategori: Tinggi
+      Rating Uji Valid: True
+      Total Ulasan: 1
+      @@CASE@@
+      Ruang_Kata Lala 1.5 1.5 1.5
+      @@OUTPUT@@
+      Judul: Ruang Kata
+      Penulis: Lala
+      Rating: 1.5
+      Berhasil: True
+      Kategori: Rendah
+      Rating Uji Valid: True
       Total Ulasan: 1
 
   - id: v6
     title: Variant 6 - Genre dan Usia Buku
-    brief: >-
-      Input: judul, genre, tahun terbit, dan tahun sekarang. Output: data
-      genre, usia buku, validitas genre, dan genre_populer.
+    brief: |
+      Modelkan genre dengan property tervalidasi, usia buku, status usia, dan perubahan genre pada object yang sama.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelompokkan buku berdasarkan genre dan menghitung usia buku dari tahun terbitnya.
+      Implementasikan class `Buku` untuk mengelompokkan buku berdasarkan genre dan menghitung usianya. Program mencoba mengganti genre, lalu menghitung usia buku.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `genre_populer = "Fiksi"` merupakan attribute class yang menunjukkan genre populer.
+      Terapkan class attribute, public attribute, protected attribute, private attribute, name mangling, property validation, dan instance method.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul` dan `genre` merupakan attribute public.
-      - Tahun terbit disimpan pada attribute private `__tahun_terbit`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, genre, tahun_terbit)`.
 
-      3. Constructor `__init__(self, judul, genre, tahun_terbit)`
+      - `genre_populer = "Fiksi"` dan `total_buku = 0` adalah class attribute.
+      - `judul` adalah public instance attribute.
+      - `_status_usia` adalah protected instance attribute.
+      - `__genre` dan `__tahun_terbit` adalah private instance attribute.
 
-      Constructor harus mengikuti signature pada starter code dan memastikan tahun terbit mengikuti aturan property yang tersedia.
+      3. Property dan Validasi
 
-      4. Property `tahun_terbit`
+      Buat getter dan setter untuk `genre` dan `tahun_terbit`.
 
-      Property harus menyediakan getter dan setter.
+      - Genre valid hanya `Fiksi`, `Nonfiksi`, `Puisi`, atau `Sejarah`. Perbandingan case-sensitive.
+      - Genre invalid menghasilkan `ValueError("Genre tidak tersedia.")`.
+      - Tahun terbit valid berada pada rentang 1 sampai 2026. Nilai di luar rentang menghasilkan `ValueError("Tahun terbit tidak valid.")`.
+      - Setter harus menyimpan data pada private attribute masing-masing. Gunakan `self.__genre` dan `self.__tahun_terbit` agar Python menerapkan name mangling.
 
-      Tahun terbit tidak boleh lebih besar dari `2026`. Nilai yang melebihi batas tersebut harus menghasilkan `ValueError`.
+      4. Method
 
-      5. Method `hitung_usia(tahun_sekarang)`
+      - `genre_valid(genre)` adalah instance method yang mengembalikan boolean berdasarkan daftar genre valid.
+      - `ubah_genre(genre_baru)` memeriksa `genre_valid(genre_baru)`, lalu mengubah property `genre` jika valid. Return `True` jika berhasil dan `False` jika invalid. Genre lama harus tetap tersimpan jika gagal.
+      - `hitung_usia(tahun_sekarang)` mengembalikan `tahun_sekarang - tahun_terbit`. Jika tahun sekarang lebih kecil dari tahun terbit, kembalikan `-1` dan set status `"Tidak Valid"`.
+      - Jika usia 0 sampai 5, status `"Baru"`; usia 6 sampai 20, `"Menengah"`; usia lebih dari 20, `"Lama"`.
+      - `status_usia()` mengembalikan protected state `_status_usia`.
 
-      Method menghasilkan usia buku berdasarkan tahun sekarang dan tahun terbit buku.
+      5. Program Utama
 
-      6. Static method `genre_valid(genre)`
+      Format Input:
+      `judul genre tahun_terbit tahun_sekarang genre_baru`
 
-      Genre yang dianggap valid adalah `Fiksi`, `Nonfiksi`, `Puisi`, dan `Sejarah`. Genre selain daftar tersebut dianggap tidak valid.
+      Program utama menjalankan `ubah_genre` sebelum `hitung_usia`. Jangan mengubah urutan operasi.
 
-      Perbandingan genre mengikuti penulisan pada input.
+      Format Output harus tepat sembilan baris: `Judul`, `Genre`, `Tahun Terbit`, `Usia Buku`, `Status Usia`, `Genre Baru Berhasil`, `Genre Baru Valid`, `Genre Populer`, dan `Total Buku`.
 
-      7. Program utama dan output
+      6. Constraints dan Aturan
 
-      Program utama membaca judul, genre, tahun terbit, dan tahun sekarang. Object dibuat dan usia buku serta validitas genre ditampilkan.
+      - Tahun dibaca sebagai integer.
+      - `tahun_sekarang` boleh lebih besar dari 2026 untuk menguji perhitungan usia.
+      - Jangan mengubah genre secara langsung tanpa property.
+      - Jangan menambahkan print atau memakai inheritance, classmethod, staticmethod, dan library tambahan.
 
-      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
+      7. Checklist sebelum Run Tests
 
-      Checklist sebelum Run Tests
+      - Validasi genre dipakai baik oleh setter maupun method perubahan genre.
+      - Genre invalid tidak menghapus genre lama.
+      - Status usia baru ditentukan setelah `hitung_usia` dipanggil.
+      - Counter object bertambah pada tingkat class.
+      - Property dan instance method dipakai sesuai signature starter code.
 
-      - `genre_populer` tersedia sebagai attribute class.
-      - Tahun terbit mengikuti aturan validasi.
-      - Property tahun terbit dapat membaca dan mengubah nilai.
-      - Usia buku sesuai dengan tahun yang diberikan.
-      - Hanya genre yang ditentukan yang dianggap valid.
-      - Format output tetap sesuai starter code.
     starter: |
       class Buku:
           genre_populer = "Fiksi"
+          total_buku = 0
 
           def __init__(self, judul, genre, tahun_terbit):
               self.judul = judul
+              self._status_usia = "Belum Dihitung"
+              Buku.total_buku += 1
               self.genre = genre
               self.tahun_terbit = tahun_terbit
+
+          @property
+          def genre(self):
+              # TODO: kembalikan __genre
+              pass
+
+          @genre.setter
+          def genre(self, nilai):
+              # TODO: validasi menggunakan genre_valid, lalu simpan ke __genre
+              pass
 
           @property
           def tahun_terbit(self):
@@ -889,154 +1125,221 @@ variants:
 
           @tahun_terbit.setter
           def tahun_terbit(self, nilai):
-              # TODO: validasi tahun tidak boleh lebih besar dari 2026
+              # TODO: validasi 1 sampai 2026, lalu simpan
               pass
 
-          def hitung_usia(self, tahun_sekarang):
-              # TODO: kembalikan tahun_sekarang - tahun_terbit
-              pass
-
-          @staticmethod
-          def genre_valid(genre):
+          def genre_valid(self, genre):
               # TODO: True untuk Fiksi, Nonfiksi, Puisi, atau Sejarah
               pass
 
+          def ubah_genre(self, genre_baru):
+              # TODO: coba ubah genre melalui property
+              pass
 
-      judul, genre, tahun, sekarang = input().split()
+          def hitung_usia(self, tahun_sekarang):
+              # TODO: hitung usia dan perbarui _status_usia
+              pass
+
+          def status_usia(self):
+              # TODO: kembalikan status usia
+              pass
+
+
+      judul, genre, tahun, sekarang, genre_baru = input().split()
       buku = Buku(judul.replace("_", " "), genre, int(tahun))
+      berhasil = buku.ubah_genre(genre_baru)
+      usia = buku.hitung_usia(int(sekarang))
 
       print(f"Judul: {buku.judul}")
       print(f"Genre: {buku.genre}")
       print(f"Tahun Terbit: {buku.tahun_terbit}")
-      print(f"Usia Buku: {buku.hitung_usia(int(sekarang))}")
-      print(f"Genre Valid: {Buku.genre_valid(buku.genre)}")
+      print(f"Usia Buku: {usia}")
+      print(f"Status Usia: {buku.status_usia()}")
+      print(f"Genre Baru Berhasil: {berhasil}")
+      print(f"Genre Baru Valid: {buku.genre_valid(genre_baru)}")
       print(f"Genre Populer: {Buku.genre_populer}")
+      print(f"Total Buku: {Buku.total_buku}")
     tests: |
-      Jalan_Pulang Fiksi 2010 2026
+      Jalan_Pulang Fiksi 2010 2026 Nonfiksi
       @@OUTPUT@@
       Judul: Jalan Pulang
-      Genre: Fiksi
+      Genre: Nonfiksi
       Tahun Terbit: 2010
       Usia Buku: 16
-      Genre Valid: True
+      Status Usia: Menengah
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Catatan_Hari Nonfiksi 2020 2026
+      Catatan_Hari Nonfiksi 2020 2026 Biografi
       @@OUTPUT@@
       Judul: Catatan Hari
       Genre: Nonfiksi
       Tahun Terbit: 2020
       Usia Buku: 6
-      Genre Valid: True
+      Status Usia: Menengah
+      Genre Baru Berhasil: False
+      Genre Baru Valid: False
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Suara_Malam Puisi 1999 2025
+      Suara_Malam Puisi 1999 2025 Sejarah
       @@OUTPUT@@
       Judul: Suara Malam
-      Genre: Puisi
+      Genre: Sejarah
       Tahun Terbit: 1999
       Usia Buku: 26
-      Genre Valid: True
+      Status Usia: Lama
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Jejak_Lama Sejarah 1890 2020
+      Jejak_Lama Sejarah 2005 2005 Fiksi
       @@OUTPUT@@
       Judul: Jejak Lama
-      Genre: Sejarah
-      Tahun Terbit: 1890
-      Usia Buku: 130
-      Genre Valid: True
+      Genre: Fiksi
+      Tahun Terbit: 2005
+      Usia Buku: 0
+      Status Usia: Baru
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Ruang_Baru Biografi 2018 2026
+      Ruang_Baru Fiksi 2026 2025 Nonfiksi
       @@OUTPUT@@
       Judul: Ruang Baru
-      Genre: Biografi
-      Tahun Terbit: 2018
-      Usia Buku: 8
-      Genre Valid: False
+      Genre: Nonfiksi
+      Tahun Terbit: 2026
+      Usia Buku: -1
+      Status Usia: Tidak Valid
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Masa_Depan Fiksi 2026 2028
+      Masa_Depan Sejarah 2018 2026 Drama
       @@OUTPUT@@
       Judul: Masa Depan
-      Genre: Fiksi
-      Tahun Terbit: 2026
-      Usia Buku: 2
-      Genre Valid: True
+      Genre: Sejarah
+      Tahun Terbit: 2018
+      Usia Buku: 8
+      Status Usia: Menengah
+      Genre Baru Berhasil: False
+      Genre Baru Valid: False
       Genre Populer: Fiksi
+      Total Buku: 1
       @@CASE@@
-      Rumah_Kata Drama 2005 2026
+      Rumah_Kata Puisi 2000 2028 Nonfiksi
       @@OUTPUT@@
       Judul: Rumah Kata
-      Genre: Drama
-      Tahun Terbit: 2005
-      Usia Buku: 21
-      Genre Valid: False
+      Genre: Nonfiksi
+      Tahun Terbit: 2000
+      Usia Buku: 28
+      Status Usia: Lama
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
       Genre Populer: Fiksi
+      Total Buku: 1
+      @@CASE@@
+      Arsip_Tua Nonfiksi 1900 2026 Puisi
+      @@OUTPUT@@
+      Judul: Arsip Tua
+      Genre: Puisi
+      Tahun Terbit: 1900
+      Usia Buku: 126
+      Status Usia: Lama
+      Genre Baru Berhasil: True
+      Genre Baru Valid: True
+      Genre Populer: Fiksi
+      Total Buku: 1
 
   - id: v7
     title: Variant 7 - Lokasi dan Kode Buku
-    brief: >-
-      Input: judul, lantai, rak awal, rak baru, dan kode buku. Output: lokasi
-      baru, kode tersimpan dalam huruf besar, validitas kode, dan
-      total_lokasi.
+    brief: |
+      Modelkan perpindahan lokasi buku, validasi lantai, normalisasi kode, dan penolakan kode baru yang tidak sesuai.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelola lokasi fisik buku di perpustakaan. Object harus menyimpan informasi lokasi dan kode buku, dapat berpindah rak, serta dapat menentukan validitas kode.
+      Implementasikan class `Buku` untuk mengelola lokasi fisik dan kode buku. Program mencoba memindahkan object ke lokasi baru, lalu mencoba mengganti kode bukunya.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `total_lokasi = 0` merupakan attribute class yang mencatat jumlah object `Buku` yang dibuat.
+      Terapkan class attribute, public attribute, protected attribute, private attribute, property getter/setter, validasi data, dan instance method.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul`, `lantai`, dan `rak` merupakan attribute public.
-      - Kode buku disimpan pada attribute private `__kode`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, lantai, rak, kode)`.
 
-      3. Constructor `__init__(self, judul, lantai, rak, kode)`
+      - `total_lokasi = 0` adalah class attribute. Tambahkan satu setiap object dibuat.
+      - `judul` dan `rak` adalah public instance attribute.
+      - `_lokasi_sebelumnya` adalah protected instance attribute.
+      - `__lantai` dan `__kode` adalah private instance attribute.
 
-      Constructor harus mengikuti signature pada starter code. Setelah object dibuat, kode buku harus tersedia melalui property dan berada dalam bentuk huruf besar.
+      3. Property dan Validasi
 
-      4. Property `kode`
+      Buat getter dan setter untuk `lantai` dan `kode`.
 
-      Property `kode` harus menyediakan getter dan setter.
+      - `lantai` harus integer pada rentang 1 sampai 5. Nilai lain menghasilkan `ValueError("Lantai harus berada pada rentang 1 sampai 5.")`.
+      - `kode` harus terdiri dari tepat 5 karakter alfanumerik. Kode yang disimpan selalu dalam huruf besar.
+      - Setter `kode` menghasilkan `ValueError("Kode harus terdiri dari 5 karakter alfanumerik.")` untuk nilai invalid.
+      - Gunakan `self.__lantai` dan `self.__kode` melalui property. Bentuk `_Buku__lantai` dan `_Buku__kode` adalah hasil name mangling, bukan nama yang dipakai program utama.
 
-      Nilai kode yang disimpan harus menggunakan huruf besar. Dengan demikian, kode yang diberikan dalam huruf kecil harus menghasilkan nilai property dalam bentuk huruf besar.
+      4. Method
 
-      5. Method `pindah_rak(rak_baru)`
+      - `kode_valid(kode)` adalah instance method yang mengembalikan boolean: panjang tepat 5 dan semua karakter alfanumerik.
+      - `pindah_lokasi(rak_baru, lantai_baru)` menyimpan lokasi lama melalui `_lokasi_sebelumnya`, lalu mengubah lantai melalui property dan rak melalui public attribute. Jika lantai invalid atau rak kosong, kembalikan `False` dan jangan mengubah lokasi.
+      - `ubah_kode(kode_baru)` memeriksa `kode_valid(kode_baru)`, lalu memakai setter kode jika valid. Return `True` jika berhasil dan `False` jika invalid. Kode lama harus dipertahankan ketika gagal.
+      - `lokasi()` mengembalikan string dengan format `lantai-rak`.
+      - `lokasi_sebelumnya()` mengembalikan lokasi lama, atau `"Belum Ada"` jika belum pernah berpindah.
 
-      Method memindahkan buku ke rak yang diberikan dan mengembalikan lokasi rak setelah proses tersebut.
+      5. Program Utama
 
-      6. Static method `kode_buku_valid(kode)`
+      Format Input:
+      `judul lantai rak kode rak_baru lantai_baru kode_baru`
 
-      Kode buku dianggap valid apabila memiliki tepat lima karakter dan seluruh karakternya alfanumerik. Kode yang memiliki panjang berbeda atau karakter non-alfanumerik dianggap tidak valid.
+      Program utama menjalankan `pindah_lokasi` lebih dahulu dan `ubah_kode` sesudahnya.
 
-      7. Program utama dan output
+      Format Output harus tepat delapan baris: `Judul`, `Lokasi`, `Lokasi Sebelumnya`, `Kode`, `Pindah Berhasil`, `Kode Baru Berhasil`, `Kode Baru Valid`, dan `Total Lokasi`.
 
-      Program utama membaca judul, lantai, rak awal, rak baru, dan kode buku. Object dibuat dan satu kali perpindahan rak dilakukan.
+      6. Constraints dan Aturan
 
-      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
+      - Lantai dibaca sebagai integer.
+      - Kode awal pada test case selalu valid agar object dapat dibuat.
+      - Kode baru dapat invalid dan harus ditolak tanpa error program.
+      - Jangan menambahkan print atau memakai inheritance, classmethod, staticmethod, dan library tambahan.
 
-      Checklist sebelum Run Tests
+      7. Checklist sebelum Run Tests
 
-      - Jumlah object tercatat pada `total_lokasi`.
-      - Kode dapat dibaca dan diubah melalui property.
-      - Nilai kode tersimpan dalam huruf besar.
-      - `pindah_rak()` menghasilkan rak baru yang sesuai.
-      - Validasi kode mengikuti panjang dan karakter yang ditentukan.
-      - Format output tetap sesuai starter code.
+      - Kode awal dan kode baru diproses melalui property.
+      - Kode valid disimpan dalam uppercase.
+      - Kegagalan pindah tidak meninggalkan perubahan sebagian.
+      - Lokasi lama dicatat hanya setelah perpindahan berhasil.
+      - Validasi kode baru dilakukan melalui instance method.
+
     starter: |
       class Buku:
           total_lokasi = 0
 
           def __init__(self, judul, lantai, rak, kode):
               self.judul = judul
-              self.lantai = lantai
               self.rak = rak
+              self._lokasi_sebelumnya = "Belum Ada"
+              self.lantai = lantai
               self.kode = kode
               Buku.total_lokasi += 1
+
+          @property
+          def lantai(self):
+              # TODO: kembalikan __lantai
+              pass
+
+          @lantai.setter
+          def lantai(self, nilai):
+              # TODO: validasi 1 sampai 5, lalu simpan
+              pass
 
           @property
           def kode(self):
@@ -1045,156 +1348,207 @@ variants:
 
           @kode.setter
           def kode(self, nilai):
-              # TODO: simpan kode dalam huruf besar
+              # TODO: validasi kode dan simpan dalam uppercase
               pass
 
-          def pindah_rak(self, rak_baru):
-              # TODO: ubah rak dan kembalikan nama rak baru
+          def kode_valid(self, kode):
+              # TODO: True jika panjang 5 dan alfanumerik
               pass
 
-          @staticmethod
-          def kode_buku_valid(kode):
-              # TODO: True jika panjang 5 dan semua karakter alfanumerik
+          def pindah_lokasi(self, rak_baru, lantai_baru):
+              # TODO: pindahkan lokasi secara aman
+              pass
+
+          def ubah_kode(self, kode_baru):
+              # TODO: ubah kode melalui property jika valid
+              pass
+
+          def lokasi(self):
+              # TODO: kembalikan format lantai-rak
+              pass
+
+          def lokasi_sebelumnya(self):
+              # TODO: kembalikan lokasi lama
               pass
 
 
-      judul, lantai, rak, rak_baru, kode = input().split()
+      judul, lantai, rak, kode, rak_baru, lantai_baru, kode_baru = input().split()
       buku = Buku(judul.replace("_", " "), int(lantai), rak, kode)
-      lokasi_baru = buku.pindah_rak(rak_baru)
+      berhasil_pindah = buku.pindah_lokasi(rak_baru, int(lantai_baru))
+      berhasil_kode = buku.ubah_kode(kode_baru)
 
       print(f"Judul: {buku.judul}")
-      print(f"Lantai: {buku.lantai}")
-      print(f"Rak: {lokasi_baru}")
+      print(f"Lokasi: {buku.lokasi()}")
+      print(f"Lokasi Sebelumnya: {buku.lokasi_sebelumnya()}")
       print(f"Kode: {buku.kode}")
-      print(f"Kode Valid: {Buku.kode_buku_valid(buku.kode)}")
+      print(f"Pindah Berhasil: {berhasil_pindah}")
+      print(f"Kode Baru Berhasil: {berhasil_kode}")
+      print(f"Kode Baru Valid: {buku.kode_valid(kode_baru)}")
       print(f"Total Lokasi: {Buku.total_lokasi}")
     tests: |
-      Buku_Pagi 1 A01 B02 bk001
+      Buku_Pagi 1 A01 bk001 B02 2 ab999
       @@OUTPUT@@
       Judul: Buku Pagi
-      Lantai: 1
-      Rak: B02
-      Kode: BK001
-      Kode Valid: True
+      Lokasi: 2-B02
+      Lokasi Sebelumnya: 1-A01
+      Kode: AB999
+      Pindah Berhasil: True
+      Kode Baru Berhasil: True
+      Kode Baru Valid: True
       Total Lokasi: 1
       @@CASE@@
-      Buku_Siang 2 C03 D04 ab123
+      Buku_Siang 2 C03 ab123 D04 2 xyz12
       @@OUTPUT@@
       Judul: Buku Siang
-      Lantai: 2
-      Rak: D04
-      Kode: AB123
-      Kode Valid: True
+      Lokasi: 2-D04
+      Lokasi Sebelumnya: 2-C03
+      Kode: XYZ12
+      Pindah Berhasil: True
+      Kode Baru Berhasil: True
+      Kode Baru Valid: True
       Total Lokasi: 1
       @@CASE@@
-      Buku_Malam 3 E05 F06 kode1
+      Buku_Malam 3 E05 KODE1 F06 5 peta-1
       @@OUTPUT@@
       Judul: Buku Malam
-      Lantai: 3
-      Rak: F06
+      Lokasi: 5-F06
+      Lokasi Sebelumnya: 3-E05
       Kode: KODE1
-      Kode Valid: True
+      Pindah Berhasil: True
+      Kode Baru Berhasil: False
+      Kode Baru Valid: False
       Total Lokasi: 1
       @@CASE@@
-      Arsip_Lama 1 G07 H08 abc
+      Arsip_Lama 1 G07 abc12 H08 0 kode2
       @@OUTPUT@@
       Judul: Arsip Lama
-      Lantai: 1
-      Rak: H08
-      Kode: ABC
-      Kode Valid: False
+      Lokasi: 1-G07
+      Lokasi Sebelumnya: Belum Ada
+      Kode: KODE2
+      Pindah Berhasil: False
+      Kode Baru Berhasil: True
+      Kode Baru Valid: True
       Total Lokasi: 1
       @@CASE@@
-      Peta_Kota 2 I09 J10 peta-1
+      Peta_Kota 5 I09 PETA1 J10 4 abc
       @@OUTPUT@@
       Judul: Peta Kota
-      Lantai: 2
-      Rak: J10
-      Kode: PETA-1
-      Kode Valid: False
+      Lokasi: 4-J10
+      Lokasi Sebelumnya: 5-I09
+      Kode: PETA1
+      Pindah Berhasil: True
+      Kode Baru Berhasil: False
+      Kode Baru Valid: False
       Total Lokasi: 1
       @@CASE@@
-      Novel_Baru 4 K11 L12 nV789
+      Novel_Baru 2 K11 NV789 L12 6 A1B2C
       @@OUTPUT@@
       Judul: Novel Baru
-      Lantai: 4
-      Rak: L12
-      Kode: NV789
-      Kode Valid: True
+      Lokasi: 2-K11
+      Lokasi Sebelumnya: Belum Ada
+      Kode: A1B2C
+      Pindah Berhasil: False
+      Kode Baru Berhasil: True
+      Kode Baru Valid: True
       Total Lokasi: 1
       @@CASE@@
-      Cerita_Pendek 5 M13 N14 a1b2c3
+      Cerita_Pendek 4 M13 A1B2C N14 4 12345
       @@OUTPUT@@
       Judul: Cerita Pendek
-      Lantai: 5
-      Rak: N14
-      Kode: A1B2C3
-      Kode Valid: False
+      Lokasi: 4-N14
+      Lokasi Sebelumnya: 4-M13
+      Kode: 12345
+      Pindah Berhasil: True
+      Kode Baru Berhasil: True
+      Kode Baru Valid: True
+      Total Lokasi: 1
+      @@CASE@@
+      Ruang_Baca 1 O15 Z9A12 P16 3 aa-12
+      @@OUTPUT@@
+      Judul: Ruang Baca
+      Lokasi: 3-P16
+      Lokasi Sebelumnya: 1-O15
+      Kode: Z9A12
+      Pindah Berhasil: True
+      Kode Baru Berhasil: False
+      Kode Baru Valid: False
       Total Lokasi: 1
 
   - id: v8
-    title: Variant 8 - Buku Digital dan Unduhan
-    brief: >-
-      Input: judul, format file, ukuran file, dan jumlah unduhan. Output: data
-      buku digital, total unduhan object, validitas format, dan total unduhan
-      class.
+    title: Variant 8 - Buku Digital dan Kuota Unduhan
+    brief: |
+      Modelkan ukuran file, kuota unduhan, dua percobaan unduh berurutan, status aktif, dan validasi format file.
     prompt: |
-      Tujuan tugas
+      Tugas
 
-      Buat class `Buku` untuk mengelola buku digital. Object harus menyimpan informasi file, menyediakan akses terhadap ukuran file melalui property, mencatat unduhan, serta memvalidasi format file.
+      Implementasikan class `Buku` untuk mengelola buku digital. Satu object memiliki kuota unduhan, menerima dua percobaan unduh, dan dapat dinonaktifkan setelah kedua percobaan selesai.
 
-      1. Attribute class
+      1. Tujuan Pembelajaran
 
-      - `total_unduhan = 0` merupakan attribute class yang mencatat jumlah seluruh unduhan yang diproses.
+      Terapkan class attribute, public attribute, protected attribute, private attribute, property validation, name mangling, dan instance method yang mengendalikan akses terhadap state.
 
-      2. Attribute object
+      2. Spesifikasi Class
 
-      - `judul` dan `format_file` merupakan attribute public.
-      - Ukuran file disimpan pada attribute private `__ukuran_mb`.
+      Gunakan class bernama `Buku` dengan constructor `__init__(self, judul, format_file, ukuran_mb, kuota=5)`.
 
-      3. Constructor `__init__(self, judul, format_file, ukuran_mb)`
+      - `total_unduhan = 0` adalah class attribute yang mencatat jumlah file yang berhasil diunduh oleh semua object.
+      - `maksimal_kuota = 10` adalah class attribute.
+      - `judul` dan `format_file` adalah public instance attribute.
+      - `_status` adalah protected instance attribute dengan nilai awal `"Aktif"`.
+      - `__ukuran_mb`, `__kuota`, dan `__jumlah_unduhan` adalah private instance attribute.
 
-      Constructor harus mengikuti signature pada starter code. Ukuran file yang diberikan harus mengikuti aturan validasi.
+      3. Property dan Validasi
 
-      4. Property `ukuran_mb`
+      Buat getter dan setter untuk `ukuran_mb` dan `kuota`.
 
-      Property harus menyediakan getter dan setter.
+      - `ukuran_mb` harus lebih besar dari 0. Nilai 0 atau kurang menghasilkan `ValueError("Ukuran file harus lebih besar dari 0.")`.
+      - `kuota` harus berada pada rentang 0 sampai `maksimal_kuota`, termasuk batas. Nilai lain menghasilkan `ValueError("Kuota harus berada pada rentang 0 sampai 10.")`.
+      - Gunakan private attribute melalui `self.__ukuran_mb` dan `self.__kuota`. Python menyimpan nama tersebut dengan name mangling.
+      - `jumlah_unduhan()` menjadi method read-only untuk membaca `__jumlah_unduhan`.
 
-      Ukuran file harus lebih besar dari `0`. Nilai `0` atau kurang harus menghasilkan `ValueError`.
+      4. Method
 
-      5. Method `unduh(jumlah)`
+      - `unduh(jumlah)` berhasil jika status masih `"Aktif"`, jumlah lebih dari 0, dan jumlah tidak melebihi kuota. Jika berhasil, kurangi kuota melalui property, tambah `__jumlah_unduhan`, tambah `Buku.total_unduhan`, lalu return `True`. Selain itu return `False` tanpa mengubah state.
+      - `nonaktifkan()` mengubah `_status` menjadi `"Nonaktif"`.
+      - `status()` mengembalikan `_status`.
+      - `format_valid(format_file)` mengembalikan `True` hanya untuk teks `pdf` atau `epub`. Perbandingan case-sensitive.
 
-      Method menerima jumlah unduhan dan mencatatnya pada penghitung unduhan tingkat class. Method mengembalikan jumlah unduhan yang tercatat setelah proses tersebut.
+      5. Program Utama
 
-      6. Static method `ekstensi_valid(format_file)`
+      Format Input:
+      `judul format_file ukuran_mb kuota unduh_pertama unduh_kedua matikan`
 
-      Format file dianggap valid apabila bernilai `pdf` atau `epub`. Format lainnya dianggap tidak valid.
+      Program utama memanggil `unduh` dua kali. Jika `matikan` bernilai 1, program memanggil `nonaktifkan` setelah kedua percobaan.
 
-      Perbandingan mengikuti teks input.
+      Format Output harus tepat sepuluh baris: `Judul`, `Format`, `Ukuran MB`, `Sisa Kuota`, `Unduhan Buku`, `Unduh 1 Berhasil`, `Unduh 2 Berhasil`, `Status`, `Format Valid`, dan `Unduhan Class`.
 
-      7. Program utama dan output
+      6. Constraints dan Aturan
 
-      Program utama membaca judul, format file, ukuran file, dan jumlah unduhan. Object dibuat dan satu kali proses unduhan dilakukan.
+      - Ukuran dibaca sebagai float dan jumlah lain sebagai integer.
+      - Unduhan yang gagal tidak mengurangi kuota dan tidak menambah counter.
+      - `matikan` bernilai 0 atau 1.
+      - Jangan menambahkan print atau memakai inheritance, classmethod, staticmethod, dan library tambahan.
 
-      Bagian input dan output sudah tersedia pada starter code. Jangan mengubah format output.
+      7. Checklist sebelum Run Tests
 
-      Checklist sebelum Run Tests
-
-      - Ukuran file harus memenuhi batas valid.
-      - Property ukuran file dapat membaca dan mengubah nilai.
-      - Jumlah unduhan tercatat pada tingkat class.
-      - `unduh()` menghasilkan total unduhan sesuai data yang diberikan.
-      - Validasi hanya menerima format `pdf` dan `epub`.
-      - Format output tetap sesuai starter code.
+      - Counter class bertambah sebanyak jumlah file yang benar-benar berhasil diunduh.
+      - Dua pemanggilan `unduh` memakai object dan state yang sama.
+      - Kuota disimpan melalui private attribute dan property.
+      - Object nonaktif menolak unduhan berikutnya.
+      - Format file divalidasi oleh instance method.
 
     starter: |
       class Buku:
           total_unduhan = 0
+          maksimal_kuota = 10
 
-          def __init__(self, judul, format_file, ukuran_mb):
+          def __init__(self, judul, format_file, ukuran_mb, kuota=5):
               self.judul = judul
               self.format_file = format_file
+              self._status = "Aktif"
+              self.__jumlah_unduhan = 0
               self.ukuran_mb = ukuran_mb
+              self.kuota = kuota
 
           @property
           def ukuran_mb(self):
@@ -1203,108 +1557,203 @@ variants:
 
           @ukuran_mb.setter
           def ukuran_mb(self, nilai):
-              # TODO: validasi ukuran > 0
+              # TODO: validasi ukuran lebih besar dari 0
+              pass
+
+          @property
+          def kuota(self):
+              # TODO: kembalikan __kuota
+              pass
+
+          @kuota.setter
+          def kuota(self, nilai):
+              # TODO: validasi kuota 0 sampai maksimal_kuota
               pass
 
           def unduh(self, jumlah):
-              # TODO: tambah total_unduhan sebanyak jumlah, return total
+              # TODO: proses unduhan jika status dan kuota memungkinkan
               pass
 
-          @staticmethod
-          def ekstensi_valid(format_file):
-              # TODO: True untuk pdf atau epub
+          def nonaktifkan(self):
+              # TODO: ubah status menjadi Nonaktif
+              pass
+
+          def status(self):
+              # TODO: kembalikan status
+              pass
+
+          def jumlah_unduhan(self):
+              # TODO: kembalikan __jumlah_unduhan
+              pass
+
+          def format_valid(self, format_file):
+              # TODO: True hanya untuk pdf atau epub
               pass
 
 
-      judul, format_file, ukuran, jumlah = input().split()
-      buku = Buku(judul.replace("_", " "), format_file, float(ukuran))
-      total = buku.unduh(int(jumlah))
+      judul, format_file, ukuran, kuota, unduh_1, unduh_2, matikan = input().split()
+      buku = Buku(judul.replace("_", " "), format_file, float(ukuran), int(kuota))
+      berhasil_1 = buku.unduh(int(unduh_1))
+      berhasil_2 = buku.unduh(int(unduh_2))
+      if int(matikan) == 1:
+          buku.nonaktifkan()
 
       print(f"Judul: {buku.judul}")
       print(f"Format: {buku.format_file}")
       print(f"Ukuran MB: {buku.ukuran_mb}")
-      print(f"Total Unduhan: {total}")
-      print(f"Format Valid: {Buku.ekstensi_valid(buku.format_file)}")
+      print(f"Sisa Kuota: {buku.kuota}")
+      print(f"Unduhan Buku: {buku.jumlah_unduhan()}")
+      print(f"Unduh 1 Berhasil: {berhasil_1}")
+      print(f"Unduh 2 Berhasil: {berhasil_2}")
+      print(f"Status: {buku.status()}")
+      print(f"Format Valid: {buku.format_valid(buku.format_file)}")
       print(f"Unduhan Class: {Buku.total_unduhan}")
     tests: |
-      Python_Dasar pdf 2.5 3
+      Python_Dasar pdf 2.5 5 3 1 0
       @@OUTPUT@@
       Judul: Python Dasar
       Format: pdf
       Ukuran MB: 2.5
-      Total Unduhan: 3
+      Sisa Kuota: 1
+      Unduhan Buku: 4
+      Unduh 1 Berhasil: True
+      Unduh 2 Berhasil: True
+      Status: Aktif
       Format Valid: True
-      Unduhan Class: 3
+      Unduhan Class: 4
       @@CASE@@
-      OOP_Lanjut epub 4 2
+      OOP_Lanjut epub 4 2 1 1 1
       @@OUTPUT@@
       Judul: OOP Lanjut
       Format: epub
       Ukuran MB: 4.0
-      Total Unduhan: 2
+      Sisa Kuota: 0
+      Unduhan Buku: 2
+      Unduh 1 Berhasil: True
+      Unduh 2 Berhasil: True
+      Status: Nonaktif
       Format Valid: True
       Unduhan Class: 2
       @@CASE@@
-      Cerita_Digital mobi 3.2 1
+      Cerita_Digital mobi 3.2 3 2 2 0
       @@OUTPUT@@
       Judul: Cerita Digital
       Format: mobi
       Ukuran MB: 3.2
-      Total Unduhan: 1
+      Sisa Kuota: 1
+      Unduhan Buku: 2
+      Unduh 1 Berhasil: True
+      Unduh 2 Berhasil: False
+      Status: Aktif
       Format Valid: False
-      Unduhan Class: 1
+      Unduhan Class: 2
       @@CASE@@
-      Panduan_Kelas PDF 10 5
+      Panduan_Kelas PDF 10 5 0 1 0
       @@OUTPUT@@
       Judul: Panduan Kelas
       Format: PDF
       Ukuran MB: 10.0
-      Total Unduhan: 5
+      Sisa Kuota: 4
+      Unduhan Buku: 1
+      Unduh 1 Berhasil: False
+      Unduh 2 Berhasil: True
+      Status: Aktif
       Format Valid: False
-      Unduhan Class: 5
+      Unduhan Class: 1
       @@CASE@@
-      Arsip_Malam epub 0.5 0
+      Arsip_Malam epub 0.5 1 0 0 1
       @@OUTPUT@@
       Judul: Arsip Malam
       Format: epub
       Ukuran MB: 0.5
-      Total Unduhan: 0
+      Sisa Kuota: 1
+      Unduhan Buku: 0
+      Unduh 1 Berhasil: False
+      Unduh 2 Berhasil: False
+      Status: Nonaktif
       Format Valid: True
       Unduhan Class: 0
       @@CASE@@
-      Buku_Kecil txt 1.0 4
+      Buku_Kecil txt 1.0 3 4 1 0
       @@OUTPUT@@
       Judul: Buku Kecil
       Format: txt
       Ukuran MB: 1.0
-      Total Unduhan: 4
+      Sisa Kuota: 2
+      Unduhan Buku: 1
+      Unduh 1 Berhasil: False
+      Unduh 2 Berhasil: True
+      Status: Aktif
       Format Valid: False
-      Unduhan Class: 4
+      Unduhan Class: 1
       @@CASE@@
-      Modul_Akhir pdf 12.75 6
+      Modul_Akhir pdf 12.75 8 4 4 1
       @@OUTPUT@@
       Judul: Modul Akhir
       Format: pdf
       Ukuran MB: 12.75
-      Total Unduhan: 6
+      Sisa Kuota: 0
+      Unduhan Buku: 8
+      Unduh 1 Berhasil: True
+      Unduh 2 Berhasil: True
+      Status: Nonaktif
       Format Valid: True
-      Unduhan Class: 6
+      Unduhan Class: 8
+      @@CASE@@
+      Buku_Nol epub 1 0 1 0 0
+      @@OUTPUT@@
+      Judul: Buku Nol
+      Format: epub
+      Ukuran MB: 1.0
+      Sisa Kuota: 0
+      Unduhan Buku: 0
+      Unduh 1 Berhasil: False
+      Unduh 2 Berhasil: False
+      Status: Aktif
+      Format Valid: True
+      Unduhan Class: 0
 ---
 
 # (Assignment 1): Peminjaman Buku Perpustakaan
 
-**Tingkat:** Easy
+**Tingkat:** Medium
 
-Soal ini tetap menggunakan satu topik besar, yaitu pengelolaan buku perpustakaan. Untuk mengurangi praktik copy-paste, setiap mahasiswa mendapatkan satu sub study case. Semua sub study case memiliki tingkat kesulitan dan cakupan materi yang setara, tetapi attribute, property, method, static method, dan format input-output dibuat berbeda.
+Assignment ini menggunakan satu domain besar, yaitu pengelolaan buku perpustakaan, tetapi setiap mahasiswa mendapatkan satu sub study case. Semua variant memiliki tingkat kesulitan yang setara dan menguji pola yang sama: class, object, class attribute, instance attribute, public/protected/private attribute, name mangling, property validation, dan instance method.
+
+Guide setiap variant sengaja ditulis dengan pola seperti soal LeetCode: ada tujuan, kontrak class, property, method, format input, format output, constraints, dan checklist. Baca kontrak sampai selesai sebelum mengubah starter code.
+
+## Batas Scope
+
+Assignment ini hanya menggunakan konsep berikut:
+
+- class dan object/instance;
+- constructor dan struktur class Python;
+- class attribute dan instance attribute;
+- public, protected, dan private secara konseptual;
+- name mangling pada private attribute;
+- property getter/setter untuk validasi data;
+- instance method untuk membaca atau mengubah state object;
+- pemodelan permasalahan perpustakaan sederhana.
+
+Assignment ini tidak menggunakan inheritance, polymorphism, class method, static method, module tambahan, file, database, atau library eksternal.
 
 ## Aturan Sub Study Case
 
-- Assignment ini memakai delapan sub study case dengan topik perpustakaan yang sama.
-- Setiap sub study case memiliki tujuh test case.
+- Assignment ini memiliki delapan variant.
+- Setiap variant memiliki delapan test case.
+- Setiap test case menjalankan satu program dari kondisi awal yang baru, sehingga class counter dimulai dari nol pada setiap test case.
+- Lengkapi hanya bagian `TODO` di dalam class. Jangan mengubah program utama, nama, signature, label output, atau format output.
+- Kegagalan validasi harus ditangani sesuai kontrak method. Program tidak boleh berhenti karena input operasi yang invalid.
 
 ## Coba Kerangka Kode
 
-Setelah sub study case dipilih, detail tugas dan starter code akan muncul pada playground di bawah. Lengkapi bagian `TODO`, lalu tekan **Run Tests** untuk menjalankan tujuh test case variant kamu.
+Setelah sub study case dipilih, prompt lengkap dan starter code akan muncul pada playground di bawah. Gunakan alur berikut:
+
+1. Baca spesifikasi attribute dan tentukan mana yang public, protected, dan private.
+2. Implementasikan getter dan setter property terlebih dahulu.
+3. Implementasikan instance method dengan memakai property, bukan mengubah private attribute secara sembarangan.
+4. Periksa urutan operasi pada program utama.
+5. Jalankan **Run Tests** dan baca detail test yang gagal.
 
 {% include pyodide-exercise.html id="assignment1-kelas-a" title="Memuat sub study case..." prompt="Masukkan NIM untuk memuat sub study case." %}
 
