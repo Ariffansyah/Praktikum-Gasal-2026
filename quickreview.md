@@ -1,6 +1,7 @@
 ---
-title: Assignment
+title: Quick Review
 layout: default
 parent: Resources
-nav_order: 3
+nav_order: 2
 ---
+
