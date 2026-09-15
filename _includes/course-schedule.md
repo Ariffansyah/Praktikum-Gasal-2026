@@ -23,4 +23,4 @@
 
 {: .table-footnote}
 
-</div>
+</div>  
