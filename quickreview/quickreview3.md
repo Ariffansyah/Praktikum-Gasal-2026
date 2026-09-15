@@ -2,6 +2,7 @@
 title: Quick Review 3
 layout: default
 parent: Quick Review
+tampil: true
 nav_order: 1
 ---
 # Quick Review - Chapter 3
@@ -35,15 +36,8 @@ Recall singkat sebelum masuk ke study case. Fokusnya adalah cara menjaga state o
    - Property tanpa setter cocok untuk nilai hasil perhitungan, seperti total nilai stok, halaman tersisa, atau denda.
    - Nilai tersebut tidak disimpan terpisah; hitung dari state object saat dibaca.
 
-## Hubungan dengan semua variant
 
-| Variant | Fokus tambahan |
-|:--|:--|
-| v1 - Peminjaman | Beberapa class berkolaborasi, property `stok` dan `jumlah_pinjam`, serta transaksi yang gagal tanpa mengubah state. |
-| v2 - Progress membaca | Property `halaman` dan `progres`, status bacaan, batas 0 sampai 100, dan perhitungan halaman tersisa. |
-| v3 - Denda | Property hari keterlambatan, property read-only `dibayar`, pembayaran sebagian, status pembayaran, dan counter pengembalian. |
-
-## Pola berpikir saat mengerjakan
+## Pro Tip
 
 1. Tandai setiap attribute sebagai public, protected, atau private.
 2. Tentukan invariant: nilai apa yang tidak boleh masuk ke object?
