@@ -18,4 +18,4 @@ variant_dir: "assignment/assignment1/homework/variants"
 description_file: "assignment/assignment1/homework/description.md"
 ---
 
-{% include pyodide-exercise.html id="homework1-kelas-a" title="Memuat homework..." prompt="Mode debug aktif: pilih salah satu dari delapan variant homework." %}
+{% include pyodide-exercise.html id="homework1-kelas-a" title="Memuat homework..." prompt="Masukkan NIM yang sesuai" %}
