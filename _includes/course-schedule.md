@@ -4,7 +4,7 @@
 |:---|:---|:---|:---|:---|
 | Week 1 | Wed, 26 Aug (2025C, 2025A)<br>Fri, 28 Aug (2025B) | **Introduction to OOP concepts** ([pdf](https://drive.google.com/file/d/1v4irey6Hb2td0ezmso63NbymXaGIaJPT/view?usp=sharing)) | [Ch. 1]({{ '/readings-chapter1/' | relative_url }}) | - |
 | Week 2 | Wed, 2 Sep (2025C, 2025A)<br>Fri, 4 Sep (2025B) | **Property Visibility & Class Method** ([pdf](https://drive.google.com/file/d/1y2bwnMA9T9qMjPpk-a4Eca_mnzclWnfu/view?usp=sharing)) | [Ch. 2]({{ '/readings-chapter2/' | relative_url }}) | - |
-| Week 3 | Wed, 16 Sep (2025C, [2025A](https://forms.gle/VGFxcD43pTR5XV7E7))<br>Fri, 18 Sep (2025B) | **Encapsulation, visibility, properties, and attribute validation** ([pdf](https://drive.google.com/file/d/1klyNJZXByc_fY39vaJSXEmQxLRrWX2Cc/view?usp=sharing)),<br>[Quick Recap Ch. 3]({{ '/quickreview/quickreview3/' | relative_url }}) | [Ch. 3]({{ '/readings-chapter3/' | relative_url }}) | [Panduan Editor Python]({{ '/assignment/panduan-editor/' | relative_url }}),<br>[Live Practicum 1]({{ 'assignment/assignment1/studycase1/' | relative_url }}),<br>[Practicum Survey 1](https://forms.gle/BvBZVUGsP5BBaHxy9) <br>,[Homework 1]({{ 'assignment/assignment1/homework/' | relative_url }}) |
+| Week 3 | Wed, 16 Sep (2025C, [2025A](https://forms.gle/VGFxcD43pTR5XV7E7))<br>Fri, 18 Sep (2025B) | **Encapsulation, visibility, properties, and attribute validation** ([pdf](https://drive.google.com/file/d/1klyNJZXByc_fY39vaJSXEmQxLRrWX2Cc/view?usp=sharing)),<br>[Quick Recap Ch. 3]({{ '/quickreview/quickreview3/' | relative_url }}) | [Ch. 3]({{ '/readings-chapter3/' | relative_url }}) | [Panduan Editor Python]({{ '/assignment/panduan-editor/' | relative_url }}),<br>[Live Practicum 1]({{ '/assignment/assignment1/studycase1/' | relative_url }}),<br>[Practicum Survey 1](https://forms.gle/BvBZVUGsP5BBaHxy9)<br>[Homework 1]({{ '/assignment/assignment1/homework/' | relative_url }}) |
 | Week 4 | Wed, 23 Sep (2025C, 2025A)<br>Fri, 25 Sep (2025B) | **Class methods, static methods, and decorators** (pdf) | Ch. 4 | # |
 | Week 5 | Wed, 30 Sep (2025C, 2025A)<br>Fri, 2 Oct (2025B) | **Inheritance, overriding, nested inheritance, and multiple inheritance** (pdf) | Ch. 5 | # |
 | Week 6 | Wed, 7 Oct (2025C, 2025A)<br>Fri, 9 Oct (2025B) | **Abstract methods, data classes, mutability, and typing styles** (pdf) | Ch. 6 | # |
@@ -18,6 +18,7 @@
 | Week 14 | Wed, 2 Dec (2025C, 2025A)<br>Fri, 4 Dec (2025B) | **Application implementation and integration of OOP components** (pdf) | Ch. 14 | # |
 | Week 15 | Wed, 9 Dec (2025C, 2025A)<br>Fri, 11 Dec (2025B) | **GUI implementation and event handling** (pdf) | Ch. 15 | # |
 | Week 16 | Wed, 16 Dec (2025C, 2025A)<br>Fri, 18 Dec (2025B) | **Application demonstration, OOP design presentation, testing, and reflection** (pdf) | Ch. 16 | # |
+
 {: .schedule-table}
 
 {: .table-footnote}
