@@ -5,6 +5,9 @@ nav_order: 1
 has_toc: false
 ---
 
+#### ANNOUNCEMENT/REMINDER:
+{% include announcement.md %}
+
 # Pemrograman Berorientasi Objek
 
 Praktikum Pemrograman Berorientasi Objek Gasal 2026 - S1 Kecerdasan Artifisial, Universitas Negeri Surabaya.
