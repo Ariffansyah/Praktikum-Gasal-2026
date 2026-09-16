@@ -1,1 +1,1 @@
-Reminder Homework 1 untuk kelas 2025A deadline, 22 Sept 23.59 WIB, untuk template laporan praktikum bisa dicek [disini](https://docs.google.com/document/d/1-r2hM2JmPA6qjz45CY3f7szKAG3i5TeZUxX2zKtpoms/edit?usp=sharing)
+Reminder Homework 1 untuk kelas 2025A, deadline 22 Sept 23.59 WIB, untuk template laporan praktikum bisa dicek [disini](https://docs.google.com/document/d/1-r2hM2JmPA6qjz45CY3f7szKAG3i5TeZUxX2zKtpoms/edit?usp=sharing)
