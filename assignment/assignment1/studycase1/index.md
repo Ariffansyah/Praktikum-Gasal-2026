@@ -21,7 +21,7 @@ class_options:
     title: "2025C - Study Case 3"
     variant_id: "v3"
 unlock_at:
-  "2025A": "2026-09-16T12:30:00"
+  "2025A": "2026-09-16T11:30:00"
   "2025B": "2026-09-18T12:30:00"
   "2025C": "2026-09-16T09:00:00"
 variant_dir: "assignment/assignment1/studycase1/variants"
