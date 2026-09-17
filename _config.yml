@@ -36,3 +36,10 @@ exclude:
   - assignment/assignment1/studycase1/description.md
   - assignment/assignment1/homework/variants
   - assignment/assignment1/homework/description.md
+
+callouts:
+  warning:
+    title: Warning
+    color: red
+  highlight:
+    color: yellow
