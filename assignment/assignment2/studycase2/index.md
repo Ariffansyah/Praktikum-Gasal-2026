@@ -5,7 +5,7 @@ parent: "Assignment 2"
 printtitle: "Live Practicum 2 - Class Method dan Decorator"
 nav_order: 1
 tampil: true
-isdebug: false
+isdebug: true
 assignment_id: "assignment2-kelas"
 variant_version: 1
 selection_mode: "kelas"
