@@ -39,3 +39,5 @@ Assignment ini tidak menggunakan inheritance, polymorphism, class method, static
 5. Jalankan **Run Tests** dan baca detail test yang gagal.
 
 Setelah mengerjakan tugas, semua mahasiswa diharapkan bisa mengisi survey [ini](https://forms.gle/BvBZVUGsP5BBaHxy9), cuma 3 pertanyaan kok
+
+Setelah selesai mengerjakan live practicum, jangan lupa isi absen [disini](https://forms.gle/pNaKY8KJHkukohqu5)
