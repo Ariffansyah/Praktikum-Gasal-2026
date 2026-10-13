@@ -5,7 +5,7 @@ parent: "Assignment 4"
 printtitle: "Homework 4 - Abstract Method, Data Class, Mutability, dan Typing Style"
 nav_order: 2
 tampil: true
-isdebug: false
+isdebug: true
 assignment_id: "homework4"
 variant_version: 1
 selection_mode: "nim"
