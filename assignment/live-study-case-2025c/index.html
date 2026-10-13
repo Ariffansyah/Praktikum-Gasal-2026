@@ -1,0 +1,997 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <title>Live Study Case 2025C: KampusPinjam · OOP '26</title>
+    <link rel="stylesheet" href="{{ '/assignment/live-study-case-2025c/case.css' | relative_url }}">
+  </head>
+  <body>
+    <!-- Inline SVG Icons identical to Praktikum-Gasal-2026 -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="svg-link" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0z"/>
+      </symbol>
+      <symbol id="svg-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </symbol>
+      <symbol id="svg-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </symbol>
+    </svg>
+
+    <div class="layout-container">
+      <!-- Left Sidebar matching Just The Docs -->
+      <header class="side-bar">
+        <div class="site-header">
+          <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/" class="site-title">
+            OOP '26
+          </a>
+        </div>
+        <nav aria-label="Main Navigation" class="site-nav">
+          <div class="nav-category">Portal &amp; Materi</div>
+          <ul class="nav-list">
+            <li class="nav-list-item">
+              <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/" class="nav-list-link" target="_blank" rel="noopener">Home</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/calendar/" class="nav-list-link" target="_blank" rel="noopener">Calendar</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/readings/" class="nav-list-link" target="_blank" rel="noopener">Readings (Ch 1 s.d. 6)</a>
+            </li>
+          </ul>
+
+          <div class="nav-category">Live Study Case 2025C</div>
+          <ul class="nav-list">
+            <li class="nav-list-item">
+              <a href="#tujuan" class="nav-list-link active">1. Tujuan &amp; Materi</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#kasus" class="nav-list-link">2. Skenario Sistem</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#scope" class="nav-list-link">3. Batas Pekerjaan</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#ketua" class="nav-list-link">4. Ketua &amp; Peran Tim</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#tim" class="nav-list-link">5. Paket 7 Tim</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#kontrak" class="nav-list-link">6. Kontrak Antartim</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#ekspektasi" class="nav-list-link">7. Ekspektasi &amp; Goals</a>
+            </li>
+            <li class="nav-list-item">
+              <a href="#starters" class="nav-list-link">8. Berkas Kerangka</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="site-footer">
+          <strong>Kelas 2025C · Gasal 2026</strong><br>
+          S1 Kecerdasan Artifisial<br>
+          Universitas Negeri Surabaya
+        </div>
+      </header>
+
+      <!-- Main Area matching Just The Docs -->
+      <div class="main" id="top">
+        <header class="main-header">
+          <div class="main-header__brand">
+            <button id="menu-button" class="site-button mobile-only" type="button" aria-label="Toggle menu" aria-expanded="false">
+              <svg width="18" height="18" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+            </button>
+            <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/" class="main-header__brand-title mobile-only">OOP '26</a>
+            <span class="main-header__tag">Live Case</span>
+            <span class="main-header__sub">Praktikum Gasal 2026 · Kelas 2025C</span>
+          </div>
+          <nav aria-label="Auxiliary">
+            <ul class="aux-nav-list">
+              <li>
+                <button id="theme-toggle" class="site-button" type="button" aria-label="Toggle dark mode">
+                  Dark Mode
+                </button>
+              </li>
+              <li>
+                <a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/" class="site-button" target="_blank" rel="noopener">
+                  Materi Praktikum
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+        <div class="main-content-wrap">
+          <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+            <ol class="breadcrumb-nav-list">
+              <li><a href="https://oop-ai26.github.io/Praktikum-Gasal-2026/assignment/">Assignment</a></li>
+              <li><span>Kelas 2025C</span></li>
+              <li><span>Live Study Case: KampusPinjam</span></li>
+            </ol>
+          </nav>
+
+          <main class="main-content">
+            <div class="announcement-grid">
+              <div class="announcement-grid__label">
+                <span class="label label-yellow">Live Review</span>
+              </div>
+              <div class="announcement-grid__text">
+                Live Study Case <strong>KampusPinjam</strong> pekan ini merupakan evaluasi komprehensif materi Chapter 1 hingga Chapter 6 (sampai Abstract Method) khusus untuk 35 mahasiswa <strong>Kelas 2025C</strong>. Mahasiswa dibagi menjadi 7 tim (5 mahasiswa per tim) untuk membangun komponen dan mengintegrasikan sistem peminjaman perlengkapan kampus.
+              </div>
+            </div>
+
+            <h1 id="kampuspinjam">
+              <a href="#kampuspinjam" class="anchor-heading" aria-label="Anchor link to KampusPinjam">
+                <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+              </a>
+              Live Study Case: KampusPinjam
+            </h1>
+            <p class="course-lede">
+              Bangun sistem peminjaman perlengkapan kampus bersama enam tim fitur dan satu tim integrasi berbasis paradigma OOP Python.
+            </p>
+
+            <dl class="course-detail">
+              <dt>Term</dt>
+              <dd>: Semester Gasal 2026</dd>
+              <dt>Mata Kuliah</dt>
+              <dd>: Pemrograman Berorientasi Objek (S1 Kecerdasan Artifisial)</dd>
+              <dt>Instructor</dt>
+              <dd>: Riskyana Dewi Instan Puspitasari, M. Kom.</dd>
+              <dt>Kelas / Peserta</dt>
+              <dd>: 2025C (35 Mahasiswa, 7 Tim @ 5 Mahasiswa)</dd>
+              <dt>Alokasi Sesi</dt>
+              <dd>: 60 Menit Implementasi Paralel + 45 Menit Presentasi &amp; Tanya Jawab</dd>
+              <dt>Cakupan Materi</dt>
+              <dd>: Chapter 1 s.d. Chapter 6 (Class, Encapsulation, Decorator, Inheritance, Abstract Method)</dd>
+              <dt>Status Akses</dt>
+              <dd>: Halaman publik GitHub Pages</dd>
+            </dl>
+
+            <!-- Section 1 -->
+            <section id="tujuan">
+              <h2>
+                <a href="#tujuan" class="anchor-heading" aria-label="Anchor link to Tujuan">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                1. Tujuan dan Materi
+              </h2>
+              <p>
+                Setiap tim membangun satu modul fungsional dari aplikasi yang dapat digabungkan menjadi satu alur sistem utuh. Tugas ini menguji penguasaan materi <strong>Reading Chapter 1 s.d. 6</strong> yang telah dipelajari sampai pertemuan minggu lalu, yaitu:
+              </p>
+              <ul>
+                <li><strong>Chapter 1 &amp; 2:</strong> Pengenalan OOP, class dan object, atribut, serta instansiasi.</li>
+                <li><strong>Chapter 3:</strong> Encapsulation, visibility, properties, dan validasi atribut.</li>
+                <li><strong>Chapter 4:</strong> Class methods, static methods, dan function decorators.</li>
+                <li><strong>Chapter 5:</strong> Inheritance, method overriding, dan hierarki class.</li>
+                <li><strong>Chapter 6:</strong> Abstract base class (ABC), abstract method, dan penegakan kontrak interface.</li>
+              </ul>
+              <p>
+                Setiap paket tim sengaja dirancang memiliki satu konsep OOP utama yang wajib tampak dan dijelaskan saat presentasi, selain konsep dasar class dan object.
+              </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section id="kasus">
+              <h2>
+                <a href="#kasus" class="anchor-heading" aria-label="Anchor link to Skenario">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                2. Skenario Sistem
+              </h2>
+              <p>
+                Kampus menyediakan layanan peminjaman perlengkapan (seperti proyektor, kamera, dan speaker) kepada mahasiswa. Mahasiswa mengajukan peminjaman barang dengan menentukan tanggal pinjam dan rencana tanggal kembali. Petugas kampus memeriksa dan memutuskan pengajuan tersebut (menyetujui atau menolak). Saat barang dikembalikan oleh mahasiswa, sistem memproses penyelesaian transaksi dan menghitung denda keterlambatan jika pengembalian melewati batas waktu rencana.
+              </p>
+              <div class="scenario-box">
+                <strong>Contoh Alur Demo Utama</strong>
+                Mahasiswa mengajukan peminjaman proyektor, kemudian petugas menyetujui pengajuan tersebut. Saat barang dikembalikan 2 hari melewati tanggal rencana kembali, sistem menghitung denda keterlambatan sebesar Rp10.000 (tarif Rp5.000 per hari) dan mengembalikan status proyektor menjadi tersedia.
+              </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section id="scope">
+              <h2>
+                <a href="#scope" class="anchor-heading" aria-label="Anchor link to Batas Pekerjaan">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                3. Batas Pekerjaan (Scope)
+              </h2>
+              <div class="scope-grid">
+                <div class="scope-card">
+                  <h3>Wajib Dikerjakan</h3>
+                  <ul>
+                    <li>1 barang per transaksi peminjaman.</li>
+                    <li>Tahapan alur transaksi: Pengajuan, Keputusan Petugas (Disetujui atau Ditolak), hingga Pengembalian barang.</li>
+                    <li>Validasi status transaksi, tanggal, dan batas durasi barang.</li>
+                    <li>Pencatatan riwayat transaksi dan filter data.</li>
+                    <li>Mampu menjalankan minimal 1 alur berhasil dan 2 kasus penolakan/gagal.</li>
+                    <li>Data fixture sintetik bersama (identitas demo).</li>
+                  </ul>
+                </div>
+                <div class="scope-card">
+                  <h3>Di Luar Scope (Jangan Dibuat)</h3>
+                  <ul>
+                    <li>Database atau penyimpanan file permanen.</li>
+                    <li>Password, token auth, atau login internal aplikasi.</li>
+                    <li>Sistem pembayaran uang sungguhan, upload bukti, atau SMS/email notifikasi.</li>
+                    <li>Multi-item cart/reservasi banyak barang sekaligus.</li>
+                    <li>Framework web baru (Flask/Django/FastAPI) atau external HTTP API.</li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                Gunakan <strong>Python standar (Standard Library)</strong> murni. Data pengguna dalam pengujian harus berupa data fixture sintetik (contoh: <code>Mahasiswa("MHS01", "Budi")</code>), dilarang menyalin NIM mahasiswa dari roster ke dalam kode. Jangan mengganti nama method interface yang telah disepakati atau mengakses atribut privat/internal milik class tim lain.
+              </p>
+            </section>
+
+            <!-- Section 4 -->
+            <section id="ketua">
+              <h2>
+                <a href="#ketua" class="anchor-heading" aria-label="Anchor link to Ketua dan Peran">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                4. Ketua dan Peran Tim
+              </h2>
+              <p>
+                35 mahasiswa kelas 2025C dibagi menjadi <strong>7 tim (5 mahasiswa per tim)</strong>. Setiap tim menunjuk <strong>satu orang ketua</strong> sebelum praktikum dimulai dan melaporkannya kepada dosen. Ketua bertindak sebagai koordinator komunikasi antartim dan PIC briefing, bukan satu-satunya anggota yang menulis kode atau presentasi.
+              </p>
+              <p>
+                Berikut pembagian peran untuk 5 anggota dalam setiap tim (boleh dirangkap jika dibutuhkan):
+              </p>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">Peran Anggota</th>
+                      <th style="width: 45%;">Tanggung Jawab Utama</th>
+                      <th style="width: 30%;">Kewajiban Presentasi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1. Ketua / Koordinator</strong></td>
+                      <td>Mengatur pembagian tugas, koordinasi kontrak lintas tim, dan menyepakati antarmuka.</td>
+                      <td>Menjelaskan pembagian peran dan ringkasan arsitektur modul.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>2. Perancang Kontrak Class</strong></td>
+                      <td>Mendesain struktur class, method signature, invariant atribut, dan tipe kembalian.</td>
+                      <td>Menjelaskan keputusan desain OOP dan alasan hierarki class.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>3. Implementer Fitur A</strong></td>
+                      <td>Mengimplementasikan logika method bisnis utama dan penanganan validasi.</td>
+                      <td>Menjelaskan implementasi kode bagian fitur A baris per baris.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>4. Implementer Fitur B</strong></td>
+                      <td>Mengimplementasikan method pelengkap, factory/decorator/static method.</td>
+                      <td>Menjelaskan implementasi kode bagian fitur B baris per baris.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>5. Penguji &amp; Pencatat Demo</strong></td>
+                      <td>Membuat skenario pengujian unit, fixture contoh kasus sukses dan gagal.</td>
+                      <td>Mendemonstrasikan jalannya pengujian dan mencatat bug.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section id="tim">
+              <h2>
+                <a href="#tim" class="anchor-heading" aria-label="Anchor link to Paket 7 Tim">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                5. Paket Tujuh Tim: Rincian Fitur, Metode, Item OOP, dan Hint
+              </h2>
+              <p>
+                Setiap kelompok bertanggung jawab atas satu modul utama. Untuk membantu pengerjaan tahap awal dan menjaga agar kode tidak keluar dari batasan yang disepakati, berikut adalah rincian lengkap mengenai item konsep OOP, daftar metode yang wajib dibuat, batasan aturan bisnis, serta petunjuk (hint) implementasinya:
+              </p>
+
+              <!-- Tim 1 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 1: Identitas Pengguna (<code>pengguna.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Memodelkan data pengguna kampus dan membedakan hak akses antara mahasiswa dan petugas inventaris.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Class &amp; Constructor:</strong> Class induk <code>Pengguna</code> serta subclass <code>Mahasiswa</code> dan <code>Petugas</code>.</li>
+                    <li><strong>Encapsulation:</strong> Menyimpan atribut privat dengan awalan underscore: <code>_identitas</code>, <code>_nama</code>, dan <code>_role</code>.</li>
+                    <li><strong>Property (<code>@property</code>):</strong> Getter pembacaan publik untuk <code>identitas</code>, <code>nama</code>, <code>role</code>, serta alias <code>nim</code> dan <code>nip</code>.</li>
+                    <li><strong>Inheritance &amp; <code>super()</code>:</strong> Subclass memanggil <code>super().__init__(identitas, nama, role)</code> dengan role otomatis.</li>
+                    <li><strong>Class Method Factory (<code>@classmethod</code>):</strong> Method <code>dari_data(cls, data)</code> untuk instansiasi dari dictionary fixture.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>Pengguna.__init__(self, identitas: str, nama: str, role: str)</code></li>
+                    <li><code>Pengguna.identitas(self) -&gt; str</code> (property)</li>
+                    <li><code>Pengguna.nama(self) -&gt; str</code> (property)</li>
+                    <li><code>Pengguna.role(self) -&gt; str</code> (property, nilai hanya <code>'mahasiswa'</code> atau <code>'petugas'</code>)</li>
+                    <li><code>Mahasiswa.__init__(self, nim: str, nama: str)</code></li>
+                    <li><code>Mahasiswa.nim(self) -&gt; str</code> (property alias ke identitas)</li>
+                    <li><code>Mahasiswa.dari_data(cls, data: dict) -&gt; Mahasiswa</code> (class method)</li>
+                    <li><code>Petugas.__init__(self, nip: str, nama: str)</code></li>
+                    <li><code>Petugas.nip(self) -&gt; str</code> (property alias ke identitas)</li>
+                    <li><code>Petugas.dari_data(cls, data: dict) -&gt; Petugas</code> (class method)</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Validasi string: Jika identitas atau nama kosong (atau spasi saja), bangkitkan <code>ValueError</code>.</li>
+                    <li>Validasi role: Jika role bukan <code>'mahasiswa'</code> atau <code>'petugas'</code>, bangkitkan <code>ValueError</code>.</li>
+                    <li>Validasi data fixture: Jika kunci <code>'nim'</code>/<code>'nip'</code> atau <code>'nama'</code> tidak ditemukan pada dictionary, bangkitkan <code>KeyError</code>.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 1:</strong>
+                  Jangan membuat setter untuk <code>role</code> agar peran pengguna bersifat read-only dan tidak dapat diubah sembarangan dari luar. Di dalam <code>Mahasiswa.__init__</code>, cukup panggil <code>super().__init__(nim, nama, "mahasiswa")</code> sehingga tidak perlu menulis ulang inisialisasi atribut nama dan identitas.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/pengguna.py" download="pengguna.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 1 (pengguna.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 2 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 2: Katalog Perlengkapan (<code>perlengkapan.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Memodelkan katalog barang inventaris kampus dengan batas pinjam yang berbeda-beda serta status ketersediaan.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Abstract Base Class (ABC):</strong> Class dasar <code>Perlengkapan</code> mewarisi <code>abc.ABC</code>.</li>
+                    <li><strong>Abstract Method (<code>@abstractmethod</code>):</strong> Method <code>batas_durasi_hari(self) -&gt; int</code> wajib dideklarasikan di class induk tanpa implementasi kode.</li>
+                    <li><strong>Polimorfisme &amp; Method Overriding:</strong> Subclass konkret <code>Proyektor</code>, <code>Kamera</code>, dan <code>Speaker</code> mengimplementasikan durasi batas masing-masing.</li>
+                    <li><strong>Encapsulation:</strong> Menyimpan atribut privat <code>_id_barang</code>, <code>_nama</code>, dan status boolean <code>_tersedia</code>.</li>
+                    <li><strong>Controlled Mutation Method:</strong> Mengubah status ketersediaan hanya melalui method <code>ubah_ketersediaan(status: bool)</code>.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>Perlengkapan.__init__(self, id_barang: str, nama: str)</code></li>
+                    <li><code>Perlengkapan.id_barang(self) -&gt; str</code> (property)</li>
+                    <li><code>Perlengkapan.nama(self) -&gt; str</code> (property)</li>
+                    <li><code>Perlengkapan.tersedia(self) -&gt; bool</code> (property, default awal <code>True</code>)</li>
+                    <li><code>Perlengkapan.ubah_ketersediaan(self, status: bool) -&gt; None</code></li>
+                    <li><code>Perlengkapan.batas_durasi_hari(self) -&gt; int</code> (abstract method)</li>
+                    <li><code>Proyektor.batas_durasi_hari(self) -&gt; int</code> (mengembalikan nilai <code>3</code>)</li>
+                    <li><code>Kamera.batas_durasi_hari(self) -&gt; int</code> (mengembalikan nilai <code>2</code>)</li>
+                    <li><code>Speaker.batas_durasi_hari(self) -&gt; int</code> (mengembalikan nilai <code>2</code>)</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Class <code>Perlengkapan</code> tidak boleh dapat diinstansiasi secara langsung; Python harus memunculkan <code>TypeError</code> jika dicoba instansiasi.</li>
+                    <li>Batas peminjaman wajib sesuai aturan: Proyektor maksimal 3 hari, Kamera maksimal 2 hari, Speaker maksimal 2 hari.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 2:</strong>
+                  Gunakan modul bawaan <code>from abc import ABC, abstractmethod</code>. Atribut <code>self._tersedia = True</code> diatur pada konstruktor class induk <code>Perlengkapan</code>. Method <code>ubah_ketersediaan</code> cukup melakukan <code>self._tersedia = bool(status)</code>.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/perlengkapan.py" download="perlengkapan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 2 (perlengkapan.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 3 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 3: Pengajuan Transaksi (<code>peminjaman.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Mengelola siklus transaksi peminjaman, memvalidasi durasi dan tanggal, serta mereservasi barang.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Object Aggregation:</strong> Mengaitkan objek <code>Mahasiswa</code> dan objek <code>Perlengkapan</code> ke dalam objek transaksi <code>Peminjaman</code>.</li>
+                    <li><strong>State Machine Invariant:</strong> Menjaga siklus status baku (<code>DIAJUKAN</code>, <code>DISETUJUI</code>, <code>DITOLAK</code>, <code>SELESAI</code>) menggunakan kamus <code>TRANSISI_SAH</code>.</li>
+                    <li><strong>Encapsulation:</strong> Seluruh state transaksi dilindungi dan hanya dibaca via <code>@property</code>.</li>
+                    <li><strong>Validasi Domain:</strong> Memvalidasi urutan tanggal, batas maksimal durasi barang, dan ketersediaan barang.</li>
+                    <li><strong>Inter-module Effect:</strong> Otomatis mereservasi barang dengan memanggil <code>barang.ubah_ketersediaan(False)</code> saat pengajuan valid dibuat.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>Peminjaman.__init__(self, id_peminjaman, mahasiswa, barang, tanggal_pinjam, tanggal_kembali)</code></li>
+                    <li><code>Peminjaman.id_peminjaman(self) -&gt; str</code> (property)</li>
+                    <li><code>Peminjaman.mahasiswa(self) -&gt; Mahasiswa</code> (property)</li>
+                    <li><code>Peminjaman.barang(self) -&gt; Perlengkapan</code> (property)</li>
+                    <li><code>Peminjaman.tanggal_pinjam(self) -&gt; date</code> (property)</li>
+                    <li><code>Peminjaman.tanggal_kembali(self) -&gt; date</code> (property)</li>
+                    <li><code>Peminjaman.status(self) -&gt; str</code> (property, status awal: <code>'DIAJUKAN'</code>)</li>
+                    <li><code>Peminjaman.durasi_rencana_hari(self) -&gt; int</code> (menghitung selisih hari rencana)</li>
+                    <li><code>Peminjaman.ubah_status(self, status_baru: str) -&gt; None</code> (validasi state machine)</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Peminjam wajib bertipe <code>Mahasiswa</code> (peran <code>mahasiswa</code>). Tolak role lain dengan <code>PermissionError</code>.</li>
+                    <li>Barang wajib turunan dari <code>Perlengkapan</code>.</li>
+                    <li>Tanggal kembali tidak boleh mendahului tanggal pinjam (bangkitkan <code>ValueError</code>).</li>
+                    <li>Durasi peminjaman minimal 1 hari dan tidak boleh melebihi <code>barang.batas_durasi_hari()</code> (bangkitkan <code>ValueError</code>).</li>
+                    <li>Barang wajib sedang berstatus tersedia (<code>barang.tersedia == True</code>). Jika sedang dipinjam, tolak dengan <code>ValueError</code>.</li>
+                    <li>Perubahan status ke selain transisi sah pada <code>TRANSISI_SAH</code> wajib membangkitkan <code>ValueError</code>.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 3:</strong>
+                  Gunakan helper <code>datetime.strptime(string_tgl, "%Y-%m-%d").date()</code> agar method Anda dapat menerima input string maupun objek date kalender secara fleksibel. Selisih hari didapat dengan <code>(tgl_kembali - tgl_pinjam).days</code>.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/peminjaman.py" download="peminjaman.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 3 (peminjaman.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 4 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 4: Layanan Persetujuan (<code>persetujuan.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Memproses persetujuan atau penolakan pengajuan oleh Petugas yang berwenang.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Service Class:</strong> Class <code>LayananPersetujuan</code> sebagai pengelola logika bisnis keputusan.</li>
+                    <li><strong>Static Method (<code>@staticmethod</code>):</strong> Method <code>alasan_valid(alasan: str) -&gt; bool</code> dibuat tanpa memerlukan atribut instansi <code>self</code>.</li>
+                    <li><strong>Authorization Check:</strong> Memvalidasi kewenangan petugas (<code>petugas.role == 'petugas'</code>).</li>
+                    <li><strong>Inter-object Coordination:</strong> Mengubah status transaksi via <code>peminjaman.ubah_status()</code> dan melepaskan ketersediaan barang jika ditolak.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>LayananPersetujuan.alasan_valid(alasan: str) -&gt; bool</code> (static method)</li>
+                    <li><code>LayananPersetujuan.putuskan(self, peminjaman, petugas, disetujui: bool, alasan: str = "") -&gt; bool</code></li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Hanya pengguna ber-role <code>'petugas'</code> yang berhak memutuskan. Jika selain petugas, bangkitkan <code>PermissionError</code>.</li>
+                    <li>Hanya peminjaman berstatus <code>'DIAJUKAN'</code> yang dapat diputuskan. Jika berstatus lain, bangkitkan <code>ValueError</code>.</li>
+                    <li>Jika ditolak (<code>disetujui == False</code>): teks alasan wajib valid (minimal 5 karakter tidak kosong via <code>alasan_valid</code>). Jika alasan tidak valid, bangkitkan <code>ValueError</code>.</li>
+                    <li>Jika ditolak, status barang wajib otomatis dikembalikan menjadi tersedia: <code>peminjaman.barang.ubah_ketersediaan(True)</code>.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 4:</strong>
+                  Dekorator <code>@staticmethod</code> ditaruh tepat di atas method <code>alasan_valid</code>. Pada method <code>putuskan</code>, jika disetujui ubah status ke <code>'DISETUJUI'</code>; jika tidak disetujui ubah status ke <code>'DITOLAK'</code> dan jangan lupa lepaskan barang dengan <code>peminjaman.barang.ubah_ketersediaan(True)</code>.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/persetujuan.py" download="persetujuan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 4 (persetujuan.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 5 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 5: Pengembalian dan Denda (<code>pengembalian.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Memproses penyelesaian transaksi saat barang dikembalikan serta menghitung denda keterlambatan kalender.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Abstract Base Class (ABC):</strong> Class abstrak <code>KebijakanDenda(ABC)</code>.</li>
+                    <li><strong>Abstract Method (<code>@abstractmethod</code>):</strong> Method <code>hitung_denda(tanggal_kembali, tanggal_aktual) -&gt; int</code>.</li>
+                    <li><strong>Strategy Pattern / Polimorfisme:</strong> Class konkret <code>DendaHarian(KebijakanDenda)</code> dengan tarif Rp5.000 per hari kalender terlambat.</li>
+                    <li><strong>Dependency Injection:</strong> <code>LayananPengembalian</code> menerima objek kebijakan denda pada constructor <code>__init__(self, kebijakan_denda=None)</code>.</li>
+                    <li><strong>Transaction Finalization:</strong> Menyelesaikan transaksi (status <code>SELESAI</code>) dan mengembalikan barang ke status tersedia.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>KebijakanDenda.hitung_denda(self, tanggal_kembali, tanggal_aktual) -&gt; int</code> (abstract method)</li>
+                    <li><code>DendaHarian.__init__(self, tarif_per_hari: int = 5000)</code></li>
+                    <li><code>DendaHarian.hitung_denda(self, tanggal_kembali, tanggal_aktual) -&gt; int</code></li>
+                    <li><code>LayananPengembalian.__init__(self, kebijakan_denda: KebijakanDenda = None)</code></li>
+                    <li><code>LayananPengembalian.proses(self, peminjaman, tanggal_aktual) -&gt; dict</code></li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Hanya transaksi berstatus <code>'DISETUJUI'</code> yang dapat dikembalikan. Tolak status <code>'DIAJUKAN'</code>, <code>'DITOLAK'</code>, atau <code>'SELESAI'</code> (mencegah pengembalian ganda) dengan <code>ValueError</code>.</li>
+                    <li>Tanggal aktual pengembalian tidak boleh sebelum tanggal pinjam (bangkitkan <code>ValueError</code>).</li>
+                    <li>Perhitungan keterlambatan kalender: <code>hari_terlambat = max(0, (tanggal_aktual - tanggal_kembali).days)</code>.</li>
+                    <li>Denda adalah <code>hari_terlambat * tarif_per_hari</code>. Jika tepat waktu, denda adalah Rp0.</li>
+                    <li>Saat transaksi selesai, ubah status ke <code>'SELESAI'</code> dan kembalikan barang: <code>peminjaman.barang.ubah_ketersediaan(True)</code>.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 5:</strong>
+                  Gunakan <code>max(0, selisih_hari)</code> agar tidak menghasilkan denda minus jika barang dikembalikan lebih awal. Di dalam <code>LayananPengembalian</code>, gunakan nilai default: <code>self._kebijakan_denda = kebijakan_denda or DendaHarian()</code>.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/pengembalian.py" download="pengembalian.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 5 (pengembalian.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 6 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 6: Riwayat dan Laporan (<code>laporan.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Menyajikan penyaringan riwayat transaksi, ringkasan eksekutif, dan pencatatan audit log otomatis via Custom Decorator.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>Custom Decorator:</strong> Fungsi dekorator <code>@catat_operasi</code> menggunakan <code>functools.wraps</code>.</li>
+                    <li><strong>Separation of Concerns:</strong> Pencatatan log pemanggilan method dipisahkan secara transparan dari logika pelaporan.</li>
+                    <li><strong>Collection Aggregation:</strong> Mengelola list transaksi bersama tanpa mengubah state asli objek peminjaman.</li>
+                    <li><strong>Filtering Method:</strong> Method <code>riwayat</code> yang mendukung penyaringan berdasarkan NIM dan/atau status secara modular.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>catat_operasi(method)</code> (fungsi dekorator)</li>
+                    <li><code>LaporanPeminjaman.__init__(self, daftar_peminjaman: list)</code></li>
+                    <li><code>LaporanPeminjaman.riwayat(self, nim: str = None, status: str = None) -&gt; list</code> (didekorasi <code>@catat_operasi</code>)</li>
+                    <li><code>LaporanPeminjaman.ringkasan(self) -&gt; dict</code> (didekorasi <code>@catat_operasi</code>)</li>
+                    <li><code>LaporanPeminjaman.log_operasi(self) -&gt; list</code> (membaca salinan catatan audit)</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Batasan dan Validasi Aturan Bisnis:</strong>
+                  <ul>
+                    <li>Dekorator tidak boleh memodifikasi atau mengganti nilai kembalian (return value) asli dari method yang didekorasinya.</li>
+                    <li>Kamus ringkasan eksekutif wajib memuat: <code>total_transaksi</code>, <code>diajukan</code>, <code>disetujui</code>, <code>ditolak</code>, <code>selesai</code>, dan <code>total_denda</code>.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 6:</strong>
+                  Di dalam fungsi pembungkus (wrapper decorator), panggil <code>hasil = method(self, *args, **kwargs)</code>. Kemudian buat dictionary catatan yang merekam <code>method.__name__</code> dan timestamp waktu, lalu simpan ke <code>self._log_operasi.append(catatan)</code>, lalu <code>return hasil</code>.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/laporan.py" download="laporan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 6 (laporan.py)
+                  </a>
+                </div>
+              </div>
+
+              <!-- Tim 7 Card -->
+              <div class="scope-card" style="margin-bottom: 1.5rem;">
+                <h3 style="color: var(--oop-link);">
+                  Tim 7: Integrasi Aplikasi (<code>main.py</code>)
+                </h3>
+                <p>
+                  <strong>Tanggung Jawab Fitur:</strong> Mengorkestrasi seluruh modul dari Tim 1 s.d. 6 menjadi alur aplikasi yang siap dipresentasikan.
+                </p>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Item OOP yang Wajib Diterapkan:</strong>
+                  <ul>
+                    <li><strong>System Orchestration:</strong> Menghubungkan seluruh class dan layanan dari 6 tim lainnya.</li>
+                    <li><strong>Fixture Synthesis:</strong> Fungsi <code>buat_data_demo()</code> menyiapkan data awal tanpa menyalin NIM mahasiswa riil.</li>
+                    <li><strong>Exception Handling:</strong> Menangkap error penolakan dengan blok <code>try ... except ValueError</code> agar program tidak crash saat menguji kasus gagal.</li>
+                    <li><strong>Reproducible Execution:</strong> Seluruh alur dapat dijalankan berulang kali dengan hasil yang konsisten.</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Metode dan Fungsi yang Wajib Dibuat:</strong>
+                  <ul>
+                    <li><code>buat_data_demo() -&gt; dict</code> (menyiapkan minimal 3 Mahasiswa, 2 Petugas, dan 3 Perlengkapan: Proyektor, Kamera, Speaker)</li>
+                    <li><code>jalankan_demo() -&gt; None</code> (menjalankan alur demonstrasi lengkap)</li>
+                  </ul>
+                </div>
+                <div style="margin-bottom: 0.8rem;">
+                  <strong>Skenario Wajib yang Harus Ditampilkan pada Demo:</strong>
+                  <ul>
+                    <li><strong>Skenario 1 (Alur Sukses Utama):</strong> Mahasiswa mengajukan Proyektor 3 hari, Petugas menyetujui, dikembalikan 2 hari terlambat, sistem mencatat denda Rp10.000, status barang kembali tersedia.</li>
+                    <li><strong>Skenario 2 (Kasus Gagal: Durasi Melebihi Batas):</strong> Pengajuan Kamera selama 4 hari ditolak oleh validasi durasi (batas Kamera adalah 2 hari).</li>
+                    <li><strong>Skenario 3 (Kasus Gagal: Barang Sedang Dipinjam):</strong> Pengajuan ditolak karena barang sedang berstatus tidak tersedia (dipinjam orang lain).</li>
+                    <li><strong>Skenario 4 (Kasus Gagal: Penolakan oleh Petugas):</strong> Petugas menolak pengajuan dengan alasan valid, status menjadi DITOLAK, dan barang kembali tersedia.</li>
+                    <li><strong>Skenario 5 (Pelaporan):</strong> Menampilkan riwayat terfilter, ringkasan eksekutif, dan catatan log audit dekorator.</li>
+                  </ul>
+                </div>
+                <div class="callout-box" style="margin-top: 0.6rem;">
+                  <strong>Hint Awal untuk Tim 7:</strong>
+                  Gunakan tanggal statis sintetis (contoh: <code>2026-10-15</code>) agar hasil demo selalu konsisten. Jangan menulis ulang aturan bisnis di <code>main.py</code>; selalu delegasikan keputusan dan perhitungan ke method milik tim yang berwenang.
+                </div>
+                <div style="margin-top: 1rem;">
+                  <a href="./starters/main.py" download="main.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 7 (main.py)
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 6 -->
+            <section id="kontrak">
+              <h2>
+                <a href="#kontrak" class="anchor-heading" aria-label="Anchor link to Kontrak Antartim">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                6. Kontrak Integrasi Antartim
+              </h2>
+              <p>
+                Tabel berikut merupakan kesepakatan bersama antar 7 kelompok. Setiap tim berhak menambahkan method internal pendukung, namun method publik dalam kontrak tidak boleh diubah sepihak tanpa persetujuan tim terkait dan tim integrasi.
+              </p>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 18%;">Modul / Berkas</th>
+                      <th style="width: 47%;">Interface Minimum (Signature &amp; Atribut)</th>
+                      <th style="width: 35%;">Keluaran &amp; Aturan Kontrak</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>pengguna.py</code></td>
+                      <td>
+                        <code>Mahasiswa(nim, nama)</code><br>
+                        <code>Petugas(nip, nama)</code><br>
+                        Property: <code>role</code> (nilai: <code>'mahasiswa'</code> / <code>'petugas'</code>)
+                      </td>
+                      <td>Objek teridentifikasi dengan role baku; validasi role untuk operasi pinjam/keputusan.</td>
+                    </tr>
+                    <tr>
+                      <td><code>perlengkapan.py</code></td>
+                      <td>
+                        <code>Perlengkapan(id_barang, nama)</code> (ABC)<br>
+                        <code>Proyektor(...)</code>, <code>Kamera(...)</code>, <code>Speaker(...)</code><br>
+                        Abstract Method: <code>batas_durasi_hari()</code><br>
+                        Property/Method: <code>tersedia</code>, <code>ubah_ketersediaan(bool)</code>
+                      </td>
+                      <td>Batas pinjam per jenis barang (Proyektor: 3 hari, Kamera: 2 hari, Speaker: 2 hari); status ketersediaan terjaga.</td>
+                    </tr>
+                    <tr>
+                      <td><code>peminjaman.py</code></td>
+                      <td>
+                        <code>Peminjaman(id_pinjam, mahasiswa, barang, tgl_pinjam, tgl_kembali)</code><br>
+                        Property: <code>status</code><br>
+                        Method: <code>ubah_status(status_baru)</code>, <code>hitung_durasi()</code>
+                      </td>
+                      <td>Status awal <code>'DIAJUKAN'</code>; barang direservasi saat valid; cegah durasi melebihi batas.</td>
+                    </tr>
+                    <tr>
+                      <td><code>persetujuan.py</code></td>
+                      <td>
+                        <code>LayananPersetujuan.putuskan(peminjaman, petugas, disetujui, alasan="")</code><br>
+                        Static Method: <code>LayananPersetujuan.alasan_valid(alasan)</code>
+                      </td>
+                      <td>Hanya petugas sah berhak memutuskan; transisi status menjadi <code>'DISETUJUI'</code> atau <code>'DITOLAK'</code>.</td>
+                    </tr>
+                    <tr>
+                      <td><code>pengembalian.py</code></td>
+                      <td>
+                        <code>KebijakanDenda</code> (ABC) dengan abstract method <code>hitung_denda(...)</code><br>
+                        <code>DendaHarian(tarif_per_hari=5000)</code><br>
+                        <code>LayananPengembalian.proses(peminjaman, tgl_aktual)</code>
+                      </td>
+                      <td>Menghitung hari telat (minimal 0); menghitung denda; ubah status menjadi <code>'SELESAI'</code>; barang kembali tersedia.</td>
+                    </tr>
+                    <tr>
+                      <td><code>laporan.py</code></td>
+                      <td>
+                        <code>LaporanPeminjaman(daftar_peminjaman)</code><br>
+                        Method: <code>riwayat(nim=None, status=None)</code>, <code>ringkasan()</code><br>
+                        Decorator: <code>@catat_operasi</code>
+                      </td>
+                      <td>Penyajian riwayat berdasarkan filter; rekap transaksi; decorator mencatat operasi ke konsol/log.</td>
+                    </tr>
+                    <tr>
+                      <td><code>main.py</code></td>
+                      <td>
+                        Method: <code>buat_data_demo()</code><br>
+                        Method: <code>jalankan_demo()</code>
+                      </td>
+                      <td>Menghubungkan Tim 1 s.d. 6; eksekusi demo alur sukses dan minimal 2 kasus gagal secara konsisten.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                <strong>Aturan Siklus Status Transaksi:</strong>
+                Siklus normal transaksi dimulai dari status <code>DIAJUKAN</code>, dilanjutkan ke <code>DISETUJUI</code>, dan diselesaikan pada <code>SELESAI</code>. Apabila pengajuan tidak disetujui petugas, status berpindah dari <code>DIAJUKAN</code> menjadi <code>DITOLAK</code>. Tidak diizinkan melakukan perpindahan status langsung dari <code>DIAJUKAN</code> ke <code>SELESAI</code> atau memproses pengembalian pada transaksi yang berstatus <code>DITOLAK</code>.
+              </p>
+            </section>
+
+            <!-- Section 7 -->
+            <section id="ekspektasi">
+              <h2>
+                <a href="#ekspektasi" class="anchor-heading" aria-label="Anchor link to Ekspektasi dan Goals">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                7. Ekspektasi Hasil dan Indikator Capaian Goals
+              </h2>
+              <p>
+                Bagian ini memberikan gambaran konkret mengenai hasil akhir yang diharapkan ketika seluruh komponen dari Tim 1 s.d. 7 berhasil diintegrasikan dengan benar. Mahasiswa dapat menggunakan tolak ukur ini untuk memverifikasi apakah sistem mereka telah memenuhi seluruh kriteria kelulusan studi kasus.
+              </p>
+
+              <div class="scope-grid">
+                <div class="scope-card">
+                  <h3 style="color: var(--oop-link);">
+                    Indikator Keberhasilan Goals
+                  </h3>
+                  <ul>
+                    <li><strong>Hak Akses Terjaga:</strong> Hanya Mahasiswa yang bisa mengajukan dan hanya Petugas yang bisa menyetujui / menolak transaksi.</li>
+                    <li><strong>Polimorfisme Berjalan:</strong> Batas pinjam diatur mandiri oleh class barang: Proyektor 3 hari, Kamera 2 hari, Speaker 2 hari.</li>
+                    <li><strong>Reservasi Otomatis:</strong> Saat pengajuan dibuat, barang otomatis berubah status menjadi tidak tersedia (<code>tersedia = False</code>).</li>
+                    <li><strong>Alasan Penolakan Valid:</strong> Petugas wajib menyertakan alasan minimal 5 karakter saat menolak pengajuan, dan barang otomatis dilepaskan kembali menjadi tersedia.</li>
+                    <li><strong>Kalkulasi Denda Akurat:</strong> Pengembalian terlambat 2 hari pada Proyektor tepat menghitung denda Rp10.000 (tarif Rp5.000 per hari keterlambatan kalender).</li>
+                    <li><strong>Audit Trail Aktif:</strong> Custom decorator <code>@catat_operasi</code> mencatat metadata pemanggilan laporan tanpa merusak return value method.</li>
+                    <li><strong>Penanganan Error Anggun:</strong> Seluruh kasus penolakan ditangani dengan blok <code>try...except</code> sehingga program tidak berhenti mendadak (crash).</li>
+                  </ul>
+                </div>
+
+                <div class="scope-card">
+                  <h3 style="color: var(--oop-link);">
+                    Cara Menjalankan Sistem
+                  </h3>
+                  <p style="font-size: 0.9rem; margin-bottom: 0.8rem;">
+                    Setelah berkas kode dari seluruh tim digabungkan ke dalam direktori kerja, jalankan skrip utama <code>main.py</code> melalui salah satu cara berikut:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Melalui Terminal / Konsol:</strong><br>
+                      Buka terminal di folder kerja dan ketikkan perintah:
+                      <div style="margin: 0.35rem 0 0.6rem;"><code>python main.py</code></div>
+                    </li>
+                    <li>
+                      <strong>Melalui VS Code / Editor:</strong><br>
+                      Buka berkas <code>main.py</code>, lalu klik tombol <strong>Run Python File</strong> (ikon segitiga di pojok kanan atas) atau tekan tombol <code>Ctrl + F5</code>.
+                    </li>
+                    <li>
+                      <strong>Uji Assertion Otomatis:</strong><br>
+                      Jika tim menambahkan flag uji unit, jalankan dengan:
+                      <div style="margin: 0.35rem 0 0.6rem;"><code>python main.py --test</code></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3>Ekspektasi Output Terminal Hasil Demo</h3>
+              <p>
+                Berikut adalah contoh visualisasi luaran terminal yang diharapkan ketika sistem dijalankan secara menyeluruh dari awal hingga akhir:
+              </p>
+
+              <pre><code>============================================================================
+DEMO SISTEM KAMPUSPINJAM: INTEGRASI LENGKAP KELAS 2025C
+Pemrograman Berorientasi Objek: Gasal 2026 (S1 Kecerdasan Artifisial)
+============================================================================
+
+[SKENARIO 1: ALUR SUKSES DENGAN DENDA TERLAMBAT]
+Peminjam         : Ahmad Fauzi (NIM 2501001)
+Barang           : Proyektor Epson EB-X400 (Ruang Lab) (Batas Pinjam: 3 hari)
+Tanggal Pinjam   : 2026-10-15
+Rencana Kembali  : 2026-10-18 (Durasi: 3 hari)
+&gt;&gt; Status Awal   : DIAJUKAN
+&gt;&gt; Ketersediaan  : Proyektor Epson EB-X400 (Ruang Lab) : Tersedia: False
+&gt;&gt; Disetujui Oleh: Pak Budi Hartono (NIP 19890101)
+&gt;&gt; Status Baru   : DISETUJUI
+Tanggal Aktual   : 2026-10-20 (Terlambat 2 hari)
+&gt;&gt; Hari Terlambat: 2 hari
+&gt;&gt; Denda Dihitung: Rp10,000 (Tarif Rp5.000 per hari)
+&gt;&gt; Status Akhir  : SELESAI
+&gt;&gt; Ketersediaan  : Proyektor Epson EB-X400 (Ruang Lab) : Tersedia: True
+
+[SKENARIO 2: PENOLAKAN KARENA MELEBIHI BATAS DURASI]
+Peminjam         : Bunga Citra (NIM 2501002)
+Barang           : Kamera Sony Alpha A6400 (Inventaris Media) (Batas Pinjam: 2 hari)
+Rencana Durasi   : 2026-10-15 s.d. 2026-10-19 (4 hari)
+&gt;&gt; Validasi Error: Berhasil ditolak pada validasi pengajuan.
+   Pesan Sistem  : Pengajuan ditolak: durasi 4 hari melebihi batas maksimal untuk Kamera Sony Alpha A6400 (Inventaris Media) (2 hari).
+
+[SKENARIO 3: PENOLAKAN KARENA BARANG SEDANG DIPINJAM]
+&gt;&gt; Speaker dipinjam oleh Bunga Citra. Status Tersedia: False
+&gt;&gt; Candra Wijaya mencoba meminjam speaker yang sama:
+&gt;&gt; Validasi Error: Berhasil dicegah.
+   Pesan Sistem  : Pengajuan ditolak: barang 'Speaker Portable JBL EON ONE' (ID: SPK-01) saat ini sedang tidak tersedia.
+
+[SKENARIO 4: PENOLAKAN OLEH PETUGAS DENGAN ALASAN VALID]
+&gt;&gt; Pengajuan dibuat: TRX-2026-005 (Status: DIAJUKAN)
+&gt;&gt; Ketersediaan sebelum keputusan: Kamera Sony Alpha A6400 (Inventaris Media) : False
+&gt;&gt; Status Pasca Keputusan : DITOLAK
+&gt;&gt; Alasan Penolakan       : Kamera dijadwalkan untuk pemeliharaan lensa berkala oleh teknisi.
+&gt;&gt; Ketersediaan Kamera    : Kamera Sony Alpha A6400 (Inventaris Media) : Kembali Tersedia: True
+
+[SKENARIO 5: LAPORAN RIWAYAT DAN REKAPITULASI]
+--- Riwayat Peminjaman NIM 2501001 (Ahmad Fauzi) ---
+  * ID: TRX-2026-001 | Barang: Proyektor Epson EB-X400 (Ruang Lab) | Status: SELESAI | Denda: Rp10,000
+
+--- Riwayat Peminjaman Berstatus SELESAI ---
+  * ID: TRX-2026-001 | Peminjam: Ahmad Fauzi | Denda: Rp10,000
+
+--- Ringkasan Eksekutif Sistem ---
+  Total Transaksi Tercatat : 3
+  Transaksi Diajukan       : 1
+  Transaksi Disetujui      : 0
+  Transaksi Ditolak        : 1
+  Transaksi Selesai        : 1
+  Total Penerimaan Denda   : Rp10,000
+
+--- Log Operasi Audit (Tercatat via Decorator @catat_operasi) ---
+  [2026-10-13 23:35:14] Operasi: riwayat | Filter: args=[] kwargs={'nim': "'2501001'"}
+  [2026-10-13 23:35:14] Operasi: riwayat | Filter: args=[] kwargs={'status': "'SELESAI'"}
+  [2026-10-13 23:35:14] Operasi: ringkasan | Filter: args=[] kwargs={}
+
+============================================================================
+DEMO SELESAI: SELURUH KONTRAK 7 TIM TERVERIFIKASI SEMPURNA.
+============================================================================</code></pre>
+            </section>
+
+            <!-- Section 8 -->
+            <section id="starters">
+              <h2>
+                <a href="#starters" class="anchor-heading" aria-label="Anchor link to Starters">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg>
+                </a>
+                8. Berkas Kerangka (Starters)
+              </h2>
+              <p>
+                Silakan unduh berkas starter Python sesuai dengan paket tugas tim Anda. Seluruh berkas starter telah disiapkan dalam format <strong>Kode Rumpang (Scaffolded Code)</strong>, di mana struktur class, method, property, dan dekorator telah terpasang rapi. Mahasiswa cukup mengisi bagian rumpang yang bertanda <code>(...)</code> atau komentar panduan <code>TODO</code> (seperti pengisian variabel, parameter, dan nilai kembalian) tanpa perlu membangun kerangka dari awal.
+              </p>
+              <div class="download-grid">
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">pengguna.py</span>
+                    <span class="download-card__role">Tim 1</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Kerangka identitas pengguna, class Mahasiswa, Petugas, inheritance, property role, dan factory fixture.
+                  </p>
+                  <a href="./starters/pengguna.py" download="pengguna.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 1
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">perlengkapan.py</span>
+                    <span class="download-card__role">Tim 2</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Abstract class Perlengkapan (ABC), Proyektor, Kamera, Speaker, batas durasi, dan ketersediaan barang.
+                  </p>
+                  <a href="./starters/perlengkapan.py" download="perlengkapan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 2
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">peminjaman.py</span>
+                    <span class="download-card__role">Tim 3</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Objek transaksi Peminjaman, validasi tanggal dan durasi, reservasi ketersediaan, dan transisi status DIAJUKAN.
+                  </p>
+                  <a href="./starters/peminjaman.py" download="peminjaman.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 3
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">persetujuan.py</span>
+                    <span class="download-card__role">Tim 4</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Layanan keputusan Petugas, validasi status DIAJUKAN, static method alasan penolakan, dan anti-double approval.
+                  </p>
+                  <a href="./starters/persetujuan.py" download="persetujuan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 4
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">pengembalian.py</span>
+                    <span class="download-card__role">Tim 5</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Kebijakan denda (ABC KebijakanDenda, DendaHarian), layanan pengembalian barang, dan pelepasan status barang.
+                  </p>
+                  <a href="./starters/pengembalian.py" download="pengembalian.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 5
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">laporan.py</span>
+                    <span class="download-card__role">Tim 6</span>
+                  </div>
+                  <p class="download-card__desc">
+                    LaporanPeminjaman, filter riwayat peminjaman, ringkasan status aktif/selesai, dan custom decorator catat_operasi.
+                  </p>
+                  <a href="./starters/laporan.py" download="laporan.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 6
+                  </a>
+                </div>
+
+                <div class="download-card">
+                  <div class="download-card__header">
+                    <span class="download-card__name">main.py</span>
+                    <span class="download-card__role">Tim 7</span>
+                  </div>
+                  <p class="download-card__desc">
+                    Skrip integrasi utama, perakitan seluruh modul tim 1 s.d. 6, data fixture demo, dan pengujian alur lengkap.
+                  </p>
+                  <a href="./starters/main.py" download="main.py" class="site-button btn-sm btn-primary">
+                    <svg width="14" height="14" aria-hidden="true"><use xlink:href="#svg-download"></use></svg>
+                    Unduh Starter Tim 7
+                  </a>
+                </div>
+
+                
+              </div>
+            </section>
+
+
+            <footer class="main-footer">
+              <div>
+                <p style="margin: 0 0 0.3rem;"><a href="#top">Back to top</a></p>
+                <p style="margin: 0;">Object-Oriented Programming '26 - TAs &middot; S1 Kecerdasan Artifisial Universitas Negeri Surabaya</p>
+              </div>
+              <div style="font-size: 0.78rem; color: var(--oop-muted);">
+                Live Study Case 2025C
+              </div>
+            </footer>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ '/assignment/live-study-case-2025c/case.js' | relative_url }}" defer></script>
+  </body>
+</html>
